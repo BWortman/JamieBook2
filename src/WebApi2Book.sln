@@ -7,6 +7,34 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi2Book.Common", "WebAp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi2Book.Web.Api.Models", "WebApi2Book.Web.Api.Models\WebApi2Book.Web.Api.Models.csproj", "{A8B758B6-6B17-4A88-A403-486DB03A960A}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebApi2Book.Web.Legacy.Api", "http://localhost:62965", "{AF7D41E0-B389-471E-B5F4-320B74425FEC}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		ProjectReferences = "{A8B758B6-6B17-4A88-A403-486DB03A960A}|WebApi2Book.Web.Api.Models.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_62965"
+		Debug.AspNetCompiler.PhysicalPath = "WebApi2Book.Web.Legacy.Api\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62965\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_62965"
+		Release.AspNetCompiler.PhysicalPath = "WebApi2Book.Web.Legacy.Api\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62965\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "WebApi2Book.Web.Legacy.Api\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi2Book.Windows.Legacy.Client", "WebApi2Book.Windows.Legacy.Client\WebApi2Book.Windows.Legacy.Client.csproj", "{A72FA555-4430-4D54-9F72-84F6F225B911}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AF7D41E0-B389-471E-B5F4-320B74425FEC} = {AF7D41E0-B389-471E-B5F4-320B74425FEC}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +49,14 @@ Global
 		{A8B758B6-6B17-4A88-A403-486DB03A960A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8B758B6-6B17-4A88-A403-486DB03A960A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8B758B6-6B17-4A88-A403-486DB03A960A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF7D41E0-B389-471E-B5F4-320B74425FEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF7D41E0-B389-471E-B5F4-320B74425FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF7D41E0-B389-471E-B5F4-320B74425FEC}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF7D41E0-B389-471E-B5F4-320B74425FEC}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{A72FA555-4430-4D54-9F72-84F6F225B911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A72FA555-4430-4D54-9F72-84F6F225B911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A72FA555-4430-4D54-9F72-84F6F225B911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A72FA555-4430-4D54-9F72-84F6F225B911}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
