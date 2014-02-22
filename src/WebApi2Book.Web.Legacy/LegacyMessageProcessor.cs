@@ -18,7 +18,11 @@ namespace WebApi2Book.Web.Legacy
             //  todo: inject
             _legacyMessageParser = new LegacyMessageParser();
             _legacyMessageProcessingStrategies =
-                new List<ILegacyMessageProcessingStrategy> {new GetCategoriesMessageProcessingStrategy()};
+                new List<ILegacyMessageProcessingStrategy>
+                {
+                    new GetCategoriesMessageProcessingStrategy(),
+                    new GetCategoryByIdMessageProcessingStrategy()
+                };
         }
 
         public virtual LegacyResponse ProcessLegacyMessage(XDocument request)

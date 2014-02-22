@@ -1,7 +1,6 @@
 ﻿// TeamTaskService.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using System.Collections.Generic;
 using System.Web.Services;
 using WebApi2Book.Web.Api.Models;
 
@@ -25,18 +24,14 @@ public class TeamTaskService : WebService
     {
         return new[]
         {
-            new Category {Name = "cat1", Description = "category 1"},
-            new Category {Name = "cat2", Description = "category 2"}
+            new Category {CategoryId = 1, Name = "cat1", Description = "category 1"},
+            new Category {CategoryId = 2, Name = "cat2", Description = "category 2"}
         };
     }
 
     [WebMethod]
-    public Status[] GetStatuses()
+    public Category GetCategoryById(int categoryId)
     {
-        return new[]
-        {
-            new Status() {Name = "status1"},
-            new Status() {Name = "status2"}
-        };
+        return new Category {CategoryId = 1, Name = "cat1", Description = "category 1"};
     }
 }

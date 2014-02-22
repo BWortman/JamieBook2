@@ -57,6 +57,7 @@
     <Compile Include="LegacyMessageTypeFormatter.cs" />
     <Compile Include="LegacyResponse.cs" />
     <Compile Include="ProcessingStrategies\GetCategoriesMessageProcessingStrategy.cs" />
+    <Compile Include="ProcessingStrategies\GetCategoryByIdMessageProcessingStrategy.cs" />
     <Compile Include="ProcessingStrategies\ILegacyMessageProcessingStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

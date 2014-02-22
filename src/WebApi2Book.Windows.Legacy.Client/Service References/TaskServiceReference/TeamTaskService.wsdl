@@ -37,29 +37,20 @@
           <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
         </s:sequence>
       </s:complexType>
-      <s:element name="GetStatuses">
-        <s:complexType />
-      </s:element>
-      <s:element name="GetStatusesResponse">
+      <s:element name="GetCategoryById">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetStatusesResult" type="tns:ArrayOfStatus" />
+            <s:element minOccurs="1" maxOccurs="1" name="categoryId" type="s:int" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:complexType name="ArrayOfStatus">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="Status" nillable="true" type="tns:Status" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="Status">
-        <s:sequence>
-          <s:element minOccurs="1" maxOccurs="1" name="StatusId" type="s:long" />
-          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="Ordinal" type="s:int" />
-          <s:element minOccurs="0" maxOccurs="1" name="Links" type="tns:ArrayOfLink" />
-        </s:sequence>
-      </s:complexType>
+      <s:element name="GetCategoryByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCategoryByIdResult" type="tns:Category" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="GetCategoriesSoapIn">
@@ -68,20 +59,20 @@
   <wsdl:message name="GetCategoriesSoapOut">
     <wsdl:part name="parameters" element="tns:GetCategoriesResponse" />
   </wsdl:message>
-  <wsdl:message name="GetStatusesSoapIn">
-    <wsdl:part name="parameters" element="tns:GetStatuses" />
+  <wsdl:message name="GetCategoryByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCategoryById" />
   </wsdl:message>
-  <wsdl:message name="GetStatusesSoapOut">
-    <wsdl:part name="parameters" element="tns:GetStatusesResponse" />
+  <wsdl:message name="GetCategoryByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCategoryByIdResponse" />
   </wsdl:message>
   <wsdl:portType name="TeamTaskServiceSoap">
     <wsdl:operation name="GetCategories">
       <wsdl:input message="tns:GetCategoriesSoapIn" />
       <wsdl:output message="tns:GetCategoriesSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetStatuses">
-      <wsdl:input message="tns:GetStatusesSoapIn" />
-      <wsdl:output message="tns:GetStatusesSoapOut" />
+    <wsdl:operation name="GetCategoryById">
+      <wsdl:input message="tns:GetCategoryByIdSoapIn" />
+      <wsdl:output message="tns:GetCategoryByIdSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="TeamTaskServiceSoap" type="tns:TeamTaskServiceSoap">
@@ -95,8 +86,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetStatuses">
-      <soap:operation soapAction="http://tempuri.org/GetStatuses" style="document" />
+    <wsdl:operation name="GetCategoryById">
+      <soap:operation soapAction="http://tempuri.org/GetCategoryById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -116,8 +107,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetStatuses">
-      <soap12:operation soapAction="http://tempuri.org/GetStatuses" style="document" />
+    <wsdl:operation name="GetCategoryById">
+      <soap12:operation soapAction="http://tempuri.org/GetCategoryById" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

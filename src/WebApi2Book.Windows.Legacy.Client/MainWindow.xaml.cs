@@ -17,6 +17,8 @@ namespace WebApi2Book.Windows.Legacy.Client
     /// </summary>
     public partial class MainWindow : INotifyPropertyChanged
     {
+        private Category _category;
+        private int? _categoryId;
         private bool _isProcessing;
         private bool _useWebApi;
 
@@ -26,12 +28,36 @@ namespace WebApi2Book.Windows.Legacy.Client
             DataContext = this;
 
             GetCategoriesCommand = new DelegateCommand(GetCategories, AllowFetch);
+            GetCategoryCommand = new DelegateCommand(GetCategory, AllowIndividialCategoryFetch);
+
             Categories = new ObservableCollection<Category>();
         }
 
         public ObservableCollection<Category> Categories { get; private set; }
 
         public DelegateCommand GetCategoriesCommand { get; private set; }
+        public DelegateCommand GetCategoryCommand { get; private set; }
+
+        public Category Category
+        {
+            get { return _category; }
+            set
+            {
+                _category = value;
+                OnPropertyChanged("Category");
+            }
+        }
+
+        public int? CategoryId
+        {
+            get { return _categoryId; }
+            set
+            {
+                _categoryId = value;
+                OnPropertyChanged("CategoryId");
+                GetCategoryCommand.RaiseCanExecuteChanged();
+            }
+        }
 
         public bool UseWebApi
         {
@@ -55,6 +81,11 @@ namespace WebApi2Book.Windows.Legacy.Client
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        private bool AllowIndividialCategoryFetch()
+        {
+            return AllowFetch() && CategoryId.HasValue;
+        }
 
         private bool AllowFetch()
         {
@@ -81,16 +112,58 @@ namespace WebApi2Book.Windows.Legacy.Client
             }
         }
 
-        public async Task<GetCategoriesResponse> GetCategoriesAsync()
+        private async void GetCategory()
+        {
+            IsProcessing = true;
+
+            try
+            {
+                Category = null;
+                var result = await Task.Run(() => GetCategoryAsync());
+                Category = result.Body.GetCategoryByIdResult;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "System Message");
+            }
+            finally
+            {
+                IsProcessing = false;
+            }
+        }
+
+        public TeamTaskServiceSoapClient GetServiceClient()
         {
             var taskServiceSoapClient = UseWebApi
                 ? new TeamTaskServiceSoapClient("TeamTaskServiceViaRest")
                 : new TeamTaskServiceSoapClient("TeamTaskServiceSoap");
+            return taskServiceSoapClient;
+        }
+
+        public async Task<GetCategoriesResponse> GetCategoriesAsync()
+        {
+            var taskServiceSoapClient = GetServiceClient();
             taskServiceSoapClient.Open();
 
             try
             {
                 var result = await taskServiceSoapClient.GetCategoriesAsync();
+                return result;
+            }
+            finally
+            {
+                taskServiceSoapClient.Close();
+            }
+        }
+
+        public async Task<GetCategoryByIdResponse> GetCategoryAsync()
+        {
+            var taskServiceSoapClient = GetServiceClient();
+            taskServiceSoapClient.Open();
+
+            try
+            {
+                var result = await taskServiceSoapClient.GetCategoryByIdAsync(CategoryId.Value);
                 return result;
             }
             finally

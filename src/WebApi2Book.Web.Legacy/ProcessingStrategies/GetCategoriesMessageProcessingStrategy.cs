@@ -15,8 +15,8 @@ namespace WebApi2Book.Web.Legacy.ProcessingStrategies
             // todo - fetch from db
             var categories = new[]
             {
-                new Category {Name = "cat1", Description = "category 1"},
-                new Category {Name = "cat2", Description = "category 2"}
+                new Category {CategoryId = 1, Name = "cat1", Description = "category 1"},
+                new Category {CategoryId = 2, Name = "cat2", Description = "category 2"}
             };
 
             XNamespace ns = Constants.DefaultNamespace;
