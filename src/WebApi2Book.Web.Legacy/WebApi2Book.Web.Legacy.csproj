@@ -49,17 +49,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
     <Compile Include="ILegacyMessageParser.cs" />
     <Compile Include="ILegacyMessageTypeFormatter.cs" />
     <Compile Include="LegacyMessageParser.cs" />
+    <Compile Include="LegacyMessageProcessor.cs" />
     <Compile Include="LegacyMessageTypeFormatter.cs" />
     <Compile Include="LegacyResponse.cs" />
+    <Compile Include="ProcessingStrategies\GetCategoriesMessageProcessingStrategy.cs" />
+    <Compile Include="ProcessingStrategies\ILegacyMessageProcessingStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebApi2Book.Common\WebApi2Book.Common.csproj">
       <Project>{9E589099-F064-47C6-9D14-3A54ADA6C8E6}</Project>
       <Name>WebApi2Book.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApi2Book.Web.Api.Models\WebApi2Book.Web.Api.Models.csproj">
+      <Project>{A8B758B6-6B17-4A88-A403-486DB03A960A}</Project>
+      <Name>WebApi2Book.Web.Api.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
