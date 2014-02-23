@@ -1,8 +1,10 @@
 ﻿// Global.asax.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
+using System.Net.Http.Formatting;
 using System.Web;
 using System.Web.Http;
+using WebApi2Book.Web.Common;
 using WebApi2Book.Web.Legacy;
 
 namespace WebApi2Book.Web.Api
@@ -13,9 +15,19 @@ namespace WebApi2Book.Web.Api
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
+            ConfigureFormatters();
 
-            var legacyFormatter = new LegacyMessageTypeFormatter();
+            RegisterHandlers();
+        }
+
+        private void ConfigureFormatters()
+        {
+            var legacyFormatter = (MediaTypeFormatter) WebContainerManager.Get<ILegacyMessageTypeFormatter>();
             GlobalConfiguration.Configuration.Formatters.Insert(0, legacyFormatter);
+        }
+
+        private void RegisterHandlers()
+        {
         }
     }
 }
