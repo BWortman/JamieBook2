@@ -14,15 +14,20 @@ namespace WebApi2Book.Web.Api.Controllers.V1
 {
     public class LegacyController : ApiController
     {
+        private readonly ILegacyMessageProcessor _legacyMessageProcessor;
+
+        public LegacyController(ILegacyMessageProcessor legacyMessageProcessor)
+        {
+            _legacyMessageProcessor = legacyMessageProcessor;
+        }
+
         public override Task<HttpResponseMessage> ExecuteAsync(HttpControllerContext controllerContext,
             CancellationToken cancellationToken)
         {
             var requestContentAsString = controllerContext.Request.Content.ReadAsStringAsync().Result;
             var requestContentAsDocument = XDocument.Parse(requestContentAsString);
 
-
-            // todo: inject
-            var legacyResponse = new LegacyMessageProcessor().ProcessLegacyMessage(requestContentAsDocument);
+            var legacyResponse = _legacyMessageProcessor.ProcessLegacyMessage(requestContentAsDocument);
 
             var responseMsg = controllerContext.Request.CreateResponse(HttpStatusCode.OK, legacyResponse);
 

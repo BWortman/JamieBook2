@@ -1,10 +1,11 @@
 ﻿// NinjectConfigurator.cs
-// Copyright fiserv 2014.
+// Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using log4net.Config;
 using Ninject;
 using WebApi2Book.Common.Logging;
 using WebApi2Book.Web.Legacy;
+using WebApi2Book.Web.Legacy.ProcessingStrategies;
 
 namespace WebApi2Book.Web.Api
 {
@@ -33,13 +34,16 @@ namespace WebApi2Book.Web.Api
 
             ConfigureLog4net(container);
             ConfigureDependenciesOnlyUsedForLegacyProcessing(container);
-
-            container.Bind<ILegacyMessageTypeFormatter>().To<LegacyMessageTypeFormatter>();
         }
 
         private void ConfigureDependenciesOnlyUsedForLegacyProcessing(IKernel container)
         {
+            container.Bind<ILegacyMessageProcessor>().To<LegacyMessageProcessor>();
             container.Bind<ILegacyMessageParser>().To<LegacyMessageParser>().InSingletonScope();
+            container.Bind<ILegacyMessageTypeFormatter>().To<LegacyMessageTypeFormatter>().InSingletonScope();
+
+            container.Bind<ILegacyMessageProcessingStrategy>().To<GetCategoriesMessageProcessingStrategy>();
+            container.Bind<ILegacyMessageProcessingStrategy>().To<GetCategoryByIdMessageProcessingStrategy>();
         }
 
         private void ConfigureLog4net(IKernel container)

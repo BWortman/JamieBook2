@@ -22,6 +22,7 @@ public class TeamTaskService : WebService
     [WebMethod]
     public Category[] GetCategories()
     {
+        // todo: fetch from db
         return new[]
         {
             new Category {CategoryId = 1, Name = "cat1", Description = "category 1"},
@@ -32,6 +33,7 @@ public class TeamTaskService : WebService
     [WebMethod]
     public Category GetCategoryById(int categoryId)
     {
-        return new Category {CategoryId = 1, Name = "cat1", Description = "category 1"};
+        // todo: fetch from db
+        return new Category { CategoryId = 1, Name = "cat1", Description = "category 1" };
     }
 }

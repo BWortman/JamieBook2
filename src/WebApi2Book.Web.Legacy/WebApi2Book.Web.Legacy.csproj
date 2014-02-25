@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="ILegacyMessageParser.cs" />
+    <Compile Include="ILegacyMessageProcessor.cs" />
     <Compile Include="ILegacyMessageTypeFormatter.cs" />
     <Compile Include="LegacyMessageParser.cs" />
     <Compile Include="LegacyMessageProcessor.cs" />

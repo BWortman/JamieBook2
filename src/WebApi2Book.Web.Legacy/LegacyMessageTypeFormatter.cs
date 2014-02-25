@@ -21,9 +21,9 @@ namespace WebApi2Book.Web.Legacy
 
         private readonly ILegacyMessageParser _legacyMessageParser;
 
-        public LegacyMessageTypeFormatter()
+        public LegacyMessageTypeFormatter(ILegacyMessageParser legacyMessageParser)
         {
-            _legacyMessageParser = new LegacyMessageParser();
+            _legacyMessageParser = legacyMessageParser;
 
             SupportedMediaTypes.Add(new MediaTypeHeaderValue(TextXml));
         }

@@ -8,21 +8,16 @@ using WebApi2Book.Web.Legacy.ProcessingStrategies;
 
 namespace WebApi2Book.Web.Legacy
 {
-    public class LegacyMessageProcessor
+    public class LegacyMessageProcessor : ILegacyMessageProcessor
     {
-        private LegacyMessageParser _legacyMessageParser;
-        private IEnumerable<ILegacyMessageProcessingStrategy> _legacyMessageProcessingStrategies;
+        private readonly ILegacyMessageParser _legacyMessageParser;
+        private readonly IEnumerable<ILegacyMessageProcessingStrategy> _legacyMessageProcessingStrategies;
 
-        public LegacyMessageProcessor()
+        public LegacyMessageProcessor(ILegacyMessageParser legacyMessageParser,
+            IEnumerable<ILegacyMessageProcessingStrategy> legacyMessageProcessingStrategies)
         {
-            //  todo: inject
-            _legacyMessageParser = new LegacyMessageParser();
-            _legacyMessageProcessingStrategies =
-                new List<ILegacyMessageProcessingStrategy>
-                {
-                    new GetCategoriesMessageProcessingStrategy(),
-                    new GetCategoryByIdMessageProcessingStrategy()
-                };
+            _legacyMessageParser = legacyMessageParser;
+            _legacyMessageProcessingStrategies = legacyMessageProcessingStrategies;
         }
 
         public virtual LegacyResponse ProcessLegacyMessage(XDocument request)
