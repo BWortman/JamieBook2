@@ -4,6 +4,7 @@
 using System.Net.Http.Formatting;
 using System.Web;
 using System.Web.Http;
+using WebApi2Book.Common.Logging;
 using WebApi2Book.Web.Common;
 using WebApi2Book.Web.Legacy;
 
@@ -28,6 +29,16 @@ namespace WebApi2Book.Web.Api
 
         private void RegisterHandlers()
         {
+        }
+
+        protected void Application_Error()
+        {
+            var exception = Server.GetLastError();
+            if (exception != null)
+            {
+                var log = WebContainerManager.Get<ILogManager>().GetLog(typeof(WebApiApplication));
+                log.Error("Unhandled exception.", exception);
+            }
         }
     }
 }
