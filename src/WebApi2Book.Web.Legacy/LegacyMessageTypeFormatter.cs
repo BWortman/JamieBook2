@@ -17,15 +17,13 @@ namespace WebApi2Book.Web.Legacy
 {
     public class LegacyMessageTypeFormatter : MediaTypeFormatter, ILegacyMessageTypeFormatter
     {
-        public const string TextXml = "text/xml";
-
         private readonly ILegacyMessageParser _legacyMessageParser;
 
         public LegacyMessageTypeFormatter(ILegacyMessageParser legacyMessageParser)
         {
             _legacyMessageParser = legacyMessageParser;
 
-            SupportedMediaTypes.Add(new MediaTypeHeaderValue(TextXml));
+            SupportedMediaTypes.Add(new MediaTypeHeaderValue(Common.Constants.MediaTypeNames.TextXml));
         }
 
         public override bool CanReadType(Type type)

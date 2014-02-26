@@ -1,11 +1,11 @@
 ﻿// ApiVersionConstraint.cs
-// Copyright fiserv 2014.
+// Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http.Routing;
 
-namespace WebApi2Book.Web.Common
+namespace WebApi2Book.Web.Common.Routing
 {
     public class ApiVersionConstraint : IHttpRouteConstraint
     {

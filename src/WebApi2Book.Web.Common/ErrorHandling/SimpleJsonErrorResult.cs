@@ -1,5 +1,5 @@
 ﻿// SimpleJsonErrorResult.cs
-// Copyright fiserv 2014.
+// Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System.Net;
 using System.Net.Http;

@@ -64,8 +64,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiVersion1RoutePrefixAttribute.cs" />
-    <Compile Include="ApiVersionConstraint.cs" />
+    <Compile Include="Routing\ApiVersion1RoutePrefixAttribute.cs" />
+    <Compile Include="Routing\ApiVersionConstraint.cs" />
     <Compile Include="ErrorHandling\GlobalExceptionHandler.cs" />
     <Compile Include="NinjectDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,6 +82,10 @@
     <ProjectReference Include="..\WebApi2Book.Common\WebApi2Book.Common.csproj">
       <Project>{9E589099-F064-47C6-9D14-3A54ADA6C8E6}</Project>
       <Name>WebApi2Book.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApi2Book.Data\WebApi2Book.Data.csproj">
+      <Project>{B4F56983-5B1C-42C7-B872-AE3A5545C02D}</Project>
+      <Name>WebApi2Book.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

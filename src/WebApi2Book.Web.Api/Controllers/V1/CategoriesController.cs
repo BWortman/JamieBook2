@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿// CategoriesController.cs
+// Copyright Jamie Kurtz, Brian Wortman 2014.
+
+using System.Collections.Generic;
 using System.Web.Http;
 using WebApi2Book.Web.Api.Models;
-using WebApi2Book.Web.Common;
+using WebApi2Book.Web.Common.Routing;
 
 namespace WebApi2Book.Web.Api.Controllers.V1
 {
@@ -11,7 +14,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         [Route("", Name = "GetCategoriesRoute")]
         public IEnumerable<Category> GetCategories()
         {
-            return new Category[] {new Category {CategoryId = 1, Name = "cat1"}};
+            return new[] {new Category {CategoryId = 1, Name = "cat1"}, new Category {CategoryId = 2, Name = "cat2"}};
             //return _session
             //    .QueryOver<Data.Model.Category>()
             //    .List()
@@ -19,11 +22,14 @@ namespace WebApi2Book.Web.Api.Controllers.V1
             //    .ToList();
         }
 
-        //public Category Get(long id)
-        //{
-        //    var category = _categoryFetcher.GetCategory(id);
-        //    return _categoryMapper.CreateCategory(category);
-        //}
+        [Route("{id:long}", Name = "GetCategoryRoute")]
+        public Category Get(long id)
+        {
+            return new Category {CategoryId = id, Name = "cat" + id};
+
+            //var category = _categoryFetcher.GetCategory(id);
+            //return _categoryMapper.CreateCategory(category);
+        }
 
         //[AdministratorAuthorized]
         //public HttpResponseMessage Post(HttpRequestMessage request, Category category)

@@ -34,6 +34,6 @@ public class TeamTaskService : WebService
     public Category GetCategoryById(int categoryId)
     {
         // todo: fetch from db
-        return new Category { CategoryId = 1, Name = "cat1", Description = "category 1" };
+        return new Category {CategoryId = 1, Name = "cat1", Description = "category 1"};
     }
 }

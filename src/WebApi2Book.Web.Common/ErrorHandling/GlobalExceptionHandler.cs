@@ -1,9 +1,10 @@
 ﻿// GlobalExceptionHandler.cs
-// Copyright fiserv 2014.
+// Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System.Net;
 using System.Web;
 using System.Web.Http.ExceptionHandling;
+using WebApi2Book.Data.Exceptions;
 
 namespace WebApi2Book.Web.Common.ErrorHandling
 {
@@ -28,17 +29,17 @@ namespace WebApi2Book.Web.Common.ErrorHandling
             //    return;
             //}
 
-            //if (exception is RootObjectNotFoundException)
-            //{
-            //    context.Result = new SimpleJsonErrorResult(context.Request, HttpStatusCode.NotFound, exception.Message);
-            //    return;
-            //}
+            if (exception is RootObjectNotFoundException)
+            {
+                context.Result = new SimpleJsonErrorResult(context.Request, HttpStatusCode.NotFound, exception.Message);
+                return;
+            }
 
-            //if (exception is ChildObjectNotFoundException)
-            //{
-            //    context.Result = new SimpleJsonErrorResult(context.Request, HttpStatusCode.Conflict, exception.Message);
-            //    return;
-            //}
+            if (exception is ChildObjectNotFoundException)
+            {
+                context.Result = new SimpleJsonErrorResult(context.Request, HttpStatusCode.Conflict, exception.Message);
+                return;
+            }
 
             context.Result = new SimpleJsonErrorResult(context.Request, HttpStatusCode.InternalServerError,
                 exception.Message);

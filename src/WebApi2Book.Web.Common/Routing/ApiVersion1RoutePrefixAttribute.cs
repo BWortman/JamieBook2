@@ -1,9 +1,9 @@
 ﻿// ApiVersion1RoutePrefixAttribute.cs
-// Copyright fiserv 2014.
+// Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System.Web.Http;
 
-namespace WebApi2Book.Web.Common
+namespace WebApi2Book.Web.Common.Routing
 {
     public class ApiVersion1RoutePrefixAttribute : RoutePrefixAttribute
     {
