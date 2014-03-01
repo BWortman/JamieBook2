@@ -49,6 +49,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7663BDDC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi2Book.Common.Tests", "WebApi2Book.Common.Tests\WebApi2Book.Common.Tests.csproj", "{B772FEE1-DA0F-4B31-9C12-E84FA6A235C4}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "WebApi2BookDb", "WebApi2BookDb\WebApi2BookDb.sqlproj", "{9086F32C-F64A-4D86-8698-52CCBA7C99AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,12 @@ Global
 		{B772FEE1-DA0F-4B31-9C12-E84FA6A235C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B772FEE1-DA0F-4B31-9C12-E84FA6A235C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B772FEE1-DA0F-4B31-9C12-E84FA6A235C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9086F32C-F64A-4D86-8698-52CCBA7C99AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9086F32C-F64A-4D86-8698-52CCBA7C99AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9086F32C-F64A-4D86-8698-52CCBA7C99AA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9086F32C-F64A-4D86-8698-52CCBA7C99AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9086F32C-F64A-4D86-8698-52CCBA7C99AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9086F32C-F64A-4D86-8698-52CCBA7C99AA}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
