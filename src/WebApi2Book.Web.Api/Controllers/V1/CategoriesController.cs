@@ -2,24 +2,34 @@
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Http;
+using NHibernate;
 using WebApi2Book.Web.Api.Models;
+using WebApi2Book.Web.Common;
 using WebApi2Book.Web.Common.Routing;
 
 namespace WebApi2Book.Web.Api.Controllers.V1
 {
     [ApiVersion1RoutePrefix("categories")]
+    [UnitOfWorkActionFilter]
     public class CategoriesController : ApiController
     {
+        private readonly ISession _session;
+
+        public CategoriesController(ISession session)
+        {
+            _session = session;
+        }
+
         [Route("", Name = "GetCategoriesRoute")]
         public IEnumerable<Category> GetCategories()
         {
-            return new[] {new Category {CategoryId = 1, Name = "cat1"}, new Category {CategoryId = 2, Name = "cat2"}};
-            //return _session
-            //    .QueryOver<Data.Model.Category>()
-            //    .List()
-            //    .Select(_categoryMapper.CreateCategory)
-            //    .ToList();
+            return _session
+                .QueryOver<Data.Entities.Category>()
+                .List()
+                .Select(x => new Category {CategoryId = x.CategoryId, Name = x.Name, Description = x.Description})
+                .ToList();
         }
 
         [Route("{id:long}", Name = "GetCategoryRoute")]

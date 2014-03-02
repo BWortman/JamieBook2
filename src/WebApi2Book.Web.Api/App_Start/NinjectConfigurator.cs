@@ -1,9 +1,20 @@
 ﻿// NinjectConfigurator.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
+using System.Security.Principal;
+using System.Threading;
+using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
 using log4net.Config;
+using NHibernate;
+using NHibernate.Context;
 using Ninject;
+using Ninject.Activation;
+using Ninject.Web.Common;
 using WebApi2Book.Common.Logging;
+using WebApi2Book.Data.SqlServer;
+using WebApi2Book.Web.Common;
+using WebApi2Book.Web.Common.Security;
 using WebApi2Book.Web.Legacy;
 using WebApi2Book.Web.Legacy.ProcessingStrategies;
 
@@ -33,7 +44,48 @@ namespace WebApi2Book.Web.Api
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             ConfigureLog4net(container);
+            ConfigureNHibernate(container);
             ConfigureDependenciesOnlyUsedForLegacyProcessing(container);
+
+            container.Bind<IUserSession>().ToMethod(CreateUserSession).InRequestScope();
+
+            container.Bind<IActionTransactionHelper>().To<ActionTransactionHelper>();
+
+            container.Bind<ISqlCommandFactory>().To<SqlCommandFactory>();
+        }
+
+        private IUserSession CreateUserSession(IContext arg)
+        {
+            return new UserSession(Thread.CurrentPrincipal as GenericPrincipal);
+        }
+
+        private void ConfigureNHibernate(IKernel container)
+        {
+            var sessionFactory = Fluently.Configure()
+                .Database(
+                    MsSqlConfiguration.MsSql2008.ConnectionString(
+                        c => c.FromConnectionStringWithKey("WebApi2BookDb")))
+                .CurrentSessionContext("web")
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<SqlCommandFactory>())
+                .BuildSessionFactory();
+
+            container.Bind<ISessionFactory>().ToConstant(sessionFactory);
+
+            container.Bind<ISession>().ToMethod(CreateSession);
+
+            container.Bind<ICurrentSessionContextAdapter>().To<CurrentSessionContextAdapter>();
+        }
+
+        private ISession CreateSession(IContext context)
+        {
+            var sessionFactory = context.Kernel.Get<ISessionFactory>();
+            if (!CurrentSessionContext.HasBind(sessionFactory))
+            {
+                var session = sessionFactory.OpenSession();
+                CurrentSessionContext.Bind(session);
+            }
+
+            return sessionFactory.GetCurrentSession();
         }
 
         private void ConfigureDependenciesOnlyUsedForLegacyProcessing(IKernel container)

@@ -40,6 +40,12 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\lib\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\lib\Iesi.Collections.3.2.0.1001\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\lib\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
@@ -47,6 +53,9 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\..\lib\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\lib\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\..\lib\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
@@ -133,6 +142,14 @@
     <ProjectReference Include="..\WebApi2Book.Common\WebApi2Book.Common.csproj">
       <Project>{9E589099-F064-47C6-9D14-3A54ADA6C8E6}</Project>
       <Name>WebApi2Book.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApi2Book.Data.SqlServer\WebApi2Book.Data.SqlServer.csproj">
+      <Project>{36CAC611-2F82-456D-923D-EF959AEB5BBA}</Project>
+      <Name>WebApi2Book.Data.SqlServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApi2Book.Data\WebApi2Book.Data.csproj">
+      <Project>{b4f56983-5b1c-42c7-b872-ae3a5545c02d}</Project>
+      <Name>WebApi2Book.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebApi2Book.Web.Api.Models\WebApi2Book.Web.Api.Models.csproj">
       <Project>{A8B758B6-6B17-4A88-A403-486DB03A960A}</Project>
