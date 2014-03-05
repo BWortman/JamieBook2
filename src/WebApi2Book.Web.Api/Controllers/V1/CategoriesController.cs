@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using NHibernate;
+using WebApi2Book.Web.Api.InquiryProcessing;
 using WebApi2Book.Web.Api.Models;
 using WebApi2Book.Web.Common;
 using WebApi2Book.Web.Common.Routing;
@@ -16,10 +17,12 @@ namespace WebApi2Book.Web.Api.Controllers.V1
     public class CategoriesController : ApiController
     {
         private readonly ISession _session;
+        private readonly ICategoryByIdInquiryProcessor _categoryByIdInquiryProcessor;
 
-        public CategoriesController(ISession session)
+        public CategoriesController(ISession session, ICategoryByIdInquiryProcessor categoryByIdInquiryProcessor)
         {
             _session = session;
+            _categoryByIdInquiryProcessor = categoryByIdInquiryProcessor;
         }
 
         [Route("", Name = "GetCategoriesRoute")]
@@ -35,10 +38,8 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         [Route("{id:long}", Name = "GetCategoryRoute")]
         public Category Get(long id)
         {
-            return new Category {CategoryId = id, Name = "cat" + id};
-
-            //var category = _categoryFetcher.GetCategory(id);
-            //return _categoryMapper.CreateCategory(category);
+            var category = _categoryByIdInquiryProcessor.GetCategory(id);
+            return category;
         }
 
         //[AdministratorAuthorized]

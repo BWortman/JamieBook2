@@ -11,8 +11,12 @@ using NHibernate.Context;
 using Ninject;
 using Ninject.Activation;
 using Ninject.Web.Common;
+using WebApi2Book.Common;
 using WebApi2Book.Common.Logging;
 using WebApi2Book.Data.SqlServer;
+using WebApi2Book.Data.SqlServer.QueryProcessors;
+using WebApi2Book.Web.Api.AutoMappingConfiguration;
+using WebApi2Book.Web.Api.InquiryProcessing;
 using WebApi2Book.Web.Common;
 using WebApi2Book.Web.Common.Security;
 using WebApi2Book.Web.Legacy;
@@ -46,12 +50,18 @@ namespace WebApi2Book.Web.Api
             ConfigureLog4net(container);
             ConfigureNHibernate(container);
             ConfigureDependenciesOnlyUsedForLegacyProcessing(container);
+            ConfigureAutoMapper(container);
 
             container.Bind<IUserSession>().ToMethod(CreateUserSession).InRequestScope();
 
-            container.Bind<IActionTransactionHelper>().To<ActionTransactionHelper>();
+            container.Bind<ICategoryByIdInquiryProcessor>().To<CategoryByIdInquiryProcessor>();
+            container.Bind<ICategoryByIdQueryProcessor>().To<CategoryByIdQueryProcessor>();
+        }
 
-            container.Bind<ISqlCommandFactory>().To<SqlCommandFactory>();
+        private void ConfigureAutoMapper(IKernel container)
+        {
+            container.Bind<IAutoMapper>().To<AutoMapperAdapter>();
+            container.Bind<IAutoMapperTypeConfigurator>().To<CategoryEntityToCategoryModelAutoMapperTypeConfigurator>();
         }
 
         private IUserSession CreateUserSession(IContext arg)
@@ -70,10 +80,10 @@ namespace WebApi2Book.Web.Api
                 .BuildSessionFactory();
 
             container.Bind<ISessionFactory>().ToConstant(sessionFactory);
-
             container.Bind<ISession>().ToMethod(CreateSession);
-
             container.Bind<ICurrentSessionContextAdapter>().To<CurrentSessionContextAdapter>();
+            container.Bind<IActionTransactionHelper>().To<ActionTransactionHelper>();
+            container.Bind<ISqlCommandFactory>().To<SqlCommandFactory>();
         }
 
         private ISession CreateSession(IContext context)

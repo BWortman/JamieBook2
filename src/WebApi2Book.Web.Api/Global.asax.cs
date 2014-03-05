@@ -4,6 +4,7 @@
 using System.Net.Http.Formatting;
 using System.Web;
 using System.Web.Http;
+using WebApi2Book.Common;
 using WebApi2Book.Common.Logging;
 using WebApi2Book.Web.Common;
 using WebApi2Book.Web.Legacy;
@@ -19,6 +20,8 @@ namespace WebApi2Book.Web.Api
             ConfigureFormatters();
 
             RegisterHandlers();
+
+            new AutoMapperConfigurator().Configure(WebContainerManager.GetAll<IAutoMapperTypeConfigurator>());
         }
 
         private void ConfigureFormatters()
