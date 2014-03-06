@@ -11,8 +11,8 @@ using NHibernate.Context;
 using Ninject;
 using Ninject.Activation;
 using Ninject.Web.Common;
-using WebApi2Book.Common;
 using WebApi2Book.Common.Logging;
+using WebApi2Book.Common.TypeMapping;
 using WebApi2Book.Data.SqlServer;
 using WebApi2Book.Data.SqlServer.QueryProcessors;
 using WebApi2Book.Web.Api.AutoMappingConfiguration;
@@ -53,6 +53,11 @@ namespace WebApi2Book.Web.Api
             ConfigureAutoMapper(container);
 
             container.Bind<IUserSession>().ToMethod(CreateUserSession).InRequestScope();
+
+            container.Bind<ICategoriesInquiryProcessorBlock>().To<CategoriesInquiryProcessorBlock>();
+
+            container.Bind<IAllCategoriesInquiryProcessor>().To<AllCategoriesInquiryProcessor>();
+            container.Bind<IAllCategoriesQueryProcessor>().To<AllCategoriesQueryProcessor>();
 
             container.Bind<ICategoryByIdInquiryProcessor>().To<CategoryByIdInquiryProcessor>();
             container.Bind<ICategoryByIdQueryProcessor>().To<CategoryByIdQueryProcessor>();

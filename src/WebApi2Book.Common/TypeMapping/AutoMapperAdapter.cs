@@ -3,7 +3,7 @@
 
 using AutoMapper;
 
-namespace WebApi2Book.Common
+namespace WebApi2Book.Common.TypeMapping
 {
     public class AutoMapperAdapter : IAutoMapper
     {

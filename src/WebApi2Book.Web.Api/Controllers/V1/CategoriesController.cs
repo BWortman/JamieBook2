@@ -2,9 +2,7 @@
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
-using NHibernate;
 using WebApi2Book.Web.Api.InquiryProcessing;
 using WebApi2Book.Web.Api.Models;
 using WebApi2Book.Web.Common;
@@ -16,29 +14,24 @@ namespace WebApi2Book.Web.Api.Controllers.V1
     [UnitOfWorkActionFilter]
     public class CategoriesController : ApiController
     {
-        private readonly ISession _session;
-        private readonly ICategoryByIdInquiryProcessor _categoryByIdInquiryProcessor;
+        private readonly ICategoriesInquiryProcessorBlock _categoriesInquiryProcessorBlock;
 
-        public CategoriesController(ISession session, ICategoryByIdInquiryProcessor categoryByIdInquiryProcessor)
+        public CategoriesController(ICategoriesInquiryProcessorBlock categoriesInquiryProcessorBlock)
         {
-            _session = session;
-            _categoryByIdInquiryProcessor = categoryByIdInquiryProcessor;
+            _categoriesInquiryProcessorBlock = categoriesInquiryProcessorBlock;
         }
 
         [Route("", Name = "GetCategoriesRoute")]
         public IEnumerable<Category> GetCategories()
         {
-            return _session
-                .QueryOver<Data.Entities.Category>()
-                .List()
-                .Select(x => new Category {CategoryId = x.CategoryId, Name = x.Name, Description = x.Description})
-                .ToList();
+            var categories = _categoriesInquiryProcessorBlock.AllCategoriesInquiryProcessor.GetCategories();
+            return categories;
         }
 
         [Route("{id:long}", Name = "GetCategoryRoute")]
         public Category Get(long id)
         {
-            var category = _categoryByIdInquiryProcessor.GetCategory(id);
+            var category = _categoriesInquiryProcessorBlock.CategoryByIdInquiryProcessor.GetCategory(id);
             return category;
         }
 

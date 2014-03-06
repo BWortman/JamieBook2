@@ -50,14 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMapperAdapter.cs" />
+    <Compile Include="TypeMapping\AutoMapperAdapter.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="DateTimeAdapter.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\IntExtensions.cs" />
     <Compile Include="Extensions\XDocSoapExtensions.cs" />
-    <Compile Include="IAutoMapper.cs" />
-    <Compile Include="IAutoMapperTypeConfigurator.cs" />
+    <Compile Include="TypeMapping\IAutoMapper.cs" />
+    <Compile Include="TypeMapping\IAutoMapperTypeConfigurator.cs" />
     <Compile Include="IDateTime.cs" />
     <Compile Include="Logging\ILogManager.cs" />
     <Compile Include="Logging\LogManagerAdapter.cs" />

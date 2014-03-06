@@ -1,7 +1,7 @@
 ﻿// CategoryByIdInquiryProcessor.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using WebApi2Book.Common;
+using WebApi2Book.Common.TypeMapping;
 using WebApi2Book.Data.Exceptions;
 using WebApi2Book.Data.SqlServer.QueryProcessors;
 using WebApi2Book.Web.Api.Models;
@@ -29,8 +29,8 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
 
             // TODO - add link service
 
-            var categoryModel = _autoMapper.Map<Category>(category);
-            return categoryModel;
+            var modelCategory = _autoMapper.Map<Category>(category);
+            return modelCategory;
         }
     }
 }
