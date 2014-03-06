@@ -17,6 +17,7 @@ using WebApi2Book.Data.SqlServer;
 using WebApi2Book.Data.SqlServer.QueryProcessors;
 using WebApi2Book.Web.Api.AutoMappingConfiguration;
 using WebApi2Book.Web.Api.InquiryProcessing;
+using WebApi2Book.Web.Api.LinkServices;
 using WebApi2Book.Web.Common;
 using WebApi2Book.Web.Common.Security;
 using WebApi2Book.Web.Legacy;
@@ -61,6 +62,8 @@ namespace WebApi2Book.Web.Api
 
             container.Bind<ICategoryByIdInquiryProcessor>().To<CategoryByIdInquiryProcessor>();
             container.Bind<ICategoryByIdQueryProcessor>().To<CategoryByIdQueryProcessor>();
+
+            container.Bind<ICategoryLinkService>().To<CategoryLinkService>();
         }
 
         private void ConfigureAutoMapper(IKernel container)

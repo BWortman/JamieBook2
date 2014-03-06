@@ -4,6 +4,7 @@
 using WebApi2Book.Common.TypeMapping;
 using WebApi2Book.Data.Exceptions;
 using WebApi2Book.Data.SqlServer.QueryProcessors;
+using WebApi2Book.Web.Api.LinkServices;
 using WebApi2Book.Web.Api.Models;
 
 namespace WebApi2Book.Web.Api.InquiryProcessing
@@ -11,12 +12,15 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
     public class CategoryByIdInquiryProcessor : ICategoryByIdInquiryProcessor
     {
         private readonly IAutoMapper _autoMapper;
+        private readonly ICategoryLinkService _categoryLinkService;
         private readonly ICategoryByIdQueryProcessor _queryProcessor;
 
-        public CategoryByIdInquiryProcessor(ICategoryByIdQueryProcessor queryProcessor, IAutoMapper autoMapper)
+        public CategoryByIdInquiryProcessor(ICategoryByIdQueryProcessor queryProcessor, IAutoMapper autoMapper,
+            ICategoryLinkService categoryLinkService)
         {
             _queryProcessor = queryProcessor;
             _autoMapper = autoMapper;
+            _categoryLinkService = categoryLinkService;
         }
 
         public Category GetCategory(long categoryId)
@@ -27,9 +31,10 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
                 throw new RootObjectNotFoundException("Category not found");
             }
 
-            // TODO - add link service
-
             var modelCategory = _autoMapper.Map<Category>(category);
+
+            _categoryLinkService.AddLinks(modelCategory);
+
             return modelCategory;
         }
     }
