@@ -2,12 +2,18 @@
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using WebApi2Book.Web.Api.Models;
+using WebApi2Book.Web.Common.Security;
 
 namespace WebApi2Book.Web.Api.LinkServices
 {
     public class CategoryLinkService : ICategoryLinkService
     {
-        // TODO: API version
+        private readonly IUserSession _userSession;
+
+        public CategoryLinkService(IUserSession userSession)
+        {
+            _userSession = userSession;
+        }
 
         public void AddLinks(Category modelCategory)
         {
@@ -19,9 +25,9 @@ namespace WebApi2Book.Web.Api.LinkServices
         {
             modelCategory.Links.Add(new Link
             {
-                Title = "self",
+                Title = "Self",
                 Rel = "self",
-                Href = "/api/categories/" + modelCategory.CategoryId
+                Href = string.Format("/api/{0}/categories/{1}", _userSession.ApiVersionInUse, modelCategory.CategoryId)
             });
         }
 
@@ -31,7 +37,7 @@ namespace WebApi2Book.Web.Api.LinkServices
             {
                 Title = "All Categories",
                 Rel = "all",
-                Href = "/api/categories"
+                Href = string.Format("/api/{0}/categories", _userSession.ApiVersionInUse)
             });
         }
     }

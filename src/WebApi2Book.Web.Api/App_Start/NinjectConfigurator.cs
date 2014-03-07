@@ -3,6 +3,7 @@
 
 using System.Security.Principal;
 using System.Threading;
+using System.Web;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using log4net.Config;
@@ -68,13 +69,15 @@ namespace WebApi2Book.Web.Api
 
         private void ConfigureAutoMapper(IKernel container)
         {
-            container.Bind<IAutoMapper>().To<AutoMapperAdapter>();
+            container.Bind<IAutoMapper>().To<AutoMapperAdapter>().InSingletonScope();
             container.Bind<IAutoMapperTypeConfigurator>().To<CategoryEntityToCategoryModelAutoMapperTypeConfigurator>();
         }
 
         private IUserSession CreateUserSession(IContext arg)
         {
-            return new UserSession(Thread.CurrentPrincipal as GenericPrincipal);
+            var requestingUri = HttpContext.Current.Request.Url;
+            var userSession = new UserSession(Thread.CurrentPrincipal as GenericPrincipal, requestingUri);
+            return userSession;
         }
 
         private void ConfigureNHibernate(IKernel container)

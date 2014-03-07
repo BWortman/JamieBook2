@@ -29,5 +29,19 @@ namespace WebApi2Book.Common
             public const string PageNumber = "pageNumber";
             public const string PageSize = "pageSize";
         }
+
+        public static class StandardLinkNames
+        {
+            public const string Self = "Self";
+            public const string PreviousPage = "PreviousPage";
+            public const string NextPage = "NextPage";
+        }
+
+        public static class CommonRoutingDefinitions
+        {
+            public const string ApiSegmentName = "api";
+            public const string ApiVersionSegmentName = "apiVersion";
+            public const string CurrentApiVersion = "v1";
+        }
     }
 }

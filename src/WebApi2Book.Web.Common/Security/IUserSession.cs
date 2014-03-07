@@ -12,5 +12,7 @@ namespace WebApi2Book.Web.Common.Security
         string Lastname { get; }
         string Username { get; }
         string Email { get; }
+        string ApiVersionInUse { get; }
+        Uri RequestingUri { get; }
     }
 }

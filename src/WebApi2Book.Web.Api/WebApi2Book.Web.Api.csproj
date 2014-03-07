@@ -144,6 +144,8 @@
     <Compile Include="InquiryProcessing\ICategoryByIdInquiryProcessor.cs" />
     <Compile Include="LinkServices\CategoryLinkService.cs" />
     <Compile Include="LinkServices\ICategoryLinkService.cs" />
+    <Compile Include="LinkServices\ILinkService.cs" />
+    <Compile Include="LinkServices\LinkService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
