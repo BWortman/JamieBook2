@@ -2,8 +2,10 @@
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Web.Http;
 using WebApi2Book.Web.Api.InquiryProcessing;
+using WebApi2Book.Web.Api.MaintenanceProcessing;
 using WebApi2Book.Web.Api.Models;
 using WebApi2Book.Web.Common;
 using WebApi2Book.Web.Common.Routing;
@@ -15,46 +17,37 @@ namespace WebApi2Book.Web.Api.Controllers.V1
     public class CategoriesController : ApiController
     {
         private readonly ICategoriesInquiryProcessorBlock _categoriesInquiryProcessorBlock;
+        private readonly ICategoriesMaintenanceProcessorBlock _categoriesMaintenanceProcessorBlock;
 
-        public CategoriesController(ICategoriesInquiryProcessorBlock categoriesInquiryProcessorBlock)
+        public CategoriesController(ICategoriesInquiryProcessorBlock categoriesInquiryProcessorBlock,
+            ICategoriesMaintenanceProcessorBlock categoriesMaintenanceProcessorBlock)
         {
             _categoriesInquiryProcessorBlock = categoriesInquiryProcessorBlock;
+            _categoriesMaintenanceProcessorBlock = categoriesMaintenanceProcessorBlock;
         }
 
         [Route("", Name = "GetCategoriesRoute")]
         public IEnumerable<Category> GetCategories()
         {
-            var categories = _categoriesInquiryProcessorBlock.AllCategoriesInquiryProcessor.GetCategories();
-            return categories;
+            var modelCategories = _categoriesInquiryProcessorBlock.AllCategoriesInquiryProcessor.GetCategories();
+            return modelCategories;
         }
 
         [Route("{id:long}", Name = "GetCategoryRoute")]
-        public Category Get(long id)
+        public Category GetCategory(long id)
         {
-            var category = _categoriesInquiryProcessorBlock.CategoryByIdInquiryProcessor.GetCategory(id);
-            return category;
+            var modelCategory = _categoriesInquiryProcessorBlock.CategoryByIdInquiryProcessor.GetCategory(id);
+            return modelCategory;
         }
 
         //[AdministratorAuthorized]
-        //public HttpResponseMessage Post(HttpRequestMessage request, Category category)
-        //{
-        //    var modelCategory = new Data.Model.Category
-        //                            {
-        //                                Description = category.Description,
-        //                                Name = category.Name
-        //                            };
-
-        //    _session.Save(modelCategory);
-
-        //    var newCategory = _categoryMapper.CreateCategory(modelCategory);
-
-        //    var href = newCategory.Links.First(x => x.Rel == "self").Href;
-
-        //    var response = request.CreateResponse(HttpStatusCode.Created, newCategory);
-        //    response.Headers.Add("Location", href);
-
-        //    return response;
-        //}
+        [Route("", Name = "AddCategoryRoute")]
+        [HttpPost]
+        public IHttpActionResult Add(HttpRequestMessage request, [FromBody] Category category)
+        {
+            var newModelCategory = _categoriesMaintenanceProcessorBlock.CategoryAddingProcessor.AddCategory(category);
+            return new ItemCreatedActionResult(request, newModelCategory);
+        }
 
         //[AdministratorAuthorized]
         //public HttpResponseMessage Delete()

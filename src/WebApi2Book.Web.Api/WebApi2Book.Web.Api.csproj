@@ -131,6 +131,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="AutoMappingConfiguration\CategoryEntityToCategoryModelAutoMapperTypeConfigurator.cs" />
+    <Compile Include="AutoMappingConfiguration\CategoryModelToCategoryEntityAutoMapperTypeConfigurator.cs" />
     <Compile Include="Controllers\V1\CategoriesController.cs" />
     <Compile Include="Controllers\V1\LegacyController.cs" />
     <Compile Include="Global.asax.cs">
@@ -146,6 +147,11 @@
     <Compile Include="LinkServices\ICategoryLinkService.cs" />
     <Compile Include="LinkServices\ILinkService.cs" />
     <Compile Include="LinkServices\LinkService.cs" />
+    <Compile Include="MaintenanceProcessing\CategoryAddingProcessor.cs" />
+    <Compile Include="MaintenanceProcessing\CategoriesMaintenanceProcessorBlock.cs" />
+    <Compile Include="MaintenanceProcessing\ICategoryAddingProcessor.cs" />
+    <Compile Include="MaintenanceProcessing\ICategoriesMaintenanceProcessorBlock.cs" />
+    <Compile Include="MaintenanceProcessing\ItemCreatedActionResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

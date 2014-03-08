@@ -1,6 +1,7 @@
 ﻿// CategoryLinkService.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
+using WebApi2Book.Common;
 using WebApi2Book.Web.Api.Models;
 using WebApi2Book.Web.Common.Security;
 
@@ -23,20 +24,20 @@ namespace WebApi2Book.Web.Api.LinkServices
 
         public virtual void AddSelfLink(Category modelCategory)
         {
-            modelCategory.Links.Add(new Link
+            modelCategory.AddLink(new Link
             {
-                Title = "Self",
-                Rel = "self",
+                Title = Constants.CommonLinkTitles.Self,
+                Rel = Constants.CommonLinkRelValues.Self,
                 Href = string.Format("/api/{0}/categories/{1}", _userSession.ApiVersionInUse, modelCategory.CategoryId)
             });
         }
 
         public virtual void AddAllCategoriesLink(Category modelCategory)
         {
-            modelCategory.Links.Add(new Link
+            modelCategory.AddLink(new Link
             {
                 Title = "All Categories",
-                Rel = "all",
+                Rel = Constants.CommonLinkRelValues.All,
                 Href = string.Format("/api/{0}/categories", _userSession.ApiVersionInUse)
             });
         }

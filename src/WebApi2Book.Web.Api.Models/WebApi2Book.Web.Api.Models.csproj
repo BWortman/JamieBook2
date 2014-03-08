@@ -43,13 +43,21 @@
   <ItemGroup>
     <Compile Include="Category.cs" />
     <Compile Include="ILinkContaining.cs" />
+    <Compile Include="ILocationContaining.cs" />
     <Compile Include="IPageLinkContaining.cs" />
     <Compile Include="Link.cs" />
+    <Compile Include="LocationLinkCalculator.cs" />
     <Compile Include="Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Status.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="User.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebApi2Book.Common\WebApi2Book.Common.csproj">
+      <Project>{9E589099-F064-47C6-9D14-3A54ADA6C8E6}</Project>
+      <Name>WebApi2Book.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

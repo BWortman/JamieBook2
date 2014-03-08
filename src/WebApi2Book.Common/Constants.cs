@@ -24,17 +24,23 @@ namespace WebApi2Book.Common
             public const int DefaultPageNumber = 1;
         }
 
-        public static class StandardParameterNames
+        public static class CommonParameterNames
         {
             public const string PageNumber = "pageNumber";
             public const string PageSize = "pageSize";
         }
 
-        public static class StandardLinkNames
+        public static class CommonLinkTitles
         {
             public const string Self = "Self";
             public const string PreviousPage = "PreviousPage";
             public const string NextPage = "NextPage";
+        }
+
+        public static class CommonLinkRelValues
+        {
+            public const string Self = "self";
+            public const string All = "all";
         }
 
         public static class CommonRoutingDefinitions

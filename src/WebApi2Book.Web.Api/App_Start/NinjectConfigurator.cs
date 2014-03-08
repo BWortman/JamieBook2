@@ -19,6 +19,7 @@ using WebApi2Book.Data.SqlServer.QueryProcessors;
 using WebApi2Book.Web.Api.AutoMappingConfiguration;
 using WebApi2Book.Web.Api.InquiryProcessing;
 using WebApi2Book.Web.Api.LinkServices;
+using WebApi2Book.Web.Api.MaintenanceProcessing;
 using WebApi2Book.Web.Common;
 using WebApi2Book.Web.Common.Security;
 using WebApi2Book.Web.Legacy;
@@ -60,9 +61,13 @@ namespace WebApi2Book.Web.Api
 
             container.Bind<IAllCategoriesInquiryProcessor>().To<AllCategoriesInquiryProcessor>();
             container.Bind<IAllCategoriesQueryProcessor>().To<AllCategoriesQueryProcessor>();
-
+            
             container.Bind<ICategoryByIdInquiryProcessor>().To<CategoryByIdInquiryProcessor>();
             container.Bind<ICategoryByIdQueryProcessor>().To<CategoryByIdQueryProcessor>();
+
+            container.Bind<ICategoriesMaintenanceProcessorBlock>().To<CategoriesMaintenanceProcessorBlock>();
+
+            container.Bind<ICategoryAddingProcessor>().To<CategoryAddingProcessor>();
 
             container.Bind<ICategoryLinkService>().To<CategoryLinkService>();
         }
@@ -71,6 +76,7 @@ namespace WebApi2Book.Web.Api
         {
             container.Bind<IAutoMapper>().To<AutoMapperAdapter>().InSingletonScope();
             container.Bind<IAutoMapperTypeConfigurator>().To<CategoryEntityToCategoryModelAutoMapperTypeConfigurator>();
+            container.Bind<IAutoMapperTypeConfigurator>().To<CategoryModelToCategoryEntityAutoMapperTypeConfigurator>();
         }
 
         private IUserSession CreateUserSession(IContext arg)

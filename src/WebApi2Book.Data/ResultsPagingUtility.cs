@@ -28,10 +28,10 @@ namespace WebApi2Book.Data
         public static int CalculateStartIndex(int pageNumber, int pageSize)
         {
             if (pageNumber < 1)
-                throw new ArgumentOutOfRangeException(Constants.StandardParameterNames.PageNumber, pageNumber,
+                throw new ArgumentOutOfRangeException(Constants.CommonParameterNames.PageNumber, pageNumber,
                     ValueLessThanOneErrorMessage);
             if (pageSize < 1)
-                throw new ArgumentOutOfRangeException(Constants.StandardParameterNames.PageSize, pageSize,
+                throw new ArgumentOutOfRangeException(Constants.CommonParameterNames.PageSize, pageSize,
                     ValueLessThanOneErrorMessage);
 
             var startIndex = (pageNumber - 1)*pageSize;
@@ -43,7 +43,7 @@ namespace WebApi2Book.Data
             if (totalItemCount < 0)
                 throw new ArgumentOutOfRangeException("totalItemCount", totalItemCount, ValueLessThanZeroErrorMessage);
             if (pageSize < 1)
-                throw new ArgumentOutOfRangeException(Constants.StandardParameterNames.PageSize, pageSize,
+                throw new ArgumentOutOfRangeException(Constants.CommonParameterNames.PageSize, pageSize,
                     ValueLessThanOneErrorMessage);
 
             var totalPageCount = (totalItemCount + pageSize - 1)/pageSize;

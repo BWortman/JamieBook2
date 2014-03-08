@@ -85,18 +85,18 @@ namespace WebApi2Book.Web.Api.LinkServices
                 };
             var uriString = uriBuilder.Uri.AbsoluteUri;
 
-            var link = new Link {Href = uriString, Rel = Constants.StandardLinkNames.Self};
+            var link = new Link {Href = uriString, Rel = Constants.CommonLinkTitles.Self};
             linkContainer.AddLink(link);
         }
 
         public virtual Link GetPreviousPageLink(Uri uri)
         {
-            return new Link {Href = uri.AbsoluteUri, Rel = Constants.StandardLinkNames.PreviousPage};
+            return new Link {Href = uri.AbsoluteUri, Rel = Constants.CommonLinkTitles.PreviousPage};
         }
 
         public virtual Link GetNextPageLink(Uri uri)
         {
-            return new Link {Href = uri.AbsoluteUri, Rel = Constants.StandardLinkNames.NextPage};
+            return new Link {Href = uri.AbsoluteUri, Rel = Constants.CommonLinkTitles.NextPage};
         }
 
         public bool ShouldAddPreviousPageLink(int pageNumber)

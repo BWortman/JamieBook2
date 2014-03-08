@@ -1,21 +1,36 @@
 // Category.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
+using System;
 using System.Collections.Generic;
 
 namespace WebApi2Book.Web.Api.Models
 {
-    public class Category
+    public class Category : ILinkContaining, ILocationContaining
     {
-        private List<Link> _links;
+        private readonly List<Link> _links = new List<Link>();
         public long CategoryId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public List<Link> Links
+        public IEnumerable<Link> Links
         {
-            get { return _links ?? (_links = new List<Link>()); }
-            set { _links = value; }
+            get { return _links; }
+        }
+
+        public void AddLink(Link link)
+        {
+            _links.Add(link);
+        }
+
+        public Uri Location
+        {
+            get { return LocationLinkCalculator.GetLocationLink(this); }
+        }
+
+        public bool ShouldSerializeLocation()
+        {
+            return false;
         }
     }
 }
