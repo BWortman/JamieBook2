@@ -43,7 +43,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         //[AdministratorAuthorized]
         [Route("", Name = "AddCategoryRoute")]
         [HttpPost]
-        public IHttpActionResult Add(HttpRequestMessage request, [FromBody] Category category)
+        public IHttpActionResult Add(HttpRequestMessage request, Category category)
         {
             var newModelCategory = _categoriesMaintenanceProcessorBlock.CategoryAddingProcessor.AddCategory(category);
             return new ItemCreatedActionResult(request, newModelCategory);
