@@ -17,31 +17,31 @@ namespace WebApi2Book.Web.Common.ErrorHandling
             var httpException = exception as HttpException;
             if (httpException != null)
             {
-                context.Result = new SimpleJsonErrorResult(context.Request,
+                context.Result = new SimpleErrorResult(context.Request,
                     (HttpStatusCode) httpException.GetHttpCode(), httpException.Message);
                 return;
             }
 
             //if (exception is SecurityTokenValidationException)
             //{
-            //    context.Result = new SimpleJsonErrorResult(context.Request, HttpStatusCode.Unauthorized,
+            //    context.Result = new SimpleErrorResult(context.Request, HttpStatusCode.Unauthorized,
             //        exception.Message);
             //    return;
             //}
 
             if (exception is RootObjectNotFoundException)
             {
-                context.Result = new SimpleJsonErrorResult(context.Request, HttpStatusCode.NotFound, exception.Message);
+                context.Result = new SimpleErrorResult(context.Request, HttpStatusCode.NotFound, exception.Message);
                 return;
             }
 
             if (exception is ChildObjectNotFoundException)
             {
-                context.Result = new SimpleJsonErrorResult(context.Request, HttpStatusCode.Conflict, exception.Message);
+                context.Result = new SimpleErrorResult(context.Request, HttpStatusCode.Conflict, exception.Message);
                 return;
             }
 
-            context.Result = new SimpleJsonErrorResult(context.Request, HttpStatusCode.InternalServerError,
+            context.Result = new SimpleErrorResult(context.Request, HttpStatusCode.InternalServerError,
                 exception.Message);
         }
     }
