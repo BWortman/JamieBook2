@@ -3,7 +3,7 @@
 
 using System;
 
-namespace WebApi2Book.Web.Legacy
+namespace WebApi2Book.Web.Api.LegacyProcessing
 {
     public interface ILegacyMessageTypeFormatter
     {

@@ -37,8 +37,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi2Book.Windows.Legacy.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi2Book.Web.Api", "WebApi2Book.Web.Api\WebApi2Book.Web.Api.csproj", "{D90661C7-C0E2-40F5-A917-07483FB8C2E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi2Book.Web.Legacy", "WebApi2Book.Web.Legacy\WebApi2Book.Web.Legacy.csproj", "{0CAB5B3B-C825-4895-9AA5-FE97FD4744FD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi2Book.Web.Common", "WebApi2Book.Web.Common\WebApi2Book.Web.Common.csproj", "{68B43267-0F87-49A6-9050-509F66A4E138}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi2Book.Data", "WebApi2Book.Data\WebApi2Book.Data.csproj", "{B4F56983-5B1C-42C7-B872-AE3A5545C02D}"
@@ -77,10 +75,6 @@ Global
 		{D90661C7-C0E2-40F5-A917-07483FB8C2E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D90661C7-C0E2-40F5-A917-07483FB8C2E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D90661C7-C0E2-40F5-A917-07483FB8C2E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0CAB5B3B-C825-4895-9AA5-FE97FD4744FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0CAB5B3B-C825-4895-9AA5-FE97FD4744FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0CAB5B3B-C825-4895-9AA5-FE97FD4744FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0CAB5B3B-C825-4895-9AA5-FE97FD4744FD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{68B43267-0F87-49A6-9050-509F66A4E138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{68B43267-0F87-49A6-9050-509F66A4E138}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68B43267-0F87-49A6-9050-509F66A4E138}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -18,12 +18,12 @@ using WebApi2Book.Data.SqlServer;
 using WebApi2Book.Data.SqlServer.QueryProcessors;
 using WebApi2Book.Web.Api.AutoMappingConfiguration;
 using WebApi2Book.Web.Api.InquiryProcessing;
+using WebApi2Book.Web.Api.LegacyProcessing;
+using WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies;
 using WebApi2Book.Web.Api.LinkServices;
 using WebApi2Book.Web.Api.MaintenanceProcessing;
 using WebApi2Book.Web.Common;
 using WebApi2Book.Web.Common.Security;
-using WebApi2Book.Web.Legacy;
-using WebApi2Book.Web.Legacy.ProcessingStrategies;
 
 namespace WebApi2Book.Web.Api
 {

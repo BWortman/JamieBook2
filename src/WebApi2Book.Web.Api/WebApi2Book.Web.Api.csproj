@@ -143,6 +143,16 @@
     <Compile Include="InquiryProcessing\IAllCategoriesInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\ICategoriesInquiryProcessorBlock.cs" />
     <Compile Include="InquiryProcessing\ICategoryByIdInquiryProcessor.cs" />
+    <Compile Include="LegacyProcessing\ILegacyMessageParser.cs" />
+    <Compile Include="LegacyProcessing\ILegacyMessageProcessor.cs" />
+    <Compile Include="LegacyProcessing\ILegacyMessageTypeFormatter.cs" />
+    <Compile Include="LegacyProcessing\LegacyMessageParser.cs" />
+    <Compile Include="LegacyProcessing\LegacyMessageProcessor.cs" />
+    <Compile Include="LegacyProcessing\LegacyMessageTypeFormatter.cs" />
+    <Compile Include="LegacyProcessing\LegacyResponse.cs" />
+    <Compile Include="LegacyProcessing\ProcessingStrategies\GetCategoriesMessageProcessingStrategy.cs" />
+    <Compile Include="LegacyProcessing\ProcessingStrategies\GetCategoryByIdMessageProcessingStrategy.cs" />
+    <Compile Include="LegacyProcessing\ProcessingStrategies\ILegacyMessageProcessingStrategy.cs" />
     <Compile Include="LinkServices\CategoryLinkService.cs" />
     <Compile Include="LinkServices\ICategoryLinkService.cs" />
     <Compile Include="LinkServices\ILinkService.cs" />
@@ -186,10 +196,6 @@
     <ProjectReference Include="..\WebApi2Book.Web.Common\WebApi2Book.Web.Common.csproj">
       <Project>{68B43267-0F87-49A6-9050-509F66A4E138}</Project>
       <Name>WebApi2Book.Web.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebApi2Book.Web.Legacy\WebApi2Book.Web.Legacy.csproj">
-      <Project>{0cab5b3b-c825-4895-9aa5-fe97fd4744fd}</Project>
-      <Name>WebApi2Book.Web.Legacy</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

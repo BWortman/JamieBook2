@@ -3,7 +3,7 @@
 
 using System.Xml.Linq;
 
-namespace WebApi2Book.Web.Legacy.ProcessingStrategies
+namespace WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies
 {
     public interface ILegacyMessageProcessingStrategy
     {

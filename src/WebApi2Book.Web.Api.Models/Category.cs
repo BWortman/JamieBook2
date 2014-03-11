@@ -9,6 +9,7 @@ namespace WebApi2Book.Web.Api.Models
     public class Category : ILinkContaining, ILocationContaining
     {
         private readonly List<Link> _links = new List<Link>();
+        private bool _shouldSerializeLinks = true;
         public long CategoryId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -31,6 +32,16 @@ namespace WebApi2Book.Web.Api.Models
         public bool ShouldSerializeLocation()
         {
             return false;
+        }
+
+        public void SetShouldSerializeLinks(bool shouldSerializeLinks)
+        {
+            _shouldSerializeLinks = shouldSerializeLinks;
+        }
+
+        public bool ShouldSerializeLinks()
+        {
+            return _shouldSerializeLinks;
         }
     }
 }

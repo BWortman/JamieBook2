@@ -6,8 +6,8 @@ using System.Web;
 using System.Web.Http;
 using WebApi2Book.Common.Logging;
 using WebApi2Book.Common.TypeMapping;
+using WebApi2Book.Web.Api.LegacyProcessing;
 using WebApi2Book.Web.Common;
-using WebApi2Book.Web.Legacy;
 
 namespace WebApi2Book.Web.Api
 {

@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using WebApi2Book.Web.Legacy.ProcessingStrategies;
+using WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies;
 
-namespace WebApi2Book.Web.Legacy
+namespace WebApi2Book.Web.Api.LegacyProcessing
 {
     public class LegacyMessageProcessor : ILegacyMessageProcessor
     {

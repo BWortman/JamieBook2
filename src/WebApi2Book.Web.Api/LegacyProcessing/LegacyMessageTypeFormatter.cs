@@ -11,9 +11,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using WebApi2Book.Common;
 using WebApi2Book.Common.Extensions;
 
-namespace WebApi2Book.Web.Legacy
+namespace WebApi2Book.Web.Api.LegacyProcessing
 {
     public class LegacyMessageTypeFormatter : MediaTypeFormatter, ILegacyMessageTypeFormatter
     {
@@ -23,7 +24,7 @@ namespace WebApi2Book.Web.Legacy
         {
             _legacyMessageParser = legacyMessageParser;
 
-            SupportedMediaTypes.Add(new MediaTypeHeaderValue(Common.Constants.MediaTypeNames.TextXml));
+            SupportedMediaTypes.Add(new MediaTypeHeaderValue(Constants.MediaTypeNames.TextXml));
         }
 
         public override bool CanReadType(Type type)

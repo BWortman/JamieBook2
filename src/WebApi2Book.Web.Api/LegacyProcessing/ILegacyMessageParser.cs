@@ -3,7 +3,7 @@
 
 using System.Xml.Linq;
 
-namespace WebApi2Book.Web.Legacy
+namespace WebApi2Book.Web.Api.LegacyProcessing
 {
     /// <summary>
     ///     Used to parse legacy web service xml/soap messages.

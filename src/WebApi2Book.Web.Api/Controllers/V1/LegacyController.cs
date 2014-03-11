@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Xml.Linq;
-using WebApi2Book.Web.Legacy;
+using WebApi2Book.Web.Api.LegacyProcessing;
 
 namespace WebApi2Book.Web.Api.Controllers.V1
 {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Xml.Linq;
 using WebApi2Book.Common.Extensions;
 
-namespace WebApi2Book.Web.Legacy
+namespace WebApi2Book.Web.Api.LegacyProcessing
 {
     public class LegacyMessageParser : ILegacyMessageParser
     {

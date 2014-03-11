@@ -49,5 +49,7 @@ namespace WebApi2Book.Common
             public const string ApiVersionSegmentName = "apiVersion";
             public const string CurrentApiVersion = "v1";
         }
+
+        public const string DefaultLegacyNamespace = "http://tempuri.org/";
     }
 }
