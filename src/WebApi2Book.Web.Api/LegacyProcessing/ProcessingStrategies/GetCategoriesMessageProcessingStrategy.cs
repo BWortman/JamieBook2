@@ -24,7 +24,6 @@ namespace WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies
         public object Execute(XElement operationElement)
         {
             var modelCategories = _inquiryProcessor.GetCategories().ToArray();
-            Array.ForEach(modelCategories, x => x.SetShouldSerializeLinks(false));
 
             XNamespace ns = Constants.DefaultLegacyNamespace;
 

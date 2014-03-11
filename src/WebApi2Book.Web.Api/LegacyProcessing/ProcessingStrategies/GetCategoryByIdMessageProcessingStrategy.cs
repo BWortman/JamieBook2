@@ -27,7 +27,6 @@ namespace WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies
             var id = PrimitiveTypeParser.Parse<long>(operationElement.Descendants(ns + "categoryId").First().Value);
 
             var modelCategory = _inquiryProcessor.GetCategory(id);
-            modelCategory.SetShouldSerializeLinks(false);
 
             using (var stream = new MemoryStream())
             {
