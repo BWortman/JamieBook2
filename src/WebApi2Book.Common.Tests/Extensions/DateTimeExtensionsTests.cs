@@ -11,10 +11,10 @@ namespace WebApi2Book.Common.Tests.Extensions
     public class DateTimeExtensionsTests
     {
         [TestMethod]
-        public void ToJsonDate_converts_date()
+        public void ToUrlFriendlyDate_converts_date()
         {
             const string expected = "2013-02-13";
-            var actual = DateTime.Parse(expected).ToJsonDate();
+            var actual = DateTime.Parse(expected).ToUrlFriendlyDate();
             Assert.AreEqual(expected, actual);
         }
     }
