@@ -15,23 +15,19 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Category", Namespace="http://tempuri.org/")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Status", Namespace="http://tempuri.org/")]
     [System.SerializableAttribute()]
-    public partial class Category : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Status : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private long CategoryIdField;
+        private long StatusIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DescriptionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Link[] LinksField;
+        private int OrdinalField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -44,19 +40,19 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
-        public long CategoryId {
+        public long StatusId {
             get {
-                return this.CategoryIdField;
+                return this.StatusIdField;
             }
             set {
-                if ((this.CategoryIdField.Equals(value) != true)) {
-                    this.CategoryIdField = value;
-                    this.RaisePropertyChanged("CategoryId");
+                if ((this.StatusIdField.Equals(value) != true)) {
+                    this.StatusIdField = value;
+                    this.RaisePropertyChanged("StatusId");
                 }
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
         public string Name {
             get {
                 return this.NameField;
@@ -69,105 +65,15 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string Description {
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public int Ordinal {
             get {
-                return this.DescriptionField;
+                return this.OrdinalField;
             }
             set {
-                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
-                    this.DescriptionField = value;
-                    this.RaisePropertyChanged("Description");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Link[] Links {
-            get {
-                return this.LinksField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LinksField, value) != true)) {
-                    this.LinksField = value;
-                    this.RaisePropertyChanged("Links");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Link", Namespace="http://tempuri.org/")]
-    [System.SerializableAttribute()]
-    public partial class Link : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string RelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string HrefField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TitleField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string Rel {
-            get {
-                return this.RelField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RelField, value) != true)) {
-                    this.RelField = value;
-                    this.RaisePropertyChanged("Rel");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string Href {
-            get {
-                return this.HrefField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.HrefField, value) != true)) {
-                    this.HrefField = value;
-                    this.RaisePropertyChanged("Href");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string Title {
-            get {
-                return this.TitleField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
-                    this.TitleField = value;
-                    this.RaisePropertyChanged("Title");
+                if ((this.OrdinalField.Equals(value) != true)) {
+                    this.OrdinalField = value;
+                    this.RaisePropertyChanged("Ordinal");
                 }
             }
         }
@@ -186,34 +92,34 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TaskServiceReference.TeamTaskServiceSoap")]
     public interface TeamTaskServiceSoap {
         
-        // CODEGEN: Generating message contract since element name GetCategoriesResult from namespace http://tempuri.org/ is not marked nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCategories", ReplyAction="*")]
-        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesResponse GetCategories(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesRequest request);
+        // CODEGEN: Generating message contract since element name GetStatusesResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStatuses", ReplyAction="*")]
+        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponse GetStatuses(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCategories", ReplyAction="*")]
-        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesResponse> GetCategoriesAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStatuses", ReplyAction="*")]
+        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponse> GetStatusesAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest request);
         
-        // CODEGEN: Generating message contract since element name GetCategoryByIdResult from namespace http://tempuri.org/ is not marked nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCategoryById", ReplyAction="*")]
-        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdResponse GetCategoryById(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdRequest request);
+        // CODEGEN: Generating message contract since element name GetStatusByIdResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStatusById", ReplyAction="*")]
+        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponse GetStatusById(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetCategoryById", ReplyAction="*")]
-        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdResponse> GetCategoryByIdAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStatusById", ReplyAction="*")]
+        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponse> GetStatusByIdAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetCategoriesRequest {
+    public partial class GetStatusesRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetCategories", Namespace="http://tempuri.org/", Order=0)]
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetStatuses", Namespace="http://tempuri.org/", Order=0)]
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequestBody Body;
         
-        public GetCategoriesRequest() {
+        public GetStatusesRequest() {
         }
         
-        public GetCategoriesRequest(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesRequestBody Body) {
+        public GetStatusesRequest(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -222,9 +128,9 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute()]
-    public partial class GetCategoriesRequestBody {
+    public partial class GetStatusesRequestBody {
         
-        public GetCategoriesRequestBody() {
+        public GetStatusesRequestBody() {
         }
     }
     
@@ -232,15 +138,15 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetCategoriesResponse {
+    public partial class GetStatusesResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetCategoriesResponse", Namespace="http://tempuri.org/", Order=0)]
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetStatusesResponse", Namespace="http://tempuri.org/", Order=0)]
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponseBody Body;
         
-        public GetCategoriesResponse() {
+        public GetStatusesResponse() {
         }
         
-        public GetCategoriesResponse(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesResponseBody Body) {
+        public GetStatusesResponse(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -249,16 +155,16 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class GetCategoriesResponseBody {
+    public partial class GetStatusesResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Category[] GetCategoriesResult;
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Status[] GetStatusesResult;
         
-        public GetCategoriesResponseBody() {
+        public GetStatusesResponseBody() {
         }
         
-        public GetCategoriesResponseBody(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Category[] GetCategoriesResult) {
-            this.GetCategoriesResult = GetCategoriesResult;
+        public GetStatusesResponseBody(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Status[] GetStatusesResult) {
+            this.GetStatusesResult = GetStatusesResult;
         }
     }
     
@@ -266,15 +172,15 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetCategoryByIdRequest {
+    public partial class GetStatusByIdRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetCategoryById", Namespace="http://tempuri.org/", Order=0)]
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetStatusById", Namespace="http://tempuri.org/", Order=0)]
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequestBody Body;
         
-        public GetCategoryByIdRequest() {
+        public GetStatusByIdRequest() {
         }
         
-        public GetCategoryByIdRequest(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdRequestBody Body) {
+        public GetStatusByIdRequest(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -283,16 +189,16 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class GetCategoryByIdRequestBody {
+    public partial class GetStatusByIdRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public int categoryId;
+        public int statusId;
         
-        public GetCategoryByIdRequestBody() {
+        public GetStatusByIdRequestBody() {
         }
         
-        public GetCategoryByIdRequestBody(int categoryId) {
-            this.categoryId = categoryId;
+        public GetStatusByIdRequestBody(int statusId) {
+            this.statusId = statusId;
         }
     }
     
@@ -300,15 +206,15 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetCategoryByIdResponse {
+    public partial class GetStatusByIdResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetCategoryByIdResponse", Namespace="http://tempuri.org/", Order=0)]
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetStatusByIdResponse", Namespace="http://tempuri.org/", Order=0)]
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponseBody Body;
         
-        public GetCategoryByIdResponse() {
+        public GetStatusByIdResponse() {
         }
         
-        public GetCategoryByIdResponse(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdResponseBody Body) {
+        public GetStatusByIdResponse(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -317,16 +223,16 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class GetCategoryByIdResponseBody {
+    public partial class GetStatusByIdResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Category GetCategoryByIdResult;
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Status GetStatusByIdResult;
         
-        public GetCategoryByIdResponseBody() {
+        public GetStatusByIdResponseBody() {
         }
         
-        public GetCategoryByIdResponseBody(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Category GetCategoryByIdResult) {
-            this.GetCategoryByIdResult = GetCategoryByIdResult;
+        public GetStatusByIdResponseBody(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Status GetStatusByIdResult) {
+            this.GetStatusByIdResult = GetStatusByIdResult;
         }
     }
     
@@ -358,51 +264,51 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesResponse WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetCategories(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesRequest request) {
-            return base.Channel.GetCategories(request);
+        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponse WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetStatuses(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest request) {
+            return base.Channel.GetStatuses(request);
         }
         
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Category[] GetCategories() {
-            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesRequest();
-            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesRequestBody();
-            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesResponse retVal = ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetCategories(inValue);
-            return retVal.Body.GetCategoriesResult;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesResponse> WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetCategoriesAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesRequest request) {
-            return base.Channel.GetCategoriesAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesResponse> GetCategoriesAsync() {
-            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesRequest();
-            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesRequestBody();
-            return ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetCategoriesAsync(inValue);
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Status[] GetStatuses() {
+            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest();
+            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequestBody();
+            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponse retVal = ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetStatuses(inValue);
+            return retVal.Body.GetStatusesResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdResponse WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetCategoryById(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdRequest request) {
-            return base.Channel.GetCategoryById(request);
+        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponse> WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetStatusesAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest request) {
+            return base.Channel.GetStatusesAsync(request);
         }
         
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Category GetCategoryById(int categoryId) {
-            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdRequest();
-            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdRequestBody();
-            inValue.Body.categoryId = categoryId;
-            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdResponse retVal = ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetCategoryById(inValue);
-            return retVal.Body.GetCategoryByIdResult;
+        public System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponse> GetStatusesAsync() {
+            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest();
+            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequestBody();
+            return ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetStatusesAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdResponse> WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetCategoryByIdAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdRequest request) {
-            return base.Channel.GetCategoryByIdAsync(request);
+        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponse WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetStatusById(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest request) {
+            return base.Channel.GetStatusById(request);
         }
         
-        public System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdResponse> GetCategoryByIdAsync(int categoryId) {
-            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdRequest();
-            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdRequestBody();
-            inValue.Body.categoryId = categoryId;
-            return ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetCategoryByIdAsync(inValue);
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Status GetStatusById(int statusId) {
+            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest();
+            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequestBody();
+            inValue.Body.statusId = statusId;
+            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponse retVal = ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetStatusById(inValue);
+            return retVal.Body.GetStatusByIdResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponse> WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetStatusByIdAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest request) {
+            return base.Channel.GetStatusByIdAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponse> GetStatusByIdAsync(int statusId) {
+            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest();
+            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequestBody();
+            inValue.Body.statusId = statusId;
+            return ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetStatusByIdAsync(inValue);
         }
     }
 }

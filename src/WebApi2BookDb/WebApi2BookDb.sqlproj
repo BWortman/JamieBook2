@@ -70,11 +70,8 @@
     <None Include="Scripts\TestData.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\Category.sql" />
-    <Build Include="Tables\Priority.sql" />
     <Build Include="Tables\Status.sql" />
     <Build Include="Tables\Task.sql" />
-    <Build Include="Tables\TaskCategory.sql" />
     <Build Include="Tables\TaskUser.sql" />
     <Build Include="Tables\User.sql" />
   </ItemGroup>

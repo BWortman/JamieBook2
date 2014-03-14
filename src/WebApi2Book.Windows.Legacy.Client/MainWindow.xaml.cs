@@ -17,9 +17,9 @@ namespace WebApi2Book.Windows.Legacy.Client
     /// </summary>
     public partial class MainWindow : INotifyPropertyChanged
     {
-        private Category _category;
-        private int? _categoryId;
         private bool _isProcessing;
+        private Status _status;
+        private int? _statusId;
         private bool _useWebApi;
 
         public MainWindow()
@@ -27,35 +27,35 @@ namespace WebApi2Book.Windows.Legacy.Client
             InitializeComponent();
             DataContext = this;
 
-            GetCategoriesCommand = new DelegateCommand(GetCategories, AllowFetch);
-            GetCategoryCommand = new DelegateCommand(GetCategory, AllowIndividialCategoryFetch);
+            GetStatusesCommand = new DelegateCommand(GetStatuses, AllowFetch);
+            GetStatusCommand = new DelegateCommand(GetStatus, AllowIndividialStatusFetch);
 
-            Categories = new ObservableCollection<Category>();
+            Statuses = new ObservableCollection<Status>();
         }
 
-        public ObservableCollection<Category> Categories { get; private set; }
+        public ObservableCollection<Status> Statuses { get; private set; }
 
-        public DelegateCommand GetCategoriesCommand { get; private set; }
-        public DelegateCommand GetCategoryCommand { get; private set; }
+        public DelegateCommand GetStatusesCommand { get; private set; }
+        public DelegateCommand GetStatusCommand { get; private set; }
 
-        public Category Category
+        public Status Status
         {
-            get { return _category; }
+            get { return _status; }
             set
             {
-                _category = value;
-                OnPropertyChanged("Category");
+                _status = value;
+                OnPropertyChanged("Status");
             }
         }
 
-        public int? CategoryId
+        public int? StatusId
         {
-            get { return _categoryId; }
+            get { return _statusId; }
             set
             {
-                _categoryId = value;
-                OnPropertyChanged("CategoryId");
-                GetCategoryCommand.RaiseCanExecuteChanged();
+                _statusId = value;
+                OnPropertyChanged("StatusId");
+                GetStatusCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -76,15 +76,17 @@ namespace WebApi2Book.Windows.Legacy.Client
             {
                 _isProcessing = value;
                 OnPropertyChanged("IsProcessing");
-                GetCategoriesCommand.RaiseCanExecuteChanged();
+
+                GetStatusCommand.RaiseCanExecuteChanged();
+                GetStatusesCommand.RaiseCanExecuteChanged();
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        private bool AllowIndividialCategoryFetch()
+        private bool AllowIndividialStatusFetch()
         {
-            return AllowFetch() && CategoryId.HasValue;
+            return AllowFetch() && StatusId.HasValue;
         }
 
         private bool AllowFetch()
@@ -92,15 +94,15 @@ namespace WebApi2Book.Windows.Legacy.Client
             return !IsProcessing;
         }
 
-        public async void GetCategories()
+        public async void GetStatuses()
         {
             IsProcessing = true;
 
             try
             {
-                Categories.Clear();
-                var result = await Task.Run(() => GetCategoriesAsync());
-                result.Body.GetCategoriesResult.ToList().ForEach(x => Categories.Add(x));
+                Statuses.Clear();
+                var result = await Task.Run(() => GetStatusesAsync());
+                result.Body.GetStatusesResult.ToList().ForEach(x => Statuses.Add(x));
             }
             catch (Exception e)
             {
@@ -112,15 +114,15 @@ namespace WebApi2Book.Windows.Legacy.Client
             }
         }
 
-        private async void GetCategory()
+        private async void GetStatus()
         {
             IsProcessing = true;
 
             try
             {
-                Category = null;
-                var result = await Task.Run(() => GetCategoryAsync());
-                Category = result.Body.GetCategoryByIdResult;
+                Status = null;
+                var result = await Task.Run(() => GetStatusAsync());
+                Status = result.Body.GetStatusByIdResult;
             }
             catch (Exception e)
             {
@@ -140,14 +142,14 @@ namespace WebApi2Book.Windows.Legacy.Client
             return taskServiceSoapClient;
         }
 
-        public async Task<GetCategoriesResponse> GetCategoriesAsync()
+        public async Task<GetStatusesResponse> GetStatusesAsync()
         {
             var taskServiceSoapClient = GetServiceClient();
             taskServiceSoapClient.Open();
 
             try
             {
-                var result = await taskServiceSoapClient.GetCategoriesAsync();
+                var result = await taskServiceSoapClient.GetStatusesAsync();
                 return result;
             }
             finally
@@ -156,14 +158,14 @@ namespace WebApi2Book.Windows.Legacy.Client
             }
         }
 
-        public async Task<GetCategoryByIdResponse> GetCategoryAsync()
+        public async Task<GetStatusByIdResponse> GetStatusAsync()
         {
             var taskServiceSoapClient = GetServiceClient();
             taskServiceSoapClient.Open();
 
             try
             {
-                var result = await taskServiceSoapClient.GetCategoryByIdAsync(CategoryId.Value);
+                var result = await taskServiceSoapClient.GetStatusByIdAsync(StatusId.Value);
                 return result;
             }
             finally

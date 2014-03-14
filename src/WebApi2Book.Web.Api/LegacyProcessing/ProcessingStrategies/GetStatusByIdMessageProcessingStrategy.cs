@@ -1,4 +1,4 @@
-﻿// GetCategoryByIdMessageProcessingStrategy.cs
+﻿// GetStatusByIdMessageProcessingStrategy.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System.IO;
@@ -11,11 +11,11 @@ using WebApi2Book.Web.Api.Models;
 
 namespace WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies
 {
-    public class GetCategoryByIdMessageProcessingStrategy : ILegacyMessageProcessingStrategy
+    public class GetStatusByIdMessageProcessingStrategy : ILegacyMessageProcessingStrategy
     {
-        private readonly ICategoryByIdInquiryProcessor _inquiryProcessor;
+        private readonly IStatusByIdInquiryProcessor _inquiryProcessor;
 
-        public GetCategoryByIdMessageProcessingStrategy(ICategoryByIdInquiryProcessor inquiryProcessor)
+        public GetStatusByIdMessageProcessingStrategy(IStatusByIdInquiryProcessor inquiryProcessor)
         {
             _inquiryProcessor = inquiryProcessor;
         }
@@ -24,26 +24,26 @@ namespace WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies
         {
             XNamespace ns = Constants.DefaultLegacyNamespace;
 
-            var id = PrimitiveTypeParser.Parse<long>(operationElement.Descendants(ns + "categoryId").First().Value);
+            var id = PrimitiveTypeParser.Parse<long>(operationElement.Descendants(ns + "statusId").First().Value);
 
-            var modelCategory = _inquiryProcessor.GetCategory(id);
+            var modelStatus = _inquiryProcessor.GetStatus(id);
 
             using (var stream = new MemoryStream())
             {
-                var serializer = new XmlSerializer(typeof (Category), Constants.DefaultLegacyNamespace);
-                serializer.Serialize(stream, modelCategory);
+                var serializer = new XmlSerializer(typeof (Status), Constants.DefaultLegacyNamespace);
+                serializer.Serialize(stream, modelStatus);
 
                 stream.Seek(0, 0);
 
                 var xDocument = XDocument.Load(stream, LoadOptions.None);
-                var categoryAsXElement = xDocument.Descendants(ns + "Category");
+                var categoryAsXElement = xDocument.Descendants(ns + "Status");
                 return categoryAsXElement.Elements();
             }
         }
 
         public bool CanProcess(string operationName)
         {
-            return operationName == "GetCategoryById";
+            return operationName == "GetStatusById";
         }
     }
 }

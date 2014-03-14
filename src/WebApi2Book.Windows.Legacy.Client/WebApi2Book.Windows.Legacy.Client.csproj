@@ -115,13 +115,13 @@
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="Service References\TaskServiceReference\TeamTaskService.wsdl" />
-    <None Include="Service References\TaskServiceReference\WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Category.datasource">
+    <None Include="Service References\TaskServiceReference\WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TaskServiceReference\WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoriesResponse.datasource">
+    <None Include="Service References\TaskServiceReference\WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TaskServiceReference\WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetCategoryByIdResponse.datasource">
+    <None Include="Service References\TaskServiceReference\WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Status.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>

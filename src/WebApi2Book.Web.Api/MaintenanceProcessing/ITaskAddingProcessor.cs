@@ -1,12 +1,12 @@
-﻿// ICategoryAddingProcessor.cs
+﻿// ITaskAddingProcessor.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using WebApi2Book.Web.Api.Models;
 
 namespace WebApi2Book.Web.Api.MaintenanceProcessing
 {
-    public interface ICategoryAddingProcessor
+    public interface ITaskAddingProcessor
     {
-        Category AddCategory(Category modelCategory);
+        Task AddTask(Task modelTask);
     }
 }

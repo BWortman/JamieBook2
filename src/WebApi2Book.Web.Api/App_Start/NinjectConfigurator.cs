@@ -57,26 +57,26 @@ namespace WebApi2Book.Web.Api
 
             container.Bind<IUserSession>().ToMethod(CreateUserSession).InRequestScope();
 
-            container.Bind<ICategoriesInquiryProcessorBlock>().To<CategoriesInquiryProcessorBlock>();
+            container.Bind<IStatusesInquiryProcessorBlock>().To<StatusesInquiryProcessorBlock>();
 
-            container.Bind<IAllCategoriesInquiryProcessor>().To<AllCategoriesInquiryProcessor>();
-            container.Bind<IAllCategoriesQueryProcessor>().To<AllCategoriesQueryProcessor>();
+            container.Bind<IAllStatusesInquiryProcessor>().To<AllStatusesInquiryProcessor>();
+            container.Bind<IAllStatusesQueryProcessor>().To<AllStatusesQueryProcessor>();
             
-            container.Bind<ICategoryByIdInquiryProcessor>().To<CategoryByIdInquiryProcessor>();
-            container.Bind<ICategoryByIdQueryProcessor>().To<CategoryByIdQueryProcessor>();
+            container.Bind<IStatusByIdInquiryProcessor>().To<StatusByIdInquiryProcessor>();
+            container.Bind<IStatusByIdQueryProcessor>().To<StatusByIdQueryProcessor>();
 
-            container.Bind<ICategoriesMaintenanceProcessorBlock>().To<CategoriesMaintenanceProcessorBlock>();
+            container.Bind<ITasksMaintenanceProcessorBlock>().To<TasksMaintenanceProcessorBlock>();
 
-            container.Bind<ICategoryAddingProcessor>().To<CategoryAddingProcessor>();
+            container.Bind<ITaskAddingProcessor>().To<TaskAddingProcessor>();
 
-            container.Bind<ICategoryLinkService>().To<CategoryLinkService>();
+            container.Bind<IStatusLinkService>().To<StatusLinkService>();
         }
 
         private void ConfigureAutoMapper(IKernel container)
         {
             container.Bind<IAutoMapper>().To<AutoMapperAdapter>().InSingletonScope();
-            container.Bind<IAutoMapperTypeConfigurator>().To<CategoryEntityToCategoryModelAutoMapperTypeConfigurator>();
-            container.Bind<IAutoMapperTypeConfigurator>().To<CategoryModelToCategoryEntityAutoMapperTypeConfigurator>();
+            container.Bind<IAutoMapperTypeConfigurator>().To<StatusEntityToStatusModelAutoMapperTypeConfigurator>();
+            container.Bind<IAutoMapperTypeConfigurator>().To<StatusModelToStatusEntityAutoMapperTypeConfigurator>();
         }
 
         private IUserSession CreateUserSession(IContext arg)
@@ -121,8 +121,8 @@ namespace WebApi2Book.Web.Api
             container.Bind<ILegacyMessageParser>().To<LegacyMessageParser>().InSingletonScope();
             container.Bind<ILegacyMessageTypeFormatter>().To<LegacyMessageTypeFormatter>().InSingletonScope();
 
-            container.Bind<ILegacyMessageProcessingStrategy>().To<GetCategoriesMessageProcessingStrategy>();
-            container.Bind<ILegacyMessageProcessingStrategy>().To<GetCategoryByIdMessageProcessingStrategy>();
+            container.Bind<ILegacyMessageProcessingStrategy>().To<GetStatusesMessageProcessingStrategy>();
+            container.Bind<ILegacyMessageProcessingStrategy>().To<GetStatusByIdMessageProcessingStrategy>();
         }
 
         private void ConfigureLog4net(IKernel container)

@@ -51,17 +51,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ISqlCommandFactory.cs" />
-    <Compile Include="Mapping\CategoryMap.cs" />
-    <Compile Include="Mapping\PriorityMap.cs" />
     <Compile Include="Mapping\StatusMap.cs" />
     <Compile Include="Mapping\TaskMap.cs" />
     <Compile Include="Mapping\UserMap.cs" />
     <Compile Include="Mapping\VersionedClassMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryProcessors\AllCategoriesQueryProcessor.cs" />
-    <Compile Include="QueryProcessors\CategoryByIdQueryProcessor.cs" />
-    <Compile Include="QueryProcessors\IAllCategoriesQueryProcessor.cs" />
-    <Compile Include="QueryProcessors\ICategoryByIdQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\AllStatusesQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\StatusByIdQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\IAllStatusesQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\IStatusByIdQueryProcessor.cs" />
     <Compile Include="SqlCommandFactory.cs" />
   </ItemGroup>
   <ItemGroup>

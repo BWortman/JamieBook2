@@ -15,14 +15,15 @@
             <CheckBox Margin="0,10" HorizontalAlignment="Center" IsChecked="{Binding UseWebApi}" Content="Use Web API"/>
             <Border BorderBrush="Black" BorderThickness="1">
                 <StackPanel Margin="0,10">
-                    <Button HorizontalAlignment="Center" Content="Get Categories" Command="{Binding GetCategoriesCommand}"/>
-                    <ListBox Margin="10,10,10,0" Height="100" Width="300" ItemsSource="{Binding Categories}">
+                    <Button HorizontalAlignment="Center" Content="Get Statuses" Command="{Binding GetStatusesCommand}"/>
+                    <ListBox Margin="10,10,10,0" Height="100" Width="300" ItemsSource="{Binding Statuses}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding CategoryId}"/>
+                                    <TextBlock Text="{Binding StatusId}"/>
                                     <TextBlock Margin="10,0,0,0" Text="{Binding Name}"/>
                                     <TextBlock Margin="10,0,0,0" Text="{Binding Description}"/>
+                                    <TextBlock Margin="10,0,0,0" Text="{Binding Ordinal}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -32,15 +33,15 @@
             <Border Margin="0,10,0,0" BorderBrush="Black" BorderThickness="1">
                 <StackPanel Margin="0,10">
                     <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                        <TextBox Width="50" Text="{Binding CategoryId, UpdateSourceTrigger=PropertyChanged}"/>
-                        <Button Margin="5,0,0,0" Content="Get Category" Command="{Binding GetCategoryCommand}"/>
+                        <TextBox Width="50" Text="{Binding StatusId, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Margin="5,0,0,0" Content="Get Status" Command="{Binding GetStatusCommand}"/>
                     </StackPanel>
                     <TextBox Margin="0,10" HorizontalAlignment="Center" Width="300" IsReadOnly="True">
                         <TextBox.Text>
                             <MultiBinding StringFormat="{}{0}  {1}  {2}">
-                                <Binding Path="Category.CategoryId"/>
-                                <Binding Path="Category.Name"/>
-                                <Binding Path="Category.Description"/>
+                                <Binding Path="Status.StatusId"/>
+                                <Binding Path="Status.Name"/>
+                                <Binding Path="Status.Ordinal"/>
                             </MultiBinding>
                         </TextBox.Text>
                         </TextBox>

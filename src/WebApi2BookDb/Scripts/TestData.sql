@@ -1,8 +1,6 @@
 ﻿
 declare @statusId int,
-	@priorityId int,
 	@taskId int,
-	@categoryId int,
 	@userId uniqueidentifier
 
 --if not exists(select * from dbo.aspnet_Applications where ApplicationId = '8b2e549a-c283-46f2-b481-25136daa9059')
@@ -31,22 +29,16 @@ if not exists (select * from [User] where UserId = N'6c82524a-b1e0-4b20-97b1-dbd
 	INSERT [dbo].[User] ([UserId], [Firstname], [Lastname]) 
 		VALUES (N'6c82524a-b1e0-4b20-97b1-dbdf0dadad8e', N'Jim', N'Bob')
 
-
 if not exists(select * from dbo.Task where Subject = 'Test Task')
 begin
 	select top 1 @statusId = StatusId from Status;
-	select top 1 @priorityId = PriorityId from Priority;
-	select top 1 @categoryId = CategoryId from Category;
 	select top 1 @userId = UserId from [User];
 
-	insert into dbo.Task(Subject, StartDate, PriorityId, StatusId, CreatedDate, CreatedUserId)
-		values('Test Task', getdate(), @priorityId, @statusId, getdate(), @userId);
+	insert into dbo.Task(Subject, StartDate, StatusId, CreatedDate, CreatedUserId)
+		values('Test Task', getdate(), @statusId, getdate(), @userId);
 
 	set @taskId = SCOPE_IDENTITY();
 	
-	insert into dbo.TaskCategory(TaskId, CategoryId)
-		values(@taskId, @categoryId)
-
 	INSERT [dbo].[TaskUser] ([TaskId], [UserId]) 
 		VALUES (@taskId, N'6c82524a-b1e0-4b20-97b1-dbdf0dadad8e')
 end

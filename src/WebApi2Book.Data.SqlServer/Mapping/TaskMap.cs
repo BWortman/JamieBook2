@@ -17,7 +17,6 @@ namespace WebApi2Book.Data.SqlServer.Mapping
             Map(x => x.DateCompleted).Nullable();
 
             References(x => x.Status, "StatusId");
-            References(x => x.Priority, "PriorityId");
             References(x => x.CreatedBy, "CreatedUserId");
 
             HasManyToMany(x => x.Users)
@@ -25,12 +24,6 @@ namespace WebApi2Book.Data.SqlServer.Mapping
                 .Table("TaskUser")
                 .ParentKeyColumn("TaskId")
                 .ChildKeyColumn("UserId");
-
-            HasManyToMany(x => x.Categories)
-                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
-                .Table("TaskCategory")
-                .ParentKeyColumn("TaskId")
-                .ChildKeyColumn("CategoryId");
         }
     }
 }

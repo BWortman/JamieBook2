@@ -14,8 +14,6 @@ namespace WebApi2Book.Web.Api.Models
         public DateTime? DueDate { get; set; }
         public DateTime? DateCompleted { get; set; }
         public DateTime CreatedDate { get; set; }
-        public List<Category> Categories { get; set; }
-        public Priority Priority { get; set; }
         public Status Status { get; set; }
         public List<Link> Links { get; set; }
         public List<User> Assignees { get; set; }

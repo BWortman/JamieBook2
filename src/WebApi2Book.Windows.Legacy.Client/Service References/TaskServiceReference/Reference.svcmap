@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="4d2aa9ee-75cd-436e-ac9d-e81246bf413e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="13995e22-15c4-424c-bc19-eddafe221163" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,8 +22,8 @@
     <MetadataSource Address="http://localhost:62965/TeamTaskService.asmx" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="TeamTaskService.disco" MetadataType="Disco" ID="a8fbfe93-ae14-4e56-b3e2-d52de458cacc" SourceId="1" SourceUrl="http://localhost:62965/TeamTaskService.asmx?disco" />
-    <MetadataFile FileName="TeamTaskService.wsdl" MetadataType="Wsdl" ID="6b17c6d2-fabc-4e89-a405-7d50d92f3322" SourceId="1" SourceUrl="http://localhost:62965/TeamTaskService.asmx?wsdl" />
+    <MetadataFile FileName="TeamTaskService.disco" MetadataType="Disco" ID="54c37cb2-ae58-45fb-b0e6-f185dfaa1181" SourceId="1" SourceUrl="http://localhost:62965/TeamTaskService.asmx?disco" />
+    <MetadataFile FileName="TeamTaskService.wsdl" MetadataType="Wsdl" ID="b556fc16-0dd2-42d7-b3ab-3caab4cc2c07" SourceId="1" SourceUrl="http://localhost:62965/TeamTaskService.asmx?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

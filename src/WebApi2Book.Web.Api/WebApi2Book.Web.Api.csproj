@@ -130,19 +130,19 @@
     <Compile Include="App_Start\NinjectConfigurator.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="AutoMappingConfiguration\CategoryEntityToCategoryModelAutoMapperTypeConfigurator.cs" />
-    <Compile Include="AutoMappingConfiguration\CategoryModelToCategoryEntityAutoMapperTypeConfigurator.cs" />
-    <Compile Include="Controllers\V1\CategoriesController.cs" />
+    <Compile Include="AutoMappingConfiguration\StatusEntityToStatusModelAutoMapperTypeConfigurator.cs" />
+    <Compile Include="AutoMappingConfiguration\StatusModelToStatusEntityAutoMapperTypeConfigurator.cs" />
+    <Compile Include="Controllers\V1\StatusesController.cs" />
     <Compile Include="Controllers\V1\LegacyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="InquiryProcessing\AllCategoriesInquiryProcessor.cs" />
-    <Compile Include="InquiryProcessing\CategoriesInquiryProcessorBlock.cs" />
-    <Compile Include="InquiryProcessing\CategoryByIdInquiryProcessor.cs" />
-    <Compile Include="InquiryProcessing\IAllCategoriesInquiryProcessor.cs" />
-    <Compile Include="InquiryProcessing\ICategoriesInquiryProcessorBlock.cs" />
-    <Compile Include="InquiryProcessing\ICategoryByIdInquiryProcessor.cs" />
+    <Compile Include="InquiryProcessing\AllStatusesInquiryProcessor.cs" />
+    <Compile Include="InquiryProcessing\StatusesInquiryProcessorBlock.cs" />
+    <Compile Include="InquiryProcessing\StatusByIdInquiryProcessor.cs" />
+    <Compile Include="InquiryProcessing\IAllStatusesInquiryProcessor.cs" />
+    <Compile Include="InquiryProcessing\IStatusesInquiryProcessorBlock.cs" />
+    <Compile Include="InquiryProcessing\IStatusByIdInquiryProcessor.cs" />
     <Compile Include="LegacyProcessing\ILegacyMessageParser.cs" />
     <Compile Include="LegacyProcessing\ILegacyMessageProcessor.cs" />
     <Compile Include="LegacyProcessing\ILegacyMessageTypeFormatter.cs" />
@@ -150,17 +150,17 @@
     <Compile Include="LegacyProcessing\LegacyMessageProcessor.cs" />
     <Compile Include="LegacyProcessing\LegacyMessageTypeFormatter.cs" />
     <Compile Include="LegacyProcessing\LegacyResponse.cs" />
-    <Compile Include="LegacyProcessing\ProcessingStrategies\GetCategoriesMessageProcessingStrategy.cs" />
-    <Compile Include="LegacyProcessing\ProcessingStrategies\GetCategoryByIdMessageProcessingStrategy.cs" />
+    <Compile Include="LegacyProcessing\ProcessingStrategies\GetStatusesMessageProcessingStrategy.cs" />
+    <Compile Include="LegacyProcessing\ProcessingStrategies\GetStatusByIdMessageProcessingStrategy.cs" />
     <Compile Include="LegacyProcessing\ProcessingStrategies\ILegacyMessageProcessingStrategy.cs" />
-    <Compile Include="LinkServices\CategoryLinkService.cs" />
-    <Compile Include="LinkServices\ICategoryLinkService.cs" />
+    <Compile Include="LinkServices\StatusLinkService.cs" />
+    <Compile Include="LinkServices\IStatusLinkService.cs" />
     <Compile Include="LinkServices\ILinkService.cs" />
     <Compile Include="LinkServices\LinkService.cs" />
-    <Compile Include="MaintenanceProcessing\CategoryAddingProcessor.cs" />
-    <Compile Include="MaintenanceProcessing\CategoriesMaintenanceProcessorBlock.cs" />
-    <Compile Include="MaintenanceProcessing\ICategoryAddingProcessor.cs" />
-    <Compile Include="MaintenanceProcessing\ICategoriesMaintenanceProcessorBlock.cs" />
+    <Compile Include="MaintenanceProcessing\TaskAddingProcessor.cs" />
+    <Compile Include="MaintenanceProcessing\TasksMaintenanceProcessorBlock.cs" />
+    <Compile Include="MaintenanceProcessing\ITaskAddingProcessor.cs" />
+    <Compile Include="MaintenanceProcessing\ITasksMaintenanceProcessorBlock.cs" />
     <Compile Include="MaintenanceProcessing\ItemCreatedActionResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -7,33 +7,27 @@ using WebApi2Book.Web.Api.Models;
 /// <summary>
 ///     Summary description for TeamTaskService
 /// </summary>
+/// <remarks>
+///     This would obviously normally fetch data from the database, but we're keeping things very
+///     simple to maintain focus on the Web API, not on legacy web services or data access technologies.
+/// </remarks>
 [WebService(Namespace = "http://tempuri.org/")]
 [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-// To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-// [System.Web.Script.Services.ScriptService]
 public class TeamTaskService : WebService
 {
-    public TeamTaskService()
-    {
-        //Uncomment the following line if using designed components 
-        //InitializeComponent(); 
-    }
-
     [WebMethod]
-    public Category[] GetCategories()
+    public Status[] GetStatuses()
     {
-        // todo: fetch from db
         return new[]
         {
-            new Category {CategoryId = 1, Name = "cat1", Description = "category 1"},
-            new Category {CategoryId = 2, Name = "cat2", Description = "category 2"}
+            new Status {StatusId = 1, Name = "status1", Ordinal = 1},
+            new Status {StatusId = 2, Name = "status2", Ordinal = 2}
         };
     }
 
     [WebMethod]
-    public Category GetCategoryById(int categoryId)
+    public Status GetStatusById(int statusId)
     {
-        // todo: fetch from db
-        return new Category {CategoryId = 1, Name = "cat1", Description = "category 1"};
+        return new Status {StatusId = statusId, Name = "status" + statusId, Ordinal = statusId};
     }
 }

@@ -41,13 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Category.cs" />
     <Compile Include="ILinkContaining.cs" />
     <Compile Include="ILocationContaining.cs" />
     <Compile Include="IPageLinkContaining.cs" />
     <Compile Include="Link.cs" />
     <Compile Include="LocationLinkCalculator.cs" />
-    <Compile Include="Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Status.cs" />
     <Compile Include="Task.cs" />

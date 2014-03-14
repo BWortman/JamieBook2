@@ -1,7 +1,6 @@
-﻿// GetCategoriesMessageProcessingStrategy.cs
+﻿// GetStatusesMessageProcessingStrategy.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using System;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -12,37 +11,37 @@ using WebApi2Book.Web.Api.Models;
 
 namespace WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies
 {
-    public class GetCategoriesMessageProcessingStrategy : ILegacyMessageProcessingStrategy
+    public class GetStatusesMessageProcessingStrategy : ILegacyMessageProcessingStrategy
     {
-        private readonly IAllCategoriesInquiryProcessor _inquiryProcessor;
+        private readonly IAllStatusesInquiryProcessor _inquiryProcessor;
 
-        public GetCategoriesMessageProcessingStrategy(IAllCategoriesInquiryProcessor inquiryProcessor)
+        public GetStatusesMessageProcessingStrategy(IAllStatusesInquiryProcessor inquiryProcessor)
         {
             _inquiryProcessor = inquiryProcessor;
         }
 
         public object Execute(XElement operationElement)
         {
-            var modelCategories = _inquiryProcessor.GetCategories().ToArray();
+            var modelStatuses = _inquiryProcessor.GetStatuses().ToArray();
 
             XNamespace ns = Constants.DefaultLegacyNamespace;
 
             using (var stream = new MemoryStream())
             {
-                var serializer = new XmlSerializer(typeof (Category[]), Constants.DefaultLegacyNamespace);
-                serializer.Serialize(stream, modelCategories);
+                var serializer = new XmlSerializer(typeof (Status[]), Constants.DefaultLegacyNamespace);
+                serializer.Serialize(stream, modelStatuses);
 
                 stream.Seek(0, 0);
 
                 var xDocument = XDocument.Load(stream, LoadOptions.None);
-                var categoriesAsXElements = xDocument.Descendants(ns + "Category");
+                var categoriesAsXElements = xDocument.Descendants(ns + "Status");
                 return categoriesAsXElements;
             }
         }
 
         public bool CanProcess(string operationName)
         {
-            return operationName == "GetCategories";
+            return operationName == "GetStatuses";
         }
     }
 }

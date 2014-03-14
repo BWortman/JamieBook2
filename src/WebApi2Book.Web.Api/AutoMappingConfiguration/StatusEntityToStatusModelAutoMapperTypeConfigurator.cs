@@ -1,4 +1,4 @@
-﻿// CategoryEntityToCategoryModelAutoMapperTypeConfigurator.cs
+﻿// StatusEntityToStatusModelAutoMapperTypeConfigurator.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using AutoMapper;
@@ -7,13 +7,13 @@ using WebApi2Book.Data.Entities;
 
 namespace WebApi2Book.Web.Api.AutoMappingConfiguration
 {
-    public class CategoryEntityToCategoryModelAutoMapperTypeConfigurator : IAutoMapperTypeConfigurator
+    public class StatusEntityToStatusModelAutoMapperTypeConfigurator : IAutoMapperTypeConfigurator
     {
         public void Configure()
         {
-            Mapper.CreateMap<Category, Models.Category>()
+            Mapper.CreateMap<Status, Models.Status>()
                 .ForMember(opt => opt.Links, x => x.Ignore())
-                .ForMember(opt => opt.Location, x=> x.Ignore());
+                .ForMember(opt => opt.Location, x => x.Ignore());
         }
     }
 }

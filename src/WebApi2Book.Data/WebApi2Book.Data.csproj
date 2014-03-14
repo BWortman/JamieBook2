@@ -42,9 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\ChildObjectNotFoundException.cs" />
-    <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\IVersionedEntity.cs" />
-    <Compile Include="Entities\Priority.cs" />
     <Compile Include="Entities\Status.cs" />
     <Compile Include="Entities\Task.cs" />
     <Compile Include="Entities\User.cs" />
