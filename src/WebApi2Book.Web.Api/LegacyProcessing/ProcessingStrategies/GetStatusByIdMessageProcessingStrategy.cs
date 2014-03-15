@@ -6,6 +6,7 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using WebApi2Book.Common;
+using WebApi2Book.Data.Exceptions;
 using WebApi2Book.Web.Api.InquiryProcessing;
 using WebApi2Book.Web.Api.Models;
 
@@ -26,7 +27,15 @@ namespace WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies
 
             var id = PrimitiveTypeParser.Parse<long>(operationElement.Descendants(ns + "statusId").First().Value);
 
-            var modelStatus = _inquiryProcessor.GetStatus(id);
+            Status modelStatus = null;
+            try
+            {
+                modelStatus = _inquiryProcessor.GetStatus(id);
+            }
+            catch (RootObjectNotFoundException)
+            {
+                // Eat it. Just return an empty response.
+            }
 
             using (var stream = new MemoryStream())
             {

@@ -10,6 +10,7 @@ using WebApi2Book.Web.Api.Models;
 /// <remarks>
 ///     This would obviously normally fetch data from the database, but we're keeping things very
 ///     simple to maintain focus on the Web API, not on legacy web services or data access technologies.
+///     Besides, this is the web service that has been replaced by the new REST-based Web API.
 /// </remarks>
 [WebService(Namespace = "http://tempuri.org/")]
 [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]

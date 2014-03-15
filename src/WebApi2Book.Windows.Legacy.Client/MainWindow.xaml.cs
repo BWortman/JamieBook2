@@ -94,6 +94,15 @@ namespace WebApi2Book.Windows.Legacy.Client
             return !IsProcessing;
         }
 
+        public void DisplayErrorMessage(string errorMessage)
+        {
+            var formattedErrorMessage =
+                string.Format("An error has occurred while processing the request.{0}{1}Details:{2}{3}",
+                    Environment.NewLine, Environment.NewLine, Environment.NewLine, errorMessage);
+
+            MessageBox.Show(formattedErrorMessage, "System Message");
+        }
+
         public async void GetStatuses()
         {
             IsProcessing = true;
@@ -106,7 +115,7 @@ namespace WebApi2Book.Windows.Legacy.Client
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "System Message");
+                DisplayErrorMessage(e.Message);
             }
             finally
             {
@@ -126,7 +135,7 @@ namespace WebApi2Book.Windows.Legacy.Client
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "System Message");
+                DisplayErrorMessage(e.Message);
             }
             finally
             {
