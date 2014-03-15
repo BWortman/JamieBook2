@@ -58,18 +58,18 @@ namespace WebApi2Book.Web.Api
             container.Bind<IUserSession>().ToMethod(CreateUserSession).InRequestScope();
 
             container.Bind<IStatusesInquiryProcessorBlock>().To<StatusesInquiryProcessorBlock>();
-
             container.Bind<IAllStatusesInquiryProcessor>().To<AllStatusesInquiryProcessor>();
             container.Bind<IAllStatusesQueryProcessor>().To<AllStatusesQueryProcessor>();
-            
             container.Bind<IStatusByIdInquiryProcessor>().To<StatusByIdInquiryProcessor>();
             container.Bind<IStatusByIdQueryProcessor>().To<StatusByIdQueryProcessor>();
+            container.Bind<IStatusLinkService>().To<StatusLinkService>();
+
+            container.Bind<IAllUsersInquiryProcessor>().To<AllUsersInquiryProcessor>();
+            container.Bind<IAllUsersQueryProcessor>().To<AllUsersQueryProcessor>();
+            container.Bind<IUserLinkService>().To<UserLinkService>();
 
             container.Bind<ITasksMaintenanceProcessorBlock>().To<TasksMaintenanceProcessorBlock>();
-
             container.Bind<ITaskAddingProcessor>().To<TaskAddingProcessor>();
-
-            container.Bind<IStatusLinkService>().To<StatusLinkService>();
         }
 
         private void ConfigureAutoMapper(IKernel container)
@@ -77,6 +77,8 @@ namespace WebApi2Book.Web.Api
             container.Bind<IAutoMapper>().To<AutoMapperAdapter>().InSingletonScope();
             container.Bind<IAutoMapperTypeConfigurator>().To<StatusEntityToStatusModelAutoMapperTypeConfigurator>();
             container.Bind<IAutoMapperTypeConfigurator>().To<StatusModelToStatusEntityAutoMapperTypeConfigurator>();
+            container.Bind<IAutoMapperTypeConfigurator>().To<UserEntityToUserModelAutoMapperTypeConfigurator>();
+            container.Bind<IAutoMapperTypeConfigurator>().To<UserModelToUserEntityAutoMapperTypeConfigurator>();
         }
 
         private IUserSession CreateUserSession(IContext arg)

@@ -1,7 +1,7 @@
 ﻿
 declare @statusId int,
 	@taskId int,
-	@userId uniqueidentifier
+	@userId int
 
 --if not exists(select * from dbo.aspnet_Applications where ApplicationId = '8b2e549a-c283-46f2-b481-25136daa9059')
 --	insert into dbo.aspnet_Applications(ApplicationName, LoweredApplicationName, ApplicationId)
@@ -25,9 +25,9 @@ declare @statusId int,
 
 -- Password for jbob: jbob12345
 
-if not exists (select * from [User] where UserId = N'6c82524a-b1e0-4b20-97b1-dbdf0dadad8e')
-	INSERT [dbo].[User] ([UserId], [Firstname], [Lastname]) 
-		VALUES (N'6c82524a-b1e0-4b20-97b1-dbdf0dadad8e', N'Jim', N'Bob')
+if not exists (select * from [User] where Firstname = 'Jim' and Lastname = 'Bob')
+	INSERT into [dbo].[User] ([Firstname], [Lastname]) 
+		VALUES (N'Jim', N'Bob')
 
 if not exists(select * from dbo.Task where Subject = 'Test Task')
 begin
@@ -40,7 +40,7 @@ begin
 	set @taskId = SCOPE_IDENTITY();
 	
 	INSERT [dbo].[TaskUser] ([TaskId], [UserId]) 
-		VALUES (@taskId, N'6c82524a-b1e0-4b20-97b1-dbdf0dadad8e')
+		VALUES (@taskId, @userId)
 end
 
 

@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[TaskUser]
 (
 	[TaskId] bigint NOT NULL,
-	[UserId] uniqueidentifier not null,
+	[UserId] bigint not null,
 	[ts] rowversion not null,
 	constraint pk_TaskUser primary key (TaskId, UserId)
 )

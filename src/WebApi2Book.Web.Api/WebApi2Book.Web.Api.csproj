@@ -132,11 +132,16 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="AutoMappingConfiguration\StatusEntityToStatusModelAutoMapperTypeConfigurator.cs" />
     <Compile Include="AutoMappingConfiguration\StatusModelToStatusEntityAutoMapperTypeConfigurator.cs" />
+    <Compile Include="AutoMappingConfiguration\UserEntityToUserModelAutoMapperTypeConfigurator.cs" />
+    <Compile Include="AutoMappingConfiguration\UserModelToUserEntityAutoMapperTypeConfigurator.cs" />
     <Compile Include="Controllers\V1\StatusesController.cs" />
+    <Compile Include="Controllers\V1\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="InquiryProcessing\AllStatusesInquiryProcessor.cs" />
+    <Compile Include="InquiryProcessing\AllUsersInquiryProcessor.cs" />
+    <Compile Include="InquiryProcessing\IAllUsersInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\StatusesInquiryProcessorBlock.cs" />
     <Compile Include="InquiryProcessing\StatusByIdInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\IAllStatusesInquiryProcessor.cs" />
@@ -153,10 +158,12 @@
     <Compile Include="LegacyProcessing\ProcessingStrategies\GetStatusesMessageProcessingStrategy.cs" />
     <Compile Include="LegacyProcessing\ProcessingStrategies\GetStatusByIdMessageProcessingStrategy.cs" />
     <Compile Include="LegacyProcessing\ProcessingStrategies\ILegacyMessageProcessingStrategy.cs" />
+    <Compile Include="LinkServices\IUserLinkService.cs" />
     <Compile Include="LinkServices\StatusLinkService.cs" />
     <Compile Include="LinkServices\IStatusLinkService.cs" />
     <Compile Include="LinkServices\ILinkService.cs" />
     <Compile Include="LinkServices\LinkService.cs" />
+    <Compile Include="LinkServices\UserLinkService.cs" />
     <Compile Include="MaintenanceProcessing\TaskAddingProcessor.cs" />
     <Compile Include="MaintenanceProcessing\TasksMaintenanceProcessorBlock.cs" />
     <Compile Include="MaintenanceProcessing\ITaskAddingProcessor.cs" />

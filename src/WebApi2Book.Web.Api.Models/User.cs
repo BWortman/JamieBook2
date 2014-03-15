@@ -6,14 +6,25 @@ using System.Collections.Generic;
 
 namespace WebApi2Book.Web.Api.Models
 {
-    public class User
+    public class User : ILinkContaining
     {
-        public Guid UserId { get; set; }
+        private readonly List<Link> _links = new List<Link>();
+
+        public long UserId { get; set; }
         public string Username { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public List<Link> Links { get; set; }
+        //public string Email { get; set; }
+        //public string Password { get; set; }
+
+        public IEnumerable<Link> Links
+        {
+            get { return _links; }
+        }
+
+        public void AddLink(Link link)
+        {
+            _links.Add(link);
+        }
     }
 }
