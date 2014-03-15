@@ -1,35 +1,32 @@
-﻿// LegacyController.cs
+﻿// LegacyMessageHandler.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Controllers;
 using System.Xml.Linq;
-using WebApi2Book.Web.Api.LegacyProcessing;
 
-namespace WebApi2Book.Web.Api.Controllers.V1
+namespace WebApi2Book.Web.Api.LegacyProcessing
 {
-    public class LegacyController : ApiController
+    public class LegacyMessageHandler : DelegatingHandler
     {
         private readonly ILegacyMessageProcessor _legacyMessageProcessor;
 
-        public LegacyController(ILegacyMessageProcessor legacyMessageProcessor)
+        public LegacyMessageHandler(ILegacyMessageProcessor legacyMessageProcessor)
         {
             _legacyMessageProcessor = legacyMessageProcessor;
         }
 
-        public override Task<HttpResponseMessage> ExecuteAsync(HttpControllerContext controllerContext,
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
-            var requestContentAsString = controllerContext.Request.Content.ReadAsStringAsync().Result;
+            var requestContentAsString = request.Content.ReadAsStringAsync().Result;
             var requestContentAsDocument = XDocument.Parse(requestContentAsString);
 
             var legacyResponse = _legacyMessageProcessor.ProcessLegacyMessage(requestContentAsDocument);
 
-            var responseMsg = controllerContext.Request.CreateResponse(HttpStatusCode.OK, legacyResponse);
+            var responseMsg = request.CreateResponse(HttpStatusCode.OK, legacyResponse);
 
             return Task.FromResult(responseMsg);
         }

@@ -133,7 +133,6 @@
     <Compile Include="AutoMappingConfiguration\StatusEntityToStatusModelAutoMapperTypeConfigurator.cs" />
     <Compile Include="AutoMappingConfiguration\StatusModelToStatusEntityAutoMapperTypeConfigurator.cs" />
     <Compile Include="Controllers\V1\StatusesController.cs" />
-    <Compile Include="Controllers\V1\LegacyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -146,6 +145,7 @@
     <Compile Include="LegacyProcessing\ILegacyMessageParser.cs" />
     <Compile Include="LegacyProcessing\ILegacyMessageProcessor.cs" />
     <Compile Include="LegacyProcessing\ILegacyMessageTypeFormatter.cs" />
+    <Compile Include="LegacyProcessing\LegacyMessageHandler.cs" />
     <Compile Include="LegacyProcessing\LegacyMessageParser.cs" />
     <Compile Include="LegacyProcessing\LegacyMessageProcessor.cs" />
     <Compile Include="LegacyProcessing\LegacyMessageTypeFormatter.cs" />

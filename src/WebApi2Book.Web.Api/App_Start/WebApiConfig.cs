@@ -2,10 +2,12 @@
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System.Web.Http;
+using System.Web.Http.Dispatcher;
 using System.Web.Http.ExceptionHandling;
 using System.Web.Http.Routing;
 using System.Web.Http.Tracing;
 using WebApi2Book.Common.Logging;
+using WebApi2Book.Web.Api.LegacyProcessing;
 using WebApi2Book.Web.Common;
 using WebApi2Book.Web.Common.ErrorHandling;
 using WebApi2Book.Web.Common.Routing;
@@ -42,8 +44,12 @@ namespace WebApi2Book.Web.Api
                     new
                     {
                         controller = "Legacy"
-                    }
-                );
+                    },
+                constraints: null,
+                handler: new LegacyMessageHandler(WebContainerManager.Get<ILegacyMessageProcessor>())
+                {
+                    InnerHandler = new HttpControllerDispatcher(config)
+                });
 
             var constraintsResolver = new DefaultInlineConstraintResolver();
             constraintsResolver.ConstraintMap.Add("apiVersionConstraint", typeof (ApiVersionConstraint));
