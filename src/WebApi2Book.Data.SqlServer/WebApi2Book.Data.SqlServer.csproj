@@ -57,12 +57,16 @@
     <Compile Include="Mapping\VersionedClassMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryProcessors\AllStatusesQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\AllTasksQueryProcessor.cs" />
     <Compile Include="QueryProcessors\AllUsersQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\IAllTasksQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IAllUsersQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\ITaskByIdQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IUserByIdQueryProcessor.cs" />
     <Compile Include="QueryProcessors\StatusByIdQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IAllStatusesQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IStatusByIdQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\TaskByIdQueryProcessor.cs" />
     <Compile Include="QueryProcessors\UserByIdQueryProcessor.cs" />
     <Compile Include="SqlCommandFactory.cs" />
   </ItemGroup>

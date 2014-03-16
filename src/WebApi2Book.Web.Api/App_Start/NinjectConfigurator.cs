@@ -72,6 +72,12 @@ namespace WebApi2Book.Web.Api
 
             container.Bind<ITasksMaintenanceProcessorBlock>().To<TasksMaintenanceProcessorBlock>();
             container.Bind<ITaskAddingProcessor>().To<TaskAddingProcessor>();
+            container.Bind<IAllTasksInquiryProcessor>().To<AllTasksInquiryProcessor>();
+            container.Bind<IAllTasksQueryProcessor>().To<AllTasksQueryProcessor>();
+            container.Bind<ITaskByIdInquiryProcessor>().To<TaskByIdInquiryProcessor>();
+            container.Bind<ITaskByIdQueryProcessor>().To<TaskByIdQueryProcessor>();
+            container.Bind<ITaskLinkService>().To<TaskLinkService>();
+
         }
 
         private void ConfigureAutoMapper(IKernel container)
@@ -81,6 +87,8 @@ namespace WebApi2Book.Web.Api
             container.Bind<IAutoMapperTypeConfigurator>().To<StatusModelToStatusEntityAutoMapperTypeConfigurator>();
             container.Bind<IAutoMapperTypeConfigurator>().To<UserEntityToUserModelAutoMapperTypeConfigurator>();
             container.Bind<IAutoMapperTypeConfigurator>().To<UserModelToUserEntityAutoMapperTypeConfigurator>();
+            container.Bind<IAutoMapperTypeConfigurator>().To<TaskEntityToTaskModelAutoMapperTypeConfigurator>();
+            container.Bind<IAutoMapperTypeConfigurator>().To<TaskModelToTaskEntityAutoMapperTypeConfigurator>();
         }
 
         private IUserSession CreateUserSession(IContext arg)

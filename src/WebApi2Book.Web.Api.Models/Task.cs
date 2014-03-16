@@ -6,8 +6,10 @@ using System.Collections.Generic;
 
 namespace WebApi2Book.Web.Api.Models
 {
-    public class Task
+    public class Task : ILinkContaining
     {
+        private readonly List<Link> _links = new List<Link>();
+
         public long TaskId { get; set; }
         public string Subject { get; set; }
         public DateTime? StartDate { get; set; }
@@ -15,7 +17,16 @@ namespace WebApi2Book.Web.Api.Models
         public DateTime? DateCompleted { get; set; }
         public DateTime CreatedDate { get; set; }
         public Status Status { get; set; }
-        public List<Link> Links { get; set; }
         public List<User> Assignees { get; set; }
+
+        public IEnumerable<Link> Links
+        {
+            get { return _links; }
+        }
+
+        public void AddLink(Link link)
+        {
+            _links.Add(link);
+        }
     }
 }
