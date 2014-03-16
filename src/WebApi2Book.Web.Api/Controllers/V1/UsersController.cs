@@ -15,10 +15,12 @@ namespace WebApi2Book.Web.Api.Controllers.V1
     public class UsersController : ApiController
     {
         private readonly IAllUsersInquiryProcessor _allUsersInquiryProcessor;
+        private readonly IUserByIdInquiryProcessor _userByIdInquiryProcessor;
 
-        public UsersController(IAllUsersInquiryProcessor allUsersInquiryProcessor)
+        public UsersController(IAllUsersInquiryProcessor allUsersInquiryProcessor, IUserByIdInquiryProcessor userByIdInquiryProcessor)
         {
             _allUsersInquiryProcessor = allUsersInquiryProcessor;
+            _userByIdInquiryProcessor = userByIdInquiryProcessor;
         }
 
         [Route("", Name = "GetUsersRoute")]
@@ -26,6 +28,13 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         {
             var modelUsers = _allUsersInquiryProcessor.GetUsers();
             return modelUsers;
+        }
+
+        [Route("{id:long}", Name = "GetUserRoute")]
+        public User GetUser(long id)
+        {
+            var modelUser = _userByIdInquiryProcessor.GetUser(id);
+            return modelUser;
         }
     }
 }

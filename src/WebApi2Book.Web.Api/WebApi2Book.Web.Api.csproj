@@ -142,11 +142,13 @@
     <Compile Include="InquiryProcessing\AllStatusesInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\AllUsersInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\IAllUsersInquiryProcessor.cs" />
+    <Compile Include="InquiryProcessing\IUserByIdInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\StatusesInquiryProcessorBlock.cs" />
     <Compile Include="InquiryProcessing\StatusByIdInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\IAllStatusesInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\IStatusesInquiryProcessorBlock.cs" />
     <Compile Include="InquiryProcessing\IStatusByIdInquiryProcessor.cs" />
+    <Compile Include="InquiryProcessing\UserByIdInquiryProcessor.cs" />
     <Compile Include="LegacyProcessing\ILegacyMessageParser.cs" />
     <Compile Include="LegacyProcessing\ILegacyMessageProcessor.cs" />
     <Compile Include="LegacyProcessing\ILegacyMessageTypeFormatter.cs" />

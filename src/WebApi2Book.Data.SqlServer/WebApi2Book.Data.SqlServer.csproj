@@ -59,9 +59,11 @@
     <Compile Include="QueryProcessors\AllStatusesQueryProcessor.cs" />
     <Compile Include="QueryProcessors\AllUsersQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IAllUsersQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\IUserByIdQueryProcessor.cs" />
     <Compile Include="QueryProcessors\StatusByIdQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IAllStatusesQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IStatusByIdQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\UserByIdQueryProcessor.cs" />
     <Compile Include="SqlCommandFactory.cs" />
   </ItemGroup>
   <ItemGroup>

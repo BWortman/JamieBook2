@@ -45,8 +45,8 @@ namespace WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies
                 stream.Seek(0, 0);
 
                 var xDocument = XDocument.Load(stream, LoadOptions.None);
-                var categoryAsXElement = xDocument.Descendants(ns + "Status");
-                return categoryAsXElement.Elements();
+                var statusAsXElement = xDocument.Descendants(ns + "Status");
+                return statusAsXElement.Elements();
             }
         }
 

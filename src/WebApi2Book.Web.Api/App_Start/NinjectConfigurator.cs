@@ -66,6 +66,8 @@ namespace WebApi2Book.Web.Api
 
             container.Bind<IAllUsersInquiryProcessor>().To<AllUsersInquiryProcessor>();
             container.Bind<IAllUsersQueryProcessor>().To<AllUsersQueryProcessor>();
+            container.Bind<IUserByIdInquiryProcessor>().To<UserByIdInquiryProcessor>();
+            container.Bind<IUserByIdQueryProcessor>().To<UserByIdQueryProcessor>();
             container.Bind<IUserLinkService>().To<UserLinkService>();
 
             container.Bind<ITasksMaintenanceProcessorBlock>().To<TasksMaintenanceProcessorBlock>();

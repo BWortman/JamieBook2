@@ -26,9 +26,9 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
 
         public IEnumerable<User> GetUsers()
         {
-            var statuses = _queryProcessor.GetUsers();
+            var users = _queryProcessor.GetUsers();
 
-            var modelUsers = statuses.Select(x => _autoMapper.Map<User>(x)).ToList();
+            var modelUsers = users.Select(x => _autoMapper.Map<User>(x)).ToList();
 
             modelUsers.ForEach(x => _userLinkService.AddLinks(x));
 
