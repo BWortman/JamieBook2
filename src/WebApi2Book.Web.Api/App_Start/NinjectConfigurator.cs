@@ -12,7 +12,9 @@ using NHibernate.Context;
 using Ninject;
 using Ninject.Activation;
 using Ninject.Web.Common;
+using WebApi2Book.Common;
 using WebApi2Book.Common.Logging;
+using WebApi2Book.Common.Security;
 using WebApi2Book.Common.TypeMapping;
 using WebApi2Book.Data.SqlServer;
 using WebApi2Book.Data.SqlServer.QueryProcessors;
@@ -57,6 +59,8 @@ namespace WebApi2Book.Web.Api
 
             container.Bind<IUserSession>().ToMethod(CreateUserSession).InRequestScope();
 
+            container.Bind<IDateTime>().To<DateTimeAdapter>();
+
             container.Bind<IStatusesInquiryProcessorBlock>().To<StatusesInquiryProcessorBlock>();
             container.Bind<IAllStatusesInquiryProcessor>().To<AllStatusesInquiryProcessor>();
             container.Bind<IAllStatusesQueryProcessor>().To<AllStatusesQueryProcessor>();
@@ -70,14 +74,13 @@ namespace WebApi2Book.Web.Api
             container.Bind<IUserByIdQueryProcessor>().To<UserByIdQueryProcessor>();
             container.Bind<IUserLinkService>().To<UserLinkService>();
 
-            container.Bind<ITasksMaintenanceProcessorBlock>().To<TasksMaintenanceProcessorBlock>();
-            container.Bind<ITaskAddingProcessor>().To<TaskAddingProcessor>();
+            container.Bind<IAddTaskMaintenanceProcessor>().To<AddTaskMaintenanceProcessor>();
+            container.Bind<IAddTaskQueryProcessor>().To<AddTaskQueryProcessor>();
             container.Bind<IAllTasksInquiryProcessor>().To<AllTasksInquiryProcessor>();
             container.Bind<IAllTasksQueryProcessor>().To<AllTasksQueryProcessor>();
             container.Bind<ITaskByIdInquiryProcessor>().To<TaskByIdInquiryProcessor>();
             container.Bind<ITaskByIdQueryProcessor>().To<TaskByIdQueryProcessor>();
             container.Bind<ITaskLinkService>().To<TaskLinkService>();
-
         }
 
         private void ConfigureAutoMapper(IKernel container)

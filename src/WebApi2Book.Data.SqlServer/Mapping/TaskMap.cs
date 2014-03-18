@@ -15,6 +15,7 @@ namespace WebApi2Book.Data.SqlServer.Mapping
             Map(x => x.StartDate).Nullable();
             Map(x => x.DueDate).Nullable();
             Map(x => x.DateCompleted).Nullable();
+            Map(x => x.CreatedDate).Not.Nullable();
 
             References(x => x.Status, "StatusId");
             References(x => x.CreatedBy, "CreatedUserId");

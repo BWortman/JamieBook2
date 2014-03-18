@@ -4,8 +4,8 @@
 using System;
 using WebApi2Book.Common;
 using WebApi2Book.Common.Extensions;
+using WebApi2Book.Common.Security;
 using WebApi2Book.Web.Api.Models;
-using WebApi2Book.Web.Common.Security;
 
 namespace WebApi2Book.Web.Api.LinkServices
 {

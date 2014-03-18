@@ -145,6 +145,7 @@
     <Compile Include="InquiryProcessing\AllStatusesInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\AllTasksInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\AllUsersInquiryProcessor.cs" />
+    <Compile Include="MaintenanceProcessing\AddTaskMaintenanceProcessor.cs" />
     <Compile Include="InquiryProcessing\IAllTasksInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\IAllUsersInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\ITaskByIdInquiryProcessor.cs" />
@@ -175,10 +176,7 @@
     <Compile Include="LinkServices\LinkService.cs" />
     <Compile Include="LinkServices\TaskLinkService.cs" />
     <Compile Include="LinkServices\UserLinkService.cs" />
-    <Compile Include="MaintenanceProcessing\TaskAddingProcessor.cs" />
-    <Compile Include="MaintenanceProcessing\TasksMaintenanceProcessorBlock.cs" />
-    <Compile Include="MaintenanceProcessing\ITaskAddingProcessor.cs" />
-    <Compile Include="MaintenanceProcessing\ITasksMaintenanceProcessorBlock.cs" />
+    <Compile Include="MaintenanceProcessing\IAddTaskMaintenanceProcessor.cs" />
     <Compile Include="MaintenanceProcessing\ItemCreatedActionResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

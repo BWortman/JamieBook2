@@ -9,6 +9,7 @@ namespace WebApi2Book.Data.Entities
     public class Task : IVersionedEntity
     {
         private readonly IList<User> _users = new List<User>();
+
         public virtual long TaskId { get; set; }
         public virtual string Subject { get; set; }
         public virtual DateTime? StartDate { get; set; }

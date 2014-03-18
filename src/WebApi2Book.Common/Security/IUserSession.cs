@@ -3,11 +3,11 @@
 
 using System;
 
-namespace WebApi2Book.Web.Common.Security
+namespace WebApi2Book.Common.Security
 {
     public interface IUserSession
     {
-        Guid UserId { get; }
+        long UserId { get; }
         string Firstname { get; }
         string Lastname { get; }
         string Username { get; }

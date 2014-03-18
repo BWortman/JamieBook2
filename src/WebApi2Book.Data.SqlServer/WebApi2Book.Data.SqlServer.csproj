@@ -56,9 +56,11 @@
     <Compile Include="Mapping\UserMap.cs" />
     <Compile Include="Mapping\VersionedClassMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryProcessors\AddTaskQueryProcessor.cs" />
     <Compile Include="QueryProcessors\AllStatusesQueryProcessor.cs" />
     <Compile Include="QueryProcessors\AllTasksQueryProcessor.cs" />
     <Compile Include="QueryProcessors\AllUsersQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\IAddTaskQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IAllTasksQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IAllUsersQueryProcessor.cs" />
     <Compile Include="QueryProcessors\ITaskByIdQueryProcessor.cs" />
@@ -74,6 +76,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WebApi2Book.Common\WebApi2Book.Common.csproj">
+      <Project>{9E589099-F064-47C6-9D14-3A54ADA6C8E6}</Project>
+      <Name>WebApi2Book.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebApi2Book.Data\WebApi2Book.Data.csproj">
       <Project>{B4F56983-5B1C-42C7-B872-AE3A5545C02D}</Project>
       <Name>WebApi2Book.Data</Name>

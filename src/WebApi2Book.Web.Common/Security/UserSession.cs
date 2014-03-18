@@ -5,6 +5,7 @@ using System;
 using System.Security.Claims;
 using System.Web;
 using WebApi2Book.Common;
+using WebApi2Book.Common.Security;
 
 namespace WebApi2Book.Web.Common.Security
 {
@@ -13,7 +14,7 @@ namespace WebApi2Book.Web.Common.Security
         public UserSession(ClaimsPrincipal principal, Uri requestingUri)
         {
             // TODO
-            //UserId = Guid.Parse(principal.FindFirst(ClaimTypes.Sid).Value);
+            UserId = 1; //Guid.Parse(principal.FindFirst(ClaimTypes.Sid).Value);
             //Firstname = principal.FindFirst(ClaimTypes.GivenName).Value;
             //Lastname = principal.FindFirst(ClaimTypes.Surname).Value;
             //Username = principal.FindFirst(ClaimTypes.Name).Value;
@@ -21,7 +22,7 @@ namespace WebApi2Book.Web.Common.Security
             RequestingUri = requestingUri;
         }
 
-        public Guid UserId { get; private set; }
+        public long UserId { get; private set; }
         public string Firstname { get; private set; }
         public string Lastname { get; private set; }
         public string Username { get; private set; }

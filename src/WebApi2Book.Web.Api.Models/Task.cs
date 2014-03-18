@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace WebApi2Book.Web.Api.Models
 {
-    public class Task : ILinkContaining
+    public class Task : ILinkContaining, ILocationContaining
     {
         private readonly List<Link> _links = new List<Link>();
 
@@ -27,6 +27,11 @@ namespace WebApi2Book.Web.Api.Models
         public void AddLink(Link link)
         {
             _links.Add(link);
+        }
+
+        public Uri Location
+        {
+            get { return LocationLinkCalculator.GetLocationLink(this); }
         }
     }
 }
