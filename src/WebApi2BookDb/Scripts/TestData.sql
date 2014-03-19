@@ -29,6 +29,10 @@ if not exists (select * from [User] where Firstname = 'Jim' and Lastname = 'Bob'
 	INSERT into [dbo].[User] ([Firstname], [Lastname]) 
 		VALUES (N'Jim', N'Bob')
 
+if not exists (select * from [User] where Firstname = 'Jane' and Lastname = 'Doe')
+	INSERT into [dbo].[User] ([Firstname], [Lastname]) 
+		VALUES (N'Jane', N'Doe')
+
 if not exists(select * from dbo.Task where Subject = 'Test Task')
 begin
 	select top 1 @statusId = StatusId from Status;

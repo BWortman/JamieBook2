@@ -26,13 +26,13 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
 
         public IEnumerable<Task> GetTasks()
         {
-            var tasks = _queryProcessor.GetTasks();
+            var taskEntities = _queryProcessor.GetTasks();
 
-            var modelTasks = tasks.Select(x => _autoMapper.Map<Task>(x)).ToList();
+            var tasks = taskEntities.Select(x => _autoMapper.Map<Task>(x)).ToList();
 
-            modelTasks.ForEach(x => _taskLinkService.AddLinks(x));
+            tasks.ForEach(x => _taskLinkService.AddLinks(x));
 
-            return modelTasks;
+            return tasks;
         }
     }
 }

@@ -7,6 +7,6 @@ namespace WebApi2Book.Web.Api.LinkServices
 {
     public interface ITaskLinkService
     {
-        void AddLinks(Task modelTask);
+        void AddLinks(Task task);
     }
 }

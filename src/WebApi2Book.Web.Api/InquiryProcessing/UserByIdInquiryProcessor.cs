@@ -25,17 +25,17 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
 
         public User GetUser(long userId)
         {
-            var user = _queryProcessor.GetUser(userId);
-            if (user == null)
+            var userEntity = _queryProcessor.GetUser(userId);
+            if (userEntity == null)
             {
                 throw new RootObjectNotFoundException("User not found");
             }
 
-            var modelUser = _autoMapper.Map<User>(user);
+            var user = _autoMapper.Map<User>(userEntity);
 
-            _userLinkService.AddLinks(modelUser);
+            _userLinkService.AddLinks(user);
 
-            return modelUser;
+            return user;
         }
     }
 }

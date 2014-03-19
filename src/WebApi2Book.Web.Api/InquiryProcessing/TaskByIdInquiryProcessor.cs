@@ -25,17 +25,17 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
 
         public Task GetTask(long taskId)
         {
-            var task = _queryProcessor.GetTask(taskId);
-            if (task == null)
+            var taskEntity = _queryProcessor.GetTask(taskId);
+            if (taskEntity == null)
             {
                 throw new RootObjectNotFoundException("Task not found");
             }
 
-            var modelTask = _autoMapper.Map<Task>(task);
+            var task = _autoMapper.Map<Task>(taskEntity);
 
-            _taskLinkService.AddLinks(modelTask);
+            _taskLinkService.AddLinks(task);
 
-            return modelTask;
+            return task;
         }
     }
 }

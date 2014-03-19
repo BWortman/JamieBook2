@@ -33,5 +33,10 @@ namespace WebApi2Book.Web.Api.Models
         {
             get { return LocationLinkCalculator.GetLocationLink(this); }
         }
+
+        public bool ShouldSerializeLocation()
+        {
+            return false;
+        }
     }
 }

@@ -7,6 +7,6 @@ namespace WebApi2Book.Web.Api.LinkServices
 {
     public interface IStatusLinkService
     {
-        void AddLinks(Status modelStatus);
+        void AddLinks(Status status);
     }
 }

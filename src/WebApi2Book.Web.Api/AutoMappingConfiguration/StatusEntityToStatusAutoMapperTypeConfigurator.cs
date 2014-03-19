@@ -1,4 +1,4 @@
-﻿// StatusEntityToStatusModelAutoMapperTypeConfigurator.cs
+﻿// StatusEntityToStatusAutoMapperTypeConfigurator.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using AutoMapper;
@@ -7,7 +7,7 @@ using WebApi2Book.Data.Entities;
 
 namespace WebApi2Book.Web.Api.AutoMappingConfiguration
 {
-    public class StatusEntityToStatusModelAutoMapperTypeConfigurator : IAutoMapperTypeConfigurator
+    public class StatusEntityToStatusAutoMapperTypeConfigurator : IAutoMapperTypeConfigurator
     {
         public void Configure()
         {

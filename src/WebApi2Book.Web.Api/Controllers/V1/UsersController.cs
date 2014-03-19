@@ -26,15 +26,15 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         [Route("", Name = "GetUsersRoute")]
         public IEnumerable<User> GetUsers()
         {
-            var modelUsers = _allUsersInquiryProcessor.GetUsers();
-            return modelUsers;
+            var users = _allUsersInquiryProcessor.GetUsers();
+            return users;
         }
 
         [Route("{id:long}", Name = "GetUserRoute")]
         public User GetUser(long id)
         {
-            var modelUser = _userByIdInquiryProcessor.GetUser(id);
-            return modelUser;
+            var user = _userByIdInquiryProcessor.GetUser(id);
+            return user;
         }
     }
 }

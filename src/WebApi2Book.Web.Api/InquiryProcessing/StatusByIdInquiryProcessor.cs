@@ -25,17 +25,17 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
 
         public Status GetStatus(long statusId)
         {
-            var status = _queryProcessor.GetStatus(statusId);
-            if (status == null)
+            var statusEntity = _queryProcessor.GetStatus(statusId);
+            if (statusEntity == null)
             {
                 throw new RootObjectNotFoundException("Status not found");
             }
 
-            var modelStatus = _autoMapper.Map<Status>(status);
+            var status = _autoMapper.Map<Status>(statusEntity);
 
-            _statusLinkService.AddLinks(modelStatus);
+            _statusLinkService.AddLinks(status);
 
-            return modelStatus;
+            return status;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// UserModelToUserEntityAutoMapperTypeConfigurator.cs
+﻿// UserToUserEntityAutoMapperTypeConfigurator.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using AutoMapper;
@@ -7,7 +7,7 @@ using WebApi2Book.Web.Api.Models;
 
 namespace WebApi2Book.Web.Api.AutoMappingConfiguration
 {
-    public class UserModelToUserEntityAutoMapperTypeConfigurator : IAutoMapperTypeConfigurator
+    public class UserToUserEntityAutoMapperTypeConfigurator : IAutoMapperTypeConfigurator
     {
         public void Configure()
         {

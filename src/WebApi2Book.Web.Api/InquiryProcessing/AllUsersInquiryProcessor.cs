@@ -26,13 +26,13 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
 
         public IEnumerable<User> GetUsers()
         {
-            var users = _queryProcessor.GetUsers();
+            var userEntities = _queryProcessor.GetUsers();
 
-            var modelUsers = users.Select(x => _autoMapper.Map<User>(x)).ToList();
+            var users = userEntities.Select(x => _autoMapper.Map<User>(x)).ToList();
 
-            modelUsers.ForEach(x => _userLinkService.AddLinks(x));
+            users.ForEach(x => _userLinkService.AddLinks(x));
 
-            return modelUsers;
+            return users;
         }
     }
 }

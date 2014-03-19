@@ -32,24 +32,24 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         [Route("", Name = "GetTasksRoute")]
         public IEnumerable<Task> GetTasks()
         {
-            var modelTasks = _allTasksInquiryProcessor.GetTasks();
-            return modelTasks;
+            var tasks = _allTasksInquiryProcessor.GetTasks();
+            return tasks;
         }
 
         [Route("{id:long}", Name = "GetTaskRoute")]
         public Task GetTask(long id)
         {
-            var modelTask = _taskByIdInquiryProcessor.GetTask(id);
-            return modelTask;
+            var task = _taskByIdInquiryProcessor.GetTask(id);
+            return task;
         }
 
         [Route("", Name = "AddTaskRoute")]
         [HttpPost]
         public IHttpActionResult AddTask(HttpRequestMessage requestMessage, Task task)
         {
-            var modelTask = _addTaskMaintenanceProcessor.AddTask(task);
+            var newTask = _addTaskMaintenanceProcessor.AddTask(task);
 
-            var result = new ItemCreatedActionResult(requestMessage, modelTask);
+            var result = new ItemCreatedActionResult(requestMessage, newTask);
 
             return result;
         }

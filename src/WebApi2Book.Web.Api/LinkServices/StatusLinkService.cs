@@ -16,25 +16,25 @@ namespace WebApi2Book.Web.Api.LinkServices
             _userSession = userSession;
         }
 
-        public void AddLinks(Status modelStatus)
+        public void AddLinks(Status status)
         {
-            AddSelfLink(modelStatus);
-            AddAllStatusesLink(modelStatus);
+            AddSelfLink(status);
+            AddAllStatusesLink(status);
         }
 
-        public virtual void AddSelfLink(Status modelStatus)
+        public virtual void AddSelfLink(Status status)
         {
-            modelStatus.AddLink(new Link
+            status.AddLink(new Link
             {
                 Title = Constants.CommonLinkTitles.Self,
                 Rel = Constants.CommonLinkRelValues.Self,
-                Href = string.Format("/api/{0}/statuses/{1}", _userSession.ApiVersionInUse, modelStatus.StatusId)
+                Href = string.Format("/api/{0}/statuses/{1}", _userSession.ApiVersionInUse, status.StatusId)
             });
         }
 
-        public virtual void AddAllStatusesLink(Status modelStatus)
+        public virtual void AddAllStatusesLink(Status status)
         {
-            modelStatus.AddLink(new Link
+            status.AddLink(new Link
             {
                 Title = "All Statuses",
                 Rel = Constants.CommonLinkRelValues.All,

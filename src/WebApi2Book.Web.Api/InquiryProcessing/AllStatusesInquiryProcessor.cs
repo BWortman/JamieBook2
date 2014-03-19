@@ -26,13 +26,13 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
 
         public IEnumerable<Status> GetStatuses()
         {
-            var statuses = _queryProcessor.GetStatuses();
+            var statusEntities = _queryProcessor.GetStatuses();
 
-            var modelStatuses = statuses.Select(x => _autoMapper.Map<Status>(x)).ToList();
+            var statuses = statusEntities.Select(x => _autoMapper.Map<Status>(x)).ToList();
 
-            modelStatuses.ForEach(x => _statusLinkService.AddLinks(x));
+            statuses.ForEach(x => _statusLinkService.AddLinks(x));
 
-            return modelStatuses;
+            return statuses;
         }
     }
 }

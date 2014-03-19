@@ -16,25 +16,25 @@ namespace WebApi2Book.Web.Api.LinkServices
             _userSession = userSession;
         }
 
-        public void AddLinks(User modelUser)
+        public void AddLinks(User user)
         {
-            AddSelfLink(modelUser);
-            AddAllUsersLink(modelUser);
+            AddSelfLink(user);
+            AddAllUsersLink(user);
         }
 
-        public virtual void AddSelfLink(User modelUser)
+        public virtual void AddSelfLink(User user)
         {
-            modelUser.AddLink(new Link
+            user.AddLink(new Link
             {
                 Title = Constants.CommonLinkTitles.Self,
                 Rel = Constants.CommonLinkRelValues.Self,
-                Href = string.Format("/api/{0}/users/{1}", _userSession.ApiVersionInUse, modelUser.UserId)
+                Href = string.Format("/api/{0}/users/{1}", _userSession.ApiVersionInUse, user.UserId)
             });
         }
 
-        public virtual void AddAllUsersLink(User modelUser)
+        public virtual void AddAllUsersLink(User user)
         {
-            modelUser.AddLink(new Link
+            user.AddLink(new Link
             {
                 Title = "All Users",
                 Rel = Constants.CommonLinkRelValues.All,

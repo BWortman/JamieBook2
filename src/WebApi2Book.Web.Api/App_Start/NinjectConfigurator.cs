@@ -61,7 +61,6 @@ namespace WebApi2Book.Web.Api
 
             container.Bind<IDateTime>().To<DateTimeAdapter>();
 
-            container.Bind<IStatusesInquiryProcessorBlock>().To<StatusesInquiryProcessorBlock>();
             container.Bind<IAllStatusesInquiryProcessor>().To<AllStatusesInquiryProcessor>();
             container.Bind<IAllStatusesQueryProcessor>().To<AllStatusesQueryProcessor>();
             container.Bind<IStatusByIdInquiryProcessor>().To<StatusByIdInquiryProcessor>();
@@ -86,12 +85,12 @@ namespace WebApi2Book.Web.Api
         private void ConfigureAutoMapper(IKernel container)
         {
             container.Bind<IAutoMapper>().To<AutoMapperAdapter>().InSingletonScope();
-            container.Bind<IAutoMapperTypeConfigurator>().To<StatusEntityToStatusModelAutoMapperTypeConfigurator>();
-            container.Bind<IAutoMapperTypeConfigurator>().To<StatusModelToStatusEntityAutoMapperTypeConfigurator>();
-            container.Bind<IAutoMapperTypeConfigurator>().To<UserEntityToUserModelAutoMapperTypeConfigurator>();
-            container.Bind<IAutoMapperTypeConfigurator>().To<UserModelToUserEntityAutoMapperTypeConfigurator>();
-            container.Bind<IAutoMapperTypeConfigurator>().To<TaskEntityToTaskModelAutoMapperTypeConfigurator>();
-            container.Bind<IAutoMapperTypeConfigurator>().To<TaskModelToTaskEntityAutoMapperTypeConfigurator>();
+            container.Bind<IAutoMapperTypeConfigurator>().To<StatusEntityToStatusAutoMapperTypeConfigurator>();
+            container.Bind<IAutoMapperTypeConfigurator>().To<StatusToStatusEntityAutoMapperTypeConfigurator>();
+            container.Bind<IAutoMapperTypeConfigurator>().To<UserEntityToUserAutoMapperTypeConfigurator>();
+            container.Bind<IAutoMapperTypeConfigurator>().To<UserToUserEntityAutoMapperTypeConfigurator>();
+            container.Bind<IAutoMapperTypeConfigurator>().To<TaskEntityToTaskAutoMapperTypeConfigurator>();
+            container.Bind<IAutoMapperTypeConfigurator>().To<TaskToTaskEntityAutoMapperTypeConfigurator>();
         }
 
         private IUserSession CreateUserSession(IContext arg)

@@ -1,4 +1,4 @@
-﻿// TaskEntityToTaskModelAutoMapperTypeConfigurator.cs
+﻿// TaskEntityToTaskAutoMapperTypeConfigurator.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using AutoMapper;
@@ -7,7 +7,7 @@ using WebApi2Book.Data.Entities;
 
 namespace WebApi2Book.Web.Api.AutoMappingConfiguration
 {
-    public class TaskEntityToTaskModelAutoMapperTypeConfigurator : IAutoMapperTypeConfigurator
+    public class TaskEntityToTaskAutoMapperTypeConfigurator : IAutoMapperTypeConfigurator
     {
         public void Configure()
         {

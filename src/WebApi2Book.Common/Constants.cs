@@ -5,10 +5,6 @@ namespace WebApi2Book.Common
 {
     public static class Constants
     {
-        public const string WildcardSearchCharacter = "*";
-
-        public const string NotAvailable = "n/a";
-
         public static class MediaTypeNames
         {
             public const string ApplicationXml = "application/xml";

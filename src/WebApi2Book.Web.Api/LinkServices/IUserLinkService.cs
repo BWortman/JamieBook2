@@ -7,6 +7,6 @@ namespace WebApi2Book.Web.Api.LinkServices
 {
     public interface IUserLinkService
     {
-        void AddLinks(User modelUser);
+        void AddLinks(User user);
     }
 }
