@@ -9,6 +9,7 @@ using WebApi2Book.Web.Api.MaintenanceProcessing;
 using WebApi2Book.Web.Api.Models;
 using WebApi2Book.Web.Common;
 using WebApi2Book.Web.Common.Routing;
+using WebApi2Book.Web.Common.Validation;
 
 namespace WebApi2Book.Web.Api.Controllers.V1
 {
@@ -45,6 +46,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
 
         [Route("", Name = "AddTaskRoute")]
         [HttpPost]
+        [ValidateModel]
         public IHttpActionResult AddTask(HttpRequestMessage requestMessage, Task task)
         {
             var newTask = _addTaskMaintenanceProcessor.AddTask(task);
