@@ -49,6 +49,7 @@
     <Compile Include="LocationLinkCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Status.cs" />
+    <Compile Include="StatusesInquiryResponse.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

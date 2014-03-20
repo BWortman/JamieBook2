@@ -1,7 +1,6 @@
 ﻿// StatusesController.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using System.Collections.Generic;
 using System.Web.Http;
 using WebApi2Book.Web.Api.InquiryProcessing;
 using WebApi2Book.Web.Api.Models;
@@ -25,10 +24,10 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         }
 
         [Route("", Name = "GetStatusesRoute")]
-        public IEnumerable<Status> GetStatuses()
+        public StatusesInquiryResponse GetStatuses()
         {
-            var statuses = _allStatusesInquiryProcessor.GetStatuses();
-            return statuses;
+            var inquiryResponse = _allStatusesInquiryProcessor.GetStatuses();
+            return inquiryResponse;
         }
 
         [Route("{id:long}", Name = "GetStatusRoute")]

@@ -22,7 +22,7 @@ namespace WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies
 
         public object Execute(XElement operationElement)
         {
-            var modelStatuses = _inquiryProcessor.GetStatuses().ToArray();
+            var modelStatuses = _inquiryProcessor.GetStatuses().Statuses.ToArray();
 
             XNamespace ns = Constants.DefaultLegacyNamespace;
 

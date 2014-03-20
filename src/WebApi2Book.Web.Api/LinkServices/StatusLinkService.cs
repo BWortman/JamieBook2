@@ -32,14 +32,19 @@ namespace WebApi2Book.Web.Api.LinkServices
             });
         }
 
-        public virtual void AddAllStatusesLink(Status status)
+        public virtual Link GetAllStatusesLink()
         {
-            status.AddLink(new Link
+            return new Link
             {
                 Title = "All Statuses",
                 Rel = Constants.CommonLinkRelValues.All,
                 Href = string.Format("/api/{0}/statuses", _userSession.ApiVersionInUse)
-            });
+            };
+        }
+
+        public virtual void AddAllStatusesLink(Status status)
+        {
+            status.AddLink(GetAllStatusesLink());
         }
     }
 }
