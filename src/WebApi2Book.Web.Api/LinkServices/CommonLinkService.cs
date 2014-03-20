@@ -1,4 +1,4 @@
-﻿// LinkService.cs
+﻿// CommonLinkService.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System;
@@ -9,11 +9,11 @@ using WebApi2Book.Web.Api.Models;
 
 namespace WebApi2Book.Web.Api.LinkServices
 {
-    public class LinkService : ILinkService
+    public class CommonLinkService : ICommonLinkService
     {
         private readonly IUserSession _userSession;
 
-        public LinkService(IUserSession userSession)
+        public CommonLinkService(IUserSession userSession)
         {
             _userSession = userSession;
         }

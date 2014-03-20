@@ -32,14 +32,19 @@ namespace WebApi2Book.Web.Api.LinkServices
             });
         }
 
-        public virtual void AddAllUsersLink(User user)
+        public virtual Link GetAllUsersLink()
         {
-            user.AddLink(new Link
+            return new Link
             {
                 Title = "All Users",
                 Rel = Constants.CommonLinkRelValues.All,
                 Href = string.Format("/api/{0}/users", _userSession.ApiVersionInUse)
-            });
+            };
+        }
+
+        public virtual void AddAllUsersLink(User user)
+        {
+            user.AddLink(GetAllUsersLink());
         }
     }
 }

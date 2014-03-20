@@ -61,12 +61,15 @@ namespace WebApi2Book.Web.Api
 
             container.Bind<IDateTime>().To<DateTimeAdapter>();
 
+            container.Bind<ICommonLinkService>().To<CommonLinkService>();
+
             container.Bind<IAllStatusesInquiryProcessor>().To<AllStatusesInquiryProcessor>();
             container.Bind<IAllStatusesQueryProcessor>().To<AllStatusesQueryProcessor>();
             container.Bind<IStatusByIdInquiryProcessor>().To<StatusByIdInquiryProcessor>();
             container.Bind<IStatusByIdQueryProcessor>().To<StatusByIdQueryProcessor>();
             container.Bind<IStatusLinkService>().To<StatusLinkService>();
 
+            container.Bind<IAllUsersDataRequestFactory>().To<AllUsersDataRequestFactory>();
             container.Bind<IAllUsersInquiryProcessor>().To<AllUsersInquiryProcessor>();
             container.Bind<IAllUsersQueryProcessor>().To<AllUsersQueryProcessor>();
             container.Bind<IUserByIdInquiryProcessor>().To<UserByIdInquiryProcessor>();

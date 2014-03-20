@@ -1,4 +1,4 @@
-﻿// ILinkService.cs
+﻿// ICommonLinkService.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System;
@@ -6,7 +6,7 @@ using WebApi2Book.Web.Api.Models;
 
 namespace WebApi2Book.Web.Api.LinkServices
 {
-    public interface ILinkService
+    public interface ICommonLinkService
     {
         /// <summary>
         ///     Gets the versioned base (i.e., excluding query string) portion of the uri.

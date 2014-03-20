@@ -1,9 +1,9 @@
 ﻿// AllUsersQueryProcessor.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using System.Collections.Generic;
 using NHibernate;
 using WebApi2Book.Data.Entities;
+using WebApi2Book.Data.SqlServer.DataTransferObjects;
 
 namespace WebApi2Book.Data.SqlServer.QueryProcessors
 {
@@ -16,10 +16,19 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
             _session = session;
         }
 
-        public IEnumerable<User> GetUsers()
+        public QueryResult<User> GetUsers(AllUsersDataRequest requestInfo)
         {
-            var users = _session.QueryOver<User>().List();
-            return users;
+            var query = _session.QueryOver<User>();
+
+            var totalItemCount = query.ToRowCountQuery().RowCount();
+
+            var startIndex = ResultsPagingUtility.CalculateStartIndex(requestInfo.PageNumber, requestInfo.PageSize);
+
+            var users = query.Skip(startIndex).Take(requestInfo.PageSize).List();
+
+            var queryResult = new QueryResult<User>(users, totalItemCount, requestInfo.PageSize);
+
+            return queryResult;
         }
     }
 }

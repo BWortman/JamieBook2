@@ -1,7 +1,7 @@
 ﻿// UsersController.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using System.Collections.Generic;
+using System.Net.Http;
 using System.Web.Http;
 using WebApi2Book.Web.Api.InquiryProcessing;
 using WebApi2Book.Web.Api.Models;
@@ -14,20 +14,26 @@ namespace WebApi2Book.Web.Api.Controllers.V1
     [UnitOfWorkActionFilter]
     public class UsersController : ApiController
     {
+        private readonly IAllUsersDataRequestFactory _allUsersDataRequestFactory;
         private readonly IAllUsersInquiryProcessor _allUsersInquiryProcessor;
         private readonly IUserByIdInquiryProcessor _userByIdInquiryProcessor;
 
-        public UsersController(IAllUsersInquiryProcessor allUsersInquiryProcessor, IUserByIdInquiryProcessor userByIdInquiryProcessor)
+        public UsersController(IAllUsersDataRequestFactory allUsersDataRequestFactory,
+            IAllUsersInquiryProcessor allUsersInquiryProcessor,
+            IUserByIdInquiryProcessor userByIdInquiryProcessor)
         {
+            _allUsersDataRequestFactory = allUsersDataRequestFactory;
             _allUsersInquiryProcessor = allUsersInquiryProcessor;
             _userByIdInquiryProcessor = userByIdInquiryProcessor;
         }
 
         [Route("", Name = "GetUsersRoute")]
-        public IEnumerable<User> GetUsers()
+        public UsersInquiryResponse GetUsers(HttpRequestMessage requestMessage)
         {
-            var users = _allUsersInquiryProcessor.GetUsers();
-            return users;
+            var request = _allUsersDataRequestFactory.Create(requestMessage.RequestUri);
+
+            var inquiryResponse = _allUsersInquiryProcessor.GetUsers(request);
+            return inquiryResponse;
         }
 
         [Route("{id:long}", Name = "GetUserRoute")]
