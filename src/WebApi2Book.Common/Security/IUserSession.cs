@@ -1,8 +1,6 @@
 // IUserSession.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using System;
-
 namespace WebApi2Book.Common.Security
 {
     public interface IUserSession
@@ -12,7 +10,5 @@ namespace WebApi2Book.Common.Security
         string Lastname { get; }
         string Username { get; }
         string Email { get; }
-        string ApiVersionInUse { get; }
-        Uri RequestingUri { get; }
     }
 }

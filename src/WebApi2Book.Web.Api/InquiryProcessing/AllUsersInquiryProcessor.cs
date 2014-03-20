@@ -51,7 +51,8 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
         {
             inquiryResponse.AddLink(_userLinkService.GetAllUsersLink());
 
-            _commonLinkService.AddPageLinks(inquiryResponse, GetPreviousPageQueryString(inquiryResponse),
+            _commonLinkService.AddPageLinks(inquiryResponse, GetCurrentPageQueryString(inquiryResponse),
+                GetPreviousPageQueryString(inquiryResponse),
                 GetNextPageQueryString(inquiryResponse));
         }
 
@@ -62,6 +63,14 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
             users.ForEach(x => _userLinkService.AddSelfLink(x));
 
             return users;
+        }
+
+        public virtual string GetCurrentPageQueryString(UsersInquiryResponse inquiryResponse)
+        {
+            return
+                string.Format(QueryStringFormat,
+                    inquiryResponse.PageNumber,
+                    inquiryResponse.PageSize);
         }
 
         public virtual string GetPreviousPageQueryString(UsersInquiryResponse inquiryResponse)

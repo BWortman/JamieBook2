@@ -5,13 +5,14 @@ using System;
 using System.Security.Claims;
 using System.Web;
 using WebApi2Book.Common;
-using WebApi2Book.Common.Security;
 
 namespace WebApi2Book.Web.Common.Security
 {
-    public class UserSession : IUserSession
+    public class UserSession : IWebUserSession
     {
-        public UserSession(ClaimsPrincipal principal, Uri requestingUri)
+        private string _apiVersionInUse;
+
+        public UserSession(ClaimsPrincipal principal)
         {
             // TODO
             UserId = 1; //Guid.Parse(principal.FindFirst(ClaimTypes.Sid).Value);
@@ -19,7 +20,6 @@ namespace WebApi2Book.Web.Common.Security
             //Lastname = principal.FindFirst(ClaimTypes.Surname).Value;
             //Username = principal.FindFirst(ClaimTypes.Name).Value;
             //Email = principal.FindFirst(ClaimTypes.Email).Value;
-            RequestingUri = requestingUri;
         }
 
         public long UserId { get; private set; }
@@ -28,19 +28,30 @@ namespace WebApi2Book.Web.Common.Security
         public string Username { get; private set; }
         public string Email { get; private set; }
 
-        public Uri RequestingUri { get; private set; }
+        public Uri RequestUri
+        {
+            get { return HttpContext.Current.Request.Url; }
+        }
+
+        public string HttpRequestMethod
+        {
+            get { return HttpContext.Current.Request.HttpMethod; }
+        }
 
         public string ApiVersionInUse
         {
             get
             {
-                var apiVersionInRequest =
-                    (string) HttpContext.Current.Request.RequestContext.RouteData.Values[
-                        Constants.CommonRoutingDefinitions.ApiVersionSegmentName];
-                var apiVersion = string.IsNullOrWhiteSpace(apiVersionInRequest)
-                    ? Constants.CommonRoutingDefinitions.CurrentApiVersion
-                    : apiVersionInRequest;
-                return apiVersion;
+                if (_apiVersionInUse == null)
+                {
+                    var apiVersionInRequest =
+                        (string) HttpContext.Current.Request.RequestContext.RouteData.Values[
+                            Constants.CommonRoutingDefinitions.ApiVersionSegmentName];
+                    _apiVersionInUse = string.IsNullOrWhiteSpace(apiVersionInRequest)
+                        ? Constants.CommonRoutingDefinitions.CurrentApiVersion
+                        : apiVersionInRequest;
+                }
+                return _apiVersionInUse;
             }
         }
     }

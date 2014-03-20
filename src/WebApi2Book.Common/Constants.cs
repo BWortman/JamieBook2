@@ -26,17 +26,13 @@ namespace WebApi2Book.Common
             public const string PageSize = "pageSize";
         }
 
-        public static class CommonLinkTitles
-        {
-            public const string Self = "Self";
-            public const string PreviousPage = "PreviousPage";
-            public const string NextPage = "NextPage";
-        }
-
         public static class CommonLinkRelValues
         {
             public const string Self = "self";
             public const string All = "all";
+            public const string CurrentPage = "currentPage";
+            public const string PreviousPage = "previousPage";
+            public const string NextPage = "nextPage";
         }
 
         public static class CommonRoutingDefinitions
@@ -44,6 +40,8 @@ namespace WebApi2Book.Common
             public const string ApiSegmentName = "api";
             public const string ApiVersionSegmentName = "apiVersion";
             public const string CurrentApiVersion = "v1";
+            public const string DelimitedVersionedApiRouteBaseFormatString = ApiSegmentName + "/{0}/";
+
         }
 
         public const string DefaultLegacyNamespace = "http://tempuri.org/";

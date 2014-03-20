@@ -1,19 +1,22 @@
 ﻿// UserLinkService.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
+using System.Net.Http;
 using WebApi2Book.Common;
-using WebApi2Book.Common.Security;
 using WebApi2Book.Web.Api.Models;
+using WebApi2Book.Web.Common.Security;
 
 namespace WebApi2Book.Web.Api.LinkServices
 {
     public class UserLinkService : IUserLinkService
     {
-        private readonly IUserSession _userSession;
+        private readonly ICommonLinkService _commonLinkService;
+        private readonly IWebUserSession _userSession;
 
-        public UserLinkService(IUserSession userSession)
+        public UserLinkService(IWebUserSession userSession, ICommonLinkService commonLinkService)
         {
             _userSession = userSession;
+            _commonLinkService = commonLinkService;
         }
 
         public void AddLinks(User user)
@@ -24,27 +27,31 @@ namespace WebApi2Book.Web.Api.LinkServices
 
         public virtual void AddSelfLink(User user)
         {
-            user.AddLink(new Link
-            {
-                Title = Constants.CommonLinkTitles.Self,
-                Rel = Constants.CommonLinkRelValues.Self,
-                Href = string.Format("/api/{0}/users/{1}", _userSession.ApiVersionInUse, user.UserId)
-            });
+            user.AddLink(GetSelfLink(user));
         }
 
         public virtual Link GetAllUsersLink()
         {
-            return new Link
-            {
-                Title = "All Users",
-                Rel = Constants.CommonLinkRelValues.All,
-                Href = string.Format("/api/{0}/users", _userSession.ApiVersionInUse)
-            };
+            var path =
+                string.Format(
+                    Constants.CommonRoutingDefinitions.DelimitedVersionedApiRouteBaseFormatString + "users",
+                    _userSession.ApiVersionInUse);
+            return _commonLinkService.GetLink(path, Constants.CommonLinkRelValues.All, HttpMethod.Get);
         }
 
         public virtual void AddAllUsersLink(User user)
         {
             user.AddLink(GetAllUsersLink());
+        }
+
+        public virtual Link GetSelfLink(User user)
+        {
+            var path =
+                string.Format(
+                    Constants.CommonRoutingDefinitions.DelimitedVersionedApiRouteBaseFormatString + "users/{1}",
+                    _userSession.ApiVersionInUse, user.UserId);
+            var link = _commonLinkService.GetLink(path, Constants.CommonLinkRelValues.Self, HttpMethod.Get);
+            return link;
         }
     }
 }

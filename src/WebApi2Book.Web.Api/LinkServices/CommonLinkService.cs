@@ -2,20 +2,93 @@
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System;
+using System.Net.Http;
 using WebApi2Book.Common;
 using WebApi2Book.Common.Extensions;
-using WebApi2Book.Common.Security;
 using WebApi2Book.Web.Api.Models;
+using WebApi2Book.Web.Common.Security;
 
 namespace WebApi2Book.Web.Api.LinkServices
 {
     public class CommonLinkService : ICommonLinkService
     {
-        private readonly IUserSession _userSession;
+        private readonly IWebUserSession _userSession;
 
-        public CommonLinkService(IUserSession userSession)
+        public CommonLinkService(IWebUserSession userSession)
         {
             _userSession = userSession;
+        }
+
+        public virtual Link GetLink(string path, string relValue, HttpMethod httpMethod)
+        {
+            var uriBuilder = new UriBuilder
+            {
+                Scheme = _userSession.RequestUri.Scheme,
+                Host = _userSession.RequestUri.Host,
+                Port = _userSession.RequestUri.Port,
+                Path = path
+            };
+
+            var link = new Link
+            {
+                Href = uriBuilder.Uri.AbsoluteUri,
+                Rel = relValue,
+                Method = httpMethod.Method
+            };
+            return link;
+        }
+
+        public void AddPageLinks(IPageLinkContaining linkContainer,
+            string currentPageQueryString,
+            string previousPageQueryString,
+            string nextPageQueryString)
+        {
+            var versionedBaseUri = GetVersionedBaseUri(_userSession.RequestUri);
+
+            AddCurrentPageLink(linkContainer, versionedBaseUri, currentPageQueryString);
+
+            var addPrevPageLink = ShouldAddPreviousPageLink(linkContainer.PageNumber);
+            var addNextPageLink = ShouldAddNextPageLink(linkContainer.PageNumber, linkContainer.PageCount);
+
+            if (addPrevPageLink || addNextPageLink)
+            {
+                if (addPrevPageLink)
+                {
+                    AddPreviousPageLink(linkContainer, versionedBaseUri, previousPageQueryString);
+                }
+
+                if (addNextPageLink)
+                {
+                    AddNextPageLink(linkContainer, versionedBaseUri, nextPageQueryString);
+                }
+            }
+        }
+
+        public virtual void AddCurrentPageLink(IPageLinkContaining linkContainer, Uri versionedBaseUri, string pageQueryString)
+        {
+            var currentPageUriBuilder = new UriBuilder(versionedBaseUri)
+            {
+                Query = pageQueryString
+            };
+            linkContainer.AddLink(GetCurrentPageLink(currentPageUriBuilder.Uri));
+        }
+
+        public virtual void AddPreviousPageLink(IPageLinkContaining linkContainer, Uri versionedBaseUri, string pageQueryString)
+        {
+            var uriBuilder = new UriBuilder(versionedBaseUri)
+            {
+                Query = pageQueryString
+            };
+            linkContainer.AddLink(GetPreviousPageLink(uriBuilder.Uri));
+        }
+
+        public virtual void AddNextPageLink(IPageLinkContaining linkContainer, Uri versionedBaseUri, string pageQueryString)
+        {
+            var uriBuilder = new UriBuilder(versionedBaseUri)
+            {
+                Query = pageQueryString
+            };
+            linkContainer.AddLink(GetNextPageLink(uriBuilder.Uri));
         }
 
         public virtual Uri GetVersionedBaseUri(Uri uri)
@@ -43,60 +116,34 @@ namespace WebApi2Book.Web.Api.LinkServices
             return uri.GetBaseUri();
         }
 
-        public void AddPageLinks(IPageLinkContaining linkContainer,
-            string previousPageQueryString,
-            string nextPageQueryString)
+        public virtual Link GetCurrentPageLink(Uri uri)
         {
-            var versionedBaseUri = GetVersionedBaseUri(_userSession.RequestingUri);
-
-            var addPrevPageLink = ShouldAddPreviousPageLink(linkContainer.PageNumber);
-            var addNextPageLink = ShouldAddNextPageLink(linkContainer.PageNumber, linkContainer.PageCount);
-
-            if (addPrevPageLink || addNextPageLink)
+            return new Link
             {
-                if (addPrevPageLink)
-                {
-                    var uriBuilder = new UriBuilder(versionedBaseUri)
-                    {
-                        Query = previousPageQueryString
-                    };
-                    linkContainer.AddLink(GetPreviousPageLink(uriBuilder.Uri));
-                }
-
-                if (addNextPageLink)
-                {
-                    var uriBuilder = new UriBuilder(versionedBaseUri)
-                    {
-                        Query = nextPageQueryString
-                    };
-                    linkContainer.AddLink(GetNextPageLink(uriBuilder.Uri));
-                }
-            }
-        }
-
-        public void AddSelfLink(ILinkContaining linkContainer)
-        {
-            var versionedBaseUri = GetVersionedBaseUri(_userSession.RequestingUri);
-            var queryString = _userSession.RequestingUri.QueryWithoutLeadingQuestionMark();
-            var uriBuilder =
-                new UriBuilder(versionedBaseUri.AbsoluteUri)
-                {
-                    Query = queryString
-                };
-            var uriString = uriBuilder.Uri.AbsoluteUri;
-
-            var link = new Link {Href = uriString, Rel = Constants.CommonLinkTitles.Self};
-            linkContainer.AddLink(link);
+                Href = uri.AbsoluteUri,
+                Rel = Constants.CommonLinkRelValues.CurrentPage,
+                Method = HttpMethod.Get.Method
+            };
         }
 
         public virtual Link GetPreviousPageLink(Uri uri)
         {
-            return new Link {Href = uri.AbsoluteUri, Rel = Constants.CommonLinkTitles.PreviousPage};
+            return new Link
+            {
+                Href = uri.AbsoluteUri,
+                Rel = Constants.CommonLinkRelValues.PreviousPage,
+                Method = HttpMethod.Get.Method
+            };
         }
 
         public virtual Link GetNextPageLink(Uri uri)
         {
-            return new Link {Href = uri.AbsoluteUri, Rel = Constants.CommonLinkTitles.NextPage};
+            return new Link
+            {
+                Href = uri.AbsoluteUri,
+                Rel = Constants.CommonLinkRelValues.NextPage,
+                Method = HttpMethod.Get.Method
+            };
         }
 
         public bool ShouldAddPreviousPageLink(int pageNumber)

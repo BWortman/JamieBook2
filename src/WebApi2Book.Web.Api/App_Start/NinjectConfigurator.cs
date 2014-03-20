@@ -53,11 +53,10 @@ namespace WebApi2Book.Web.Api
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             ConfigureLog4net(container);
+            ConfigureUserSession(container);
             ConfigureNHibernate(container);
             ConfigureDependenciesOnlyUsedForLegacyProcessing(container);
             ConfigureAutoMapper(container);
-
-            container.Bind<IUserSession>().ToMethod(CreateUserSession).InRequestScope();
 
             container.Bind<IDateTime>().To<DateTimeAdapter>();
 
@@ -96,11 +95,12 @@ namespace WebApi2Book.Web.Api
             container.Bind<IAutoMapperTypeConfigurator>().To<TaskToTaskEntityAutoMapperTypeConfigurator>();
         }
 
-        private IUserSession CreateUserSession(IContext arg)
+        private void ConfigureUserSession(IKernel container)
         {
-            var requestingUri = HttpContext.Current.Request.Url;
-            var userSession = new UserSession(Thread.CurrentPrincipal as GenericPrincipal, requestingUri);
-            return userSession;
+            container.Bind<IUserSession>()
+                .ToMethod(x => new UserSession(Thread.CurrentPrincipal as GenericPrincipal))
+                .InRequestScope();
+            container.Bind<IWebUserSession>().ToMethod(x => x.Kernel.Get<IUserSession>() as IWebUserSession).InRequestScope();
         }
 
         private void ConfigureNHibernate(IKernel container)
