@@ -7,11 +7,11 @@ using System.Web.Http;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
-using WebActivator;
+using WebActivatorEx;
 using WebApi2Book.Web.Api;
 using WebApi2Book.Web.Common;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof (NinjectWebCommon), "Start")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof (NinjectWebCommon), "Start")]
 [assembly: ApplicationShutdownMethod(typeof (NinjectWebCommon), "Stop")]
 
 namespace WebApi2Book.Web.Api

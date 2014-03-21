@@ -12,7 +12,7 @@ namespace WebApi2Book.Web.Api.Models
         public static Uri GetLocationLink(ILinkContaining linkContaining)
         {
             var locationLink = linkContaining.Links.FirstOrDefault(x => x.Rel == Constants.CommonLinkRelValues.Self);
-            return locationLink == null ? null : new Uri(locationLink.Href, UriKind.Relative);
+            return locationLink == null ? null : new Uri(locationLink.Href);
         }
     }
 }

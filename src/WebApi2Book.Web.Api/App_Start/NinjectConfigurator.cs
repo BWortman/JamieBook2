@@ -65,14 +65,14 @@ namespace WebApi2Book.Web.Api
             container.Bind<IAllStatusesQueryProcessor>().To<AllStatusesQueryProcessor>();
             container.Bind<IStatusByIdInquiryProcessor>().To<StatusByIdInquiryProcessor>();
             container.Bind<IStatusByIdQueryProcessor>().To<StatusByIdQueryProcessor>();
-            container.Bind<IStatusLinkService>().To<StatusLinkService>();
+            container.Bind<IStatusLinkService>().To<StatusLinkService>().InRequestScope();
 
             container.Bind<IAllUsersDataRequestFactory>().To<AllUsersDataRequestFactory>().InSingletonScope();
             container.Bind<IAllUsersInquiryProcessor>().To<AllUsersInquiryProcessor>();
             container.Bind<IAllUsersQueryProcessor>().To<AllUsersQueryProcessor>();
             container.Bind<IUserByIdInquiryProcessor>().To<UserByIdInquiryProcessor>();
             container.Bind<IUserByIdQueryProcessor>().To<UserByIdQueryProcessor>();
-            container.Bind<IUserLinkService>().To<UserLinkService>();
+            container.Bind<IUserLinkService>().To<UserLinkService>().InRequestScope();
 
             container.Bind<IAddTaskMaintenanceProcessor>().To<AddTaskMaintenanceProcessor>();
             container.Bind<IAddTaskQueryProcessor>().To<AddTaskQueryProcessor>();
@@ -80,7 +80,7 @@ namespace WebApi2Book.Web.Api
             container.Bind<IAllTasksQueryProcessor>().To<AllTasksQueryProcessor>();
             container.Bind<ITaskByIdInquiryProcessor>().To<TaskByIdInquiryProcessor>();
             container.Bind<ITaskByIdQueryProcessor>().To<TaskByIdQueryProcessor>();
-            container.Bind<ITaskLinkService>().To<TaskLinkService>();
+            container.Bind<ITaskLinkService>().To<TaskLinkService>().InRequestScope();
         }
 
         private void ConfigureAutoMapper(IKernel container)
@@ -97,8 +97,8 @@ namespace WebApi2Book.Web.Api
         private void ConfigureUserSession(IKernel container)
         {
             container.Bind<IUserSession>()
-                .ToMethod(x => new UserSession(Thread.CurrentPrincipal as GenericPrincipal));
-            container.Bind<IWebUserSession>().ToMethod(x => x.Kernel.Get<IUserSession>() as IWebUserSession);
+                .ToMethod(x => new UserSession(Thread.CurrentPrincipal as GenericPrincipal)).InRequestScope();
+            container.Bind<IWebUserSession>().ToMethod(x => x.Kernel.Get<IUserSession>() as IWebUserSession).InRequestScope();
         }
 
         private void ConfigureNHibernate(IKernel container)
@@ -112,7 +112,7 @@ namespace WebApi2Book.Web.Api
                 .BuildSessionFactory();
 
             container.Bind<ISessionFactory>().ToConstant(sessionFactory);
-            container.Bind<ISession>().ToMethod(CreateSession);
+            container.Bind<ISession>().ToMethod(CreateSession).InRequestScope();
             container.Bind<ICurrentSessionContextAdapter>().To<CurrentSessionContextAdapter>();
             container.Bind<IActionTransactionHelper>().To<ActionTransactionHelper>();
             container.Bind<ISqlCommandFactory>().To<SqlCommandFactory>();

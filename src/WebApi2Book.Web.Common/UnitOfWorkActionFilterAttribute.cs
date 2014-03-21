@@ -15,6 +15,15 @@ namespace WebApi2Book.Web.Common
         {
         }
 
+        /// <summary>
+        /// To prevent filter from executing twice on same call. Problem solved by:
+        /// http://stackoverflow.com/questions/18485479/webapi-filter-is-calling-twice?rq=1
+        /// </summary>
+        public override bool AllowMultiple
+        {
+            get { return false; }
+        }
+
         public UnitOfWorkActionFilterAttribute(IActionTransactionHelper actionTransactionHelper)
         {
             _actionTransactionHelper = actionTransactionHelper;
