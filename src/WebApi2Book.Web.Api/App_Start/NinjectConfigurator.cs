@@ -3,7 +3,6 @@
 
 using System.Security.Principal;
 using System.Threading;
-using System.Web;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using log4net.Config;
@@ -58,9 +57,9 @@ namespace WebApi2Book.Web.Api
             ConfigureDependenciesOnlyUsedForLegacyProcessing(container);
             ConfigureAutoMapper(container);
 
-            container.Bind<IDateTime>().To<DateTimeAdapter>();
+            container.Bind<IDateTime>().To<DateTimeAdapter>().InSingletonScope();
 
-            container.Bind<ICommonLinkService>().To<CommonLinkService>();
+            container.Bind<ICommonLinkService>().To<CommonLinkService>().InRequestScope();
 
             container.Bind<IAllStatusesInquiryProcessor>().To<AllStatusesInquiryProcessor>();
             container.Bind<IAllStatusesQueryProcessor>().To<AllStatusesQueryProcessor>();
@@ -68,7 +67,7 @@ namespace WebApi2Book.Web.Api
             container.Bind<IStatusByIdQueryProcessor>().To<StatusByIdQueryProcessor>();
             container.Bind<IStatusLinkService>().To<StatusLinkService>();
 
-            container.Bind<IAllUsersDataRequestFactory>().To<AllUsersDataRequestFactory>();
+            container.Bind<IAllUsersDataRequestFactory>().To<AllUsersDataRequestFactory>().InSingletonScope();
             container.Bind<IAllUsersInquiryProcessor>().To<AllUsersInquiryProcessor>();
             container.Bind<IAllUsersQueryProcessor>().To<AllUsersQueryProcessor>();
             container.Bind<IUserByIdInquiryProcessor>().To<UserByIdInquiryProcessor>();
@@ -87,20 +86,19 @@ namespace WebApi2Book.Web.Api
         private void ConfigureAutoMapper(IKernel container)
         {
             container.Bind<IAutoMapper>().To<AutoMapperAdapter>().InSingletonScope();
-            container.Bind<IAutoMapperTypeConfigurator>().To<StatusEntityToStatusAutoMapperTypeConfigurator>();
-            container.Bind<IAutoMapperTypeConfigurator>().To<StatusToStatusEntityAutoMapperTypeConfigurator>();
-            container.Bind<IAutoMapperTypeConfigurator>().To<UserEntityToUserAutoMapperTypeConfigurator>();
-            container.Bind<IAutoMapperTypeConfigurator>().To<UserToUserEntityAutoMapperTypeConfigurator>();
-            container.Bind<IAutoMapperTypeConfigurator>().To<TaskEntityToTaskAutoMapperTypeConfigurator>();
-            container.Bind<IAutoMapperTypeConfigurator>().To<TaskToTaskEntityAutoMapperTypeConfigurator>();
+            container.Bind<IAutoMapperTypeConfigurator>().To<StatusEntityToStatusAutoMapperTypeConfigurator>().InSingletonScope();
+            container.Bind<IAutoMapperTypeConfigurator>().To<StatusToStatusEntityAutoMapperTypeConfigurator>().InSingletonScope();
+            container.Bind<IAutoMapperTypeConfigurator>().To<UserEntityToUserAutoMapperTypeConfigurator>().InSingletonScope();
+            container.Bind<IAutoMapperTypeConfigurator>().To<UserToUserEntityAutoMapperTypeConfigurator>().InSingletonScope();
+            container.Bind<IAutoMapperTypeConfigurator>().To<TaskEntityToTaskAutoMapperTypeConfigurator>().InSingletonScope();
+            container.Bind<IAutoMapperTypeConfigurator>().To<TaskToTaskEntityAutoMapperTypeConfigurator>().InSingletonScope();
         }
 
         private void ConfigureUserSession(IKernel container)
         {
             container.Bind<IUserSession>()
-                .ToMethod(x => new UserSession(Thread.CurrentPrincipal as GenericPrincipal))
-                .InRequestScope();
-            container.Bind<IWebUserSession>().ToMethod(x => x.Kernel.Get<IUserSession>() as IWebUserSession).InRequestScope();
+                .ToMethod(x => new UserSession(Thread.CurrentPrincipal as GenericPrincipal));
+            container.Bind<IWebUserSession>().ToMethod(x => x.Kernel.Get<IUserSession>() as IWebUserSession);
         }
 
         private void ConfigureNHibernate(IKernel container)
