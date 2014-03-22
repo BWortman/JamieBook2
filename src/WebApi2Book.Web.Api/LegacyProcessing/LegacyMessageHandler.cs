@@ -6,16 +6,15 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using WebApi2Book.Web.Common;
 
 namespace WebApi2Book.Web.Api.LegacyProcessing
 {
     public class LegacyMessageHandler : DelegatingHandler
     {
-        private readonly ILegacyMessageProcessor _legacyMessageProcessor;
-
-        public LegacyMessageHandler(ILegacyMessageProcessor legacyMessageProcessor)
+        public virtual ILegacyMessageProcessor LegacyMessageProcessor
         {
-            _legacyMessageProcessor = legacyMessageProcessor;
+            get { return WebContainerManager.Get<ILegacyMessageProcessor>(); }
         }
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
@@ -24,7 +23,7 @@ namespace WebApi2Book.Web.Api.LegacyProcessing
             var requestContentAsString = request.Content.ReadAsStringAsync().Result;
             var requestContentAsDocument = XDocument.Parse(requestContentAsString);
 
-            var legacyResponse = _legacyMessageProcessor.ProcessLegacyMessage(requestContentAsDocument);
+            var legacyResponse = LegacyMessageProcessor.ProcessLegacyMessage(requestContentAsDocument);
 
             var responseMsg = request.CreateResponse(HttpStatusCode.OK, legacyResponse);
 

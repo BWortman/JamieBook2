@@ -61,25 +61,25 @@ namespace WebApi2Book.Web.Api
 
             container.Bind<ICommonLinkService>().To<CommonLinkService>().InRequestScope();
 
-            container.Bind<IAllStatusesInquiryProcessor>().To<AllStatusesInquiryProcessor>();
-            container.Bind<IAllStatusesQueryProcessor>().To<AllStatusesQueryProcessor>();
-            container.Bind<IStatusByIdInquiryProcessor>().To<StatusByIdInquiryProcessor>();
-            container.Bind<IStatusByIdQueryProcessor>().To<StatusByIdQueryProcessor>();
+            container.Bind<IAllStatusesInquiryProcessor>().To<AllStatusesInquiryProcessor>().InRequestScope();
+            container.Bind<IAllStatusesQueryProcessor>().To<AllStatusesQueryProcessor>().InRequestScope();
+            container.Bind<IStatusByIdInquiryProcessor>().To<StatusByIdInquiryProcessor>().InRequestScope();
+            container.Bind<IStatusByIdQueryProcessor>().To<StatusByIdQueryProcessor>().InRequestScope();
             container.Bind<IStatusLinkService>().To<StatusLinkService>().InRequestScope();
 
             container.Bind<IAllUsersDataRequestFactory>().To<AllUsersDataRequestFactory>().InSingletonScope();
-            container.Bind<IAllUsersInquiryProcessor>().To<AllUsersInquiryProcessor>();
-            container.Bind<IAllUsersQueryProcessor>().To<AllUsersQueryProcessor>();
-            container.Bind<IUserByIdInquiryProcessor>().To<UserByIdInquiryProcessor>();
-            container.Bind<IUserByIdQueryProcessor>().To<UserByIdQueryProcessor>();
+            container.Bind<IAllUsersInquiryProcessor>().To<AllUsersInquiryProcessor>().InRequestScope();
+            container.Bind<IAllUsersQueryProcessor>().To<AllUsersQueryProcessor>().InRequestScope();
+            container.Bind<IUserByIdInquiryProcessor>().To<UserByIdInquiryProcessor>().InRequestScope();
+            container.Bind<IUserByIdQueryProcessor>().To<UserByIdQueryProcessor>().InRequestScope();
             container.Bind<IUserLinkService>().To<UserLinkService>().InRequestScope();
 
-            container.Bind<IAddTaskMaintenanceProcessor>().To<AddTaskMaintenanceProcessor>();
-            container.Bind<IAddTaskQueryProcessor>().To<AddTaskQueryProcessor>();
-            container.Bind<IAllTasksInquiryProcessor>().To<AllTasksInquiryProcessor>();
-            container.Bind<IAllTasksQueryProcessor>().To<AllTasksQueryProcessor>();
-            container.Bind<ITaskByIdInquiryProcessor>().To<TaskByIdInquiryProcessor>();
-            container.Bind<ITaskByIdQueryProcessor>().To<TaskByIdQueryProcessor>();
+            container.Bind<IAddTaskMaintenanceProcessor>().To<AddTaskMaintenanceProcessor>().InRequestScope();
+            container.Bind<IAddTaskQueryProcessor>().To<AddTaskQueryProcessor>().InRequestScope();
+            container.Bind<IAllTasksInquiryProcessor>().To<AllTasksInquiryProcessor>().InRequestScope();
+            container.Bind<IAllTasksQueryProcessor>().To<AllTasksQueryProcessor>().InRequestScope();
+            container.Bind<ITaskByIdInquiryProcessor>().To<TaskByIdInquiryProcessor>().InRequestScope();
+            container.Bind<ITaskByIdQueryProcessor>().To<TaskByIdQueryProcessor>().InRequestScope();
             container.Bind<ITaskLinkService>().To<TaskLinkService>().InRequestScope();
         }
 
@@ -113,9 +113,9 @@ namespace WebApi2Book.Web.Api
 
             container.Bind<ISessionFactory>().ToConstant(sessionFactory);
             container.Bind<ISession>().ToMethod(CreateSession).InRequestScope();
-            container.Bind<ICurrentSessionContextAdapter>().To<CurrentSessionContextAdapter>();
-            container.Bind<IActionTransactionHelper>().To<ActionTransactionHelper>();
-            container.Bind<ISqlCommandFactory>().To<SqlCommandFactory>();
+            container.Bind<ICurrentSessionContextAdapter>().To<CurrentSessionContextAdapter>().InSingletonScope();
+            container.Bind<IActionTransactionHelper>().To<ActionTransactionHelper>().InRequestScope();
+            container.Bind<ISqlCommandFactory>().To<SqlCommandFactory>().InRequestScope();
         }
 
         private ISession CreateSession(IContext context)
@@ -132,12 +132,12 @@ namespace WebApi2Book.Web.Api
 
         private void ConfigureDependenciesOnlyUsedForLegacyProcessing(IKernel container)
         {
-            container.Bind<ILegacyMessageProcessor>().To<LegacyMessageProcessor>();
+            container.Bind<ILegacyMessageProcessor>().To<LegacyMessageProcessor>().InRequestScope();
             container.Bind<ILegacyMessageParser>().To<LegacyMessageParser>().InSingletonScope();
             container.Bind<ILegacyMessageTypeFormatter>().To<LegacyMessageTypeFormatter>().InSingletonScope();
 
-            container.Bind<ILegacyMessageProcessingStrategy>().To<GetStatusesMessageProcessingStrategy>();
-            container.Bind<ILegacyMessageProcessingStrategy>().To<GetStatusByIdMessageProcessingStrategy>();
+            container.Bind<ILegacyMessageProcessingStrategy>().To<GetStatusesMessageProcessingStrategy>().InRequestScope();
+            container.Bind<ILegacyMessageProcessingStrategy>().To<GetStatusByIdMessageProcessingStrategy>().InRequestScope();
         }
 
         private void ConfigureLog4net(IKernel container)
