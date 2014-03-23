@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTransferObjects\AllUsersDataRequest.cs" />
+    <Compile Include="DataTransferObjects\PagedDataRequest.cs" />
     <Compile Include="ISqlCommandFactory.cs" />
     <Compile Include="Mapping\StatusMap.cs" />
     <Compile Include="Mapping\TaskMap.cs" />

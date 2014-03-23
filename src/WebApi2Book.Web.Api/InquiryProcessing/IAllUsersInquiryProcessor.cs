@@ -8,6 +8,6 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
 {
     public interface IAllUsersInquiryProcessor
     {
-        UsersInquiryResponse GetUsers(AllUsersDataRequest requestInfo);
+        PagedDataInquiryResponse<User> GetUsers(PagedDataRequest requestInfo);
     }
 }

@@ -60,6 +60,7 @@ namespace WebApi2Book.Web.Api
             container.Bind<IDateTime>().To<DateTimeAdapter>().InSingletonScope();
 
             container.Bind<ICommonLinkService>().To<CommonLinkService>().InRequestScope();
+            container.Bind<IPagedDataRequestFactory>().To<PagedDataRequestFactory>().InSingletonScope();
 
             container.Bind<IAllStatusesInquiryProcessor>().To<AllStatusesInquiryProcessor>().InRequestScope();
             container.Bind<IAllStatusesQueryProcessor>().To<AllStatusesQueryProcessor>().InRequestScope();
@@ -67,7 +68,6 @@ namespace WebApi2Book.Web.Api
             container.Bind<IStatusByIdQueryProcessor>().To<StatusByIdQueryProcessor>().InRequestScope();
             container.Bind<IStatusLinkService>().To<StatusLinkService>().InRequestScope();
 
-            container.Bind<IAllUsersDataRequestFactory>().To<AllUsersDataRequestFactory>().InSingletonScope();
             container.Bind<IAllUsersInquiryProcessor>().To<AllUsersInquiryProcessor>().InRequestScope();
             container.Bind<IAllUsersQueryProcessor>().To<AllUsersQueryProcessor>().InRequestScope();
             container.Bind<IUserByIdInquiryProcessor>().To<UserByIdInquiryProcessor>().InRequestScope();

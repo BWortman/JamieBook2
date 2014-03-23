@@ -150,8 +150,8 @@
     <Compile Include="InquiryProcessing\AllStatusesInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\AllTasksInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\AllUsersInquiryProcessor.cs" />
-    <Compile Include="InquiryProcessing\AllUsersDataRequestFactory.cs" />
-    <Compile Include="InquiryProcessing\IAllUsersDataRequestFactory.cs" />
+    <Compile Include="InquiryProcessing\PagedDataRequestFactory.cs" />
+    <Compile Include="InquiryProcessing\IPagedDataRequestFactory.cs" />
     <Compile Include="MaintenanceProcessing\AddTaskMaintenanceProcessor.cs" />
     <Compile Include="InquiryProcessing\IAllTasksInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\IAllUsersInquiryProcessor.cs" />

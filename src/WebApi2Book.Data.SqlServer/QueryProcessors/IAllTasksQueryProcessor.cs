@@ -1,13 +1,13 @@
 ﻿// IAllTasksQueryProcessor.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using System.Collections.Generic;
 using WebApi2Book.Data.Entities;
+using WebApi2Book.Data.SqlServer.DataTransferObjects;
 
 namespace WebApi2Book.Data.SqlServer.QueryProcessors
 {
     public interface IAllTasksQueryProcessor
     {
-        IEnumerable<Task> GetTasks();
+        QueryResult<Task> GetTasks(PagedDataRequest requestInfo);
     }
 }

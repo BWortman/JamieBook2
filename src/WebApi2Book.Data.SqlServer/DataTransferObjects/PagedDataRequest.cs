@@ -1,11 +1,11 @@
-﻿// AllUsersDataRequest.cs
+﻿// PagedDataRequest.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 namespace WebApi2Book.Data.SqlServer.DataTransferObjects
 {
-    public class AllUsersDataRequest
+    public class PagedDataRequest
     {
-        public AllUsersDataRequest(int pageNumber, int pageSize)
+        public PagedDataRequest(int pageNumber, int pageSize)
         {
             PageNumber = pageNumber;
             PageSize = pageSize;

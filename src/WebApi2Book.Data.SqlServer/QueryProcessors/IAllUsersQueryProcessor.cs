@@ -8,6 +8,6 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
 {
     public interface IAllUsersQueryProcessor
     {
-        QueryResult<User> GetUsers(AllUsersDataRequest requestInfo);
+        QueryResult<User> GetUsers(PagedDataRequest requestInfo);
     }
 }

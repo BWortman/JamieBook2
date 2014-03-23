@@ -8,6 +8,8 @@ using WebApi2Book.Data.SqlServer.DataTransferObjects;
 using WebApi2Book.Data.SqlServer.QueryProcessors;
 using WebApi2Book.Web.Api.LinkServices;
 using WebApi2Book.Web.Api.Models;
+using PagedUserDataInquiryResponse =
+    WebApi2Book.Web.Api.Models.PagedDataInquiryResponse<WebApi2Book.Web.Api.Models.User>;
 
 namespace WebApi2Book.Web.Api.InquiryProcessing
 {
@@ -28,15 +30,15 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
             _commonLinkService = commonLinkService;
         }
 
-        public UsersInquiryResponse GetUsers(AllUsersDataRequest requestInfo)
+        public PagedUserDataInquiryResponse GetUsers(PagedDataRequest requestInfo)
         {
             var queryResult = _queryProcessor.GetUsers(requestInfo);
 
             var users = GetUsers(queryResult.QueriedItems);
 
-            var inquiryResponse = new UsersInquiryResponse
+            var inquiryResponse = new PagedUserDataInquiryResponse
             {
-                Users = users,
+                Items = users,
                 PageCount = queryResult.TotalPageCount,
                 PageNumber = requestInfo.PageNumber,
                 PageSize = requestInfo.PageSize
@@ -47,7 +49,7 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
             return inquiryResponse;
         }
 
-        public virtual void AddLinksToInquiryResponse(UsersInquiryResponse inquiryResponse)
+        public virtual void AddLinksToInquiryResponse(PagedUserDataInquiryResponse inquiryResponse)
         {
             inquiryResponse.AddLink(_userLinkService.GetAllUsersLink());
 
@@ -65,7 +67,7 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
             return users;
         }
 
-        public virtual string GetCurrentPageQueryString(UsersInquiryResponse inquiryResponse)
+        public virtual string GetCurrentPageQueryString(PagedUserDataInquiryResponse inquiryResponse)
         {
             return
                 string.Format(QueryStringFormat,
@@ -73,7 +75,7 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
                     inquiryResponse.PageSize);
         }
 
-        public virtual string GetPreviousPageQueryString(UsersInquiryResponse inquiryResponse)
+        public virtual string GetPreviousPageQueryString(PagedUserDataInquiryResponse inquiryResponse)
         {
             return
                 string.Format(QueryStringFormat,
@@ -81,7 +83,7 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
                     inquiryResponse.PageSize);
         }
 
-        public virtual string GetNextPageQueryString(UsersInquiryResponse inquiryResponse)
+        public virtual string GetNextPageQueryString(PagedUserDataInquiryResponse inquiryResponse)
         {
             return string.Format(QueryStringFormat,
                 inquiryResponse.PageNumber + 1,

@@ -1,13 +1,13 @@
 ﻿// IAllTasksInquiryProcessor.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using System.Collections.Generic;
+using WebApi2Book.Data.SqlServer.DataTransferObjects;
 using WebApi2Book.Web.Api.Models;
 
 namespace WebApi2Book.Web.Api.InquiryProcessing
 {
     public interface IAllTasksInquiryProcessor
     {
-        IEnumerable<Task> GetTasks();
+        PagedDataInquiryResponse<Task> GetTasks(PagedDataRequest requestInfo);
     }
 }

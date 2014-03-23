@@ -52,7 +52,7 @@
     <Compile Include="StatusesInquiryResponse.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="UsersInquiryResponse.cs" />
+    <Compile Include="PagedDataInquiryResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebApi2Book.Common\WebApi2Book.Common.csproj">

@@ -1,9 +1,9 @@
 ﻿// AllTasksQueryProcessor.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using System.Collections.Generic;
 using NHibernate;
 using WebApi2Book.Data.Entities;
+using WebApi2Book.Data.SqlServer.DataTransferObjects;
 
 namespace WebApi2Book.Data.SqlServer.QueryProcessors
 {
@@ -16,10 +16,19 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
             _session = session;
         }
 
-        public IEnumerable<Task> GetTasks()
+        public QueryResult<Task> GetTasks(PagedDataRequest requestInfo)
         {
-            var tasks = _session.QueryOver<Task>().List();
-            return tasks;
+            var query = _session.QueryOver<Task>();
+
+            var totalItemCount = query.ToRowCountQuery().RowCount();
+
+            var startIndex = ResultsPagingUtility.CalculateStartIndex(requestInfo.PageNumber, requestInfo.PageSize);
+
+            var tasks = query.Skip(startIndex).Take(requestInfo.PageSize).List();
+
+            var queryResult = new QueryResult<Task>(tasks, totalItemCount, requestInfo.PageSize);
+
+            return queryResult;
         }
     }
 }

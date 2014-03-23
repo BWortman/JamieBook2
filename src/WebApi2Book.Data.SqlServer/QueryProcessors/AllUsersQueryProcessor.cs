@@ -16,7 +16,7 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
             _session = session;
         }
 
-        public QueryResult<User> GetUsers(AllUsersDataRequest requestInfo)
+        public QueryResult<User> GetUsers(PagedDataRequest requestInfo)
         {
             var query = _session.QueryOver<User>();
 

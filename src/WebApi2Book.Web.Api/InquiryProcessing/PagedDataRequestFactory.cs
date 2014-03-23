@@ -1,4 +1,4 @@
-﻿// AllUsersDataRequestFactory.cs
+﻿// PagedDataRequestFactory.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System;
@@ -13,7 +13,7 @@ using WebApi2Book.Data.SqlServer.DataTransferObjects;
 
 namespace WebApi2Book.Web.Api.InquiryProcessing
 {
-    public class AllUsersDataRequestFactory : IAllUsersDataRequestFactory
+    public class PagedDataRequestFactory : IPagedDataRequestFactory
     {
         public const int DefaultPageSize = 25;
 
@@ -21,12 +21,12 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
 
         private readonly ILog _log;
 
-        public AllUsersDataRequestFactory(ILogManager logManager)
+        public PagedDataRequestFactory(ILogManager logManager)
         {
-            _log = logManager.GetLog(typeof (AllUsersDataRequestFactory));
+            _log = logManager.GetLog(typeof (PagedDataRequestFactory));
         }
 
-        public AllUsersDataRequest Create(Uri requestUri)
+        public PagedDataRequest Create(Uri requestUri)
         {
             int? pageNumber;
             int? pageSize;
@@ -49,7 +49,7 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
             pageSize = pageSize.GetBoundedValue(DefaultPageSize,
                 Constants.Paging.MinPageSize, MaxPageSize);
 
-            return new AllUsersDataRequest(pageNumber.Value, pageSize.Value);
+            return new PagedDataRequest(pageNumber.Value, pageSize.Value);
         }
     }
 }

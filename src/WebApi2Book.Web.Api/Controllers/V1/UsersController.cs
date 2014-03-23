@@ -14,23 +14,23 @@ namespace WebApi2Book.Web.Api.Controllers.V1
     [UnitOfWorkActionFilter]
     public class UsersController : ApiController
     {
-        private readonly IAllUsersDataRequestFactory _allUsersDataRequestFactory;
+        private readonly IPagedDataRequestFactory _pagedDataRequestFactory;
         private readonly IAllUsersInquiryProcessor _allUsersInquiryProcessor;
         private readonly IUserByIdInquiryProcessor _userByIdInquiryProcessor;
 
-        public UsersController(IAllUsersDataRequestFactory allUsersDataRequestFactory,
+        public UsersController(IPagedDataRequestFactory pagedDataRequestFactory,
             IAllUsersInquiryProcessor allUsersInquiryProcessor,
             IUserByIdInquiryProcessor userByIdInquiryProcessor)
         {
-            _allUsersDataRequestFactory = allUsersDataRequestFactory;
+            _pagedDataRequestFactory = pagedDataRequestFactory;
             _allUsersInquiryProcessor = allUsersInquiryProcessor;
             _userByIdInquiryProcessor = userByIdInquiryProcessor;
         }
 
         [Route("", Name = "GetUsersRoute")]
-        public UsersInquiryResponse GetUsers(HttpRequestMessage requestMessage)
+        public PagedDataInquiryResponse<User> GetUsers(HttpRequestMessage requestMessage)
         {
-            var request = _allUsersDataRequestFactory.Create(requestMessage.RequestUri);
+            var request = _pagedDataRequestFactory.Create(requestMessage.RequestUri);
 
             var inquiryResponse = _allUsersInquiryProcessor.GetUsers(request);
             return inquiryResponse;
