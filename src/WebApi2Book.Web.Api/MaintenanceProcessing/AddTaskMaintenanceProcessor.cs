@@ -22,17 +22,17 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
             _taskLinkService = taskLinkService;
         }
 
-        public Task AddTask(Task task)
+        public Task AddTask(NewTask newTask)
         {
-            var taskEntity = _autoMapper.Map<Data.Entities.Task>(task);
+            var taskEntity = _autoMapper.Map<Data.Entities.Task>(newTask);
 
             _queryProcessor.AddTask(taskEntity);
 
-            var newTask = _autoMapper.Map<Task>(taskEntity);
+            var task = _autoMapper.Map<Task>(taskEntity);
 
-            _taskLinkService.AddLinks(newTask);
+            _taskLinkService.AddLinks(task);
 
-            return newTask;
+            return task;
         }
     }
 }

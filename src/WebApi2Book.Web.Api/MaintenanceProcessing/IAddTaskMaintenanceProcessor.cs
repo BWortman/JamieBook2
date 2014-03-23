@@ -7,6 +7,6 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
 {
     public interface IAddTaskMaintenanceProcessor
     {
-        Task AddTask(Task task);
+        Task AddTask(NewTask newTask);
     }
 }

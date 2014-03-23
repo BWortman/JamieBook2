@@ -51,11 +51,11 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         [Route("", Name = "AddTaskRoute")]
         [HttpPost]
         [ValidateModel]
-        public IHttpActionResult AddTask(HttpRequestMessage requestMessage, Task task)
+        public IHttpActionResult AddTask(HttpRequestMessage requestMessage, NewTask newTask)
         {
-            var newTask = _addTaskMaintenanceProcessor.AddTask(task);
+            var task = _addTaskMaintenanceProcessor.AddTask(newTask);
 
-            var result = new ItemCreatedActionResult(requestMessage, newTask);
+            var result = new ItemCreatedActionResult(requestMessage, task);
 
             return result;
         }

@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace WebApi2Book.Web.Api.Models
 {
@@ -13,27 +12,18 @@ namespace WebApi2Book.Web.Api.Models
 
         public long TaskId { get; set; }
 
-        [Editable(true)]
-        [Required(AllowEmptyStrings = false)]
         public string Subject { get; set; }
 
-        [Editable(true)]
         public DateTime? StartDate { get; set; }
 
-        [Editable(true)]
         public DateTime? DueDate { get; set; }
 
-        [Editable(false)]
         public DateTime? DateCompleted { get; set; }
 
-        [Editable(false)]
         public DateTime CreatedDate { get; set; }
 
-        [Editable(true)]
-        [Required]
         public Status Status { get; set; }
 
-        [Editable(true)]
         public List<User> Assignees { get; set; }
 
         public IEnumerable<Link> Links
