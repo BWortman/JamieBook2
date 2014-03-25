@@ -16,9 +16,6 @@ namespace WebApi2Book.Web.Api.Models
 
         public DateTime? DueDate { get; set; }
 
-        [Required]
-        public Status Status { get; set; }
-
         public List<User> Assignees { get; set; }
     }
 }

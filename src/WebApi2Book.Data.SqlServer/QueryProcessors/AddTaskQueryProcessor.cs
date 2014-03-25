@@ -6,6 +6,7 @@ using NHibernate.Util;
 using WebApi2Book.Common;
 using WebApi2Book.Common.Security;
 using WebApi2Book.Data.Entities;
+using WebApi2Book.Data.Exceptions;
 
 namespace WebApi2Book.Data.SqlServer.QueryProcessors
 {
@@ -25,14 +26,20 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
         public void AddTask(Task task)
         {
             task.CreatedDate = _dateTime.UtcNow;
-            task.Status = _session.Get<Status>(task.Status.StatusId);
+            task.Status = _session.QueryOver<Status>().Where(x => x.Name == "Not Started").SingleOrDefault();
             task.CreatedBy = _session.Get<User>(_userSession.UserId);
 
             if (task.Users != null && task.Users.Any())
             {
-                foreach (var user in task.Users)
+                for (var i = 0; i < task.Users.Count; ++i)
                 {
-                    _session.Get<User>(user.UserId);
+                    var user = task.Users[i];
+                    var persistedUser = _session.Get<User>(user.UserId);
+                    if (persistedUser == null)
+                    {
+                        throw new ChildObjectNotFoundException("User not found");
+                    }
+                    task.Users[i] = persistedUser;
                 }
             }
 
