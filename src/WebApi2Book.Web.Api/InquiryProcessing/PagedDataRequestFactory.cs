@@ -9,7 +9,7 @@ using log4net;
 using WebApi2Book.Common;
 using WebApi2Book.Common.Extensions;
 using WebApi2Book.Common.Logging;
-using WebApi2Book.Data.SqlServer.DataTransferObjects;
+using WebApi2Book.Data;
 
 namespace WebApi2Book.Web.Api.InquiryProcessing
 {

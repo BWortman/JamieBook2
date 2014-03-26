@@ -3,7 +3,6 @@
 
 using NHibernate;
 using WebApi2Book.Data.Entities;
-using WebApi2Book.Data.SqlServer.DataTransferObjects;
 
 namespace WebApi2Book.Data.SqlServer.QueryProcessors
 {
