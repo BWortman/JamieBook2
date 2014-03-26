@@ -63,7 +63,11 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
         {
             var tasks = taskEntities.Select(x => _autoMapper.Map<Task>(x)).ToList();
 
-            tasks.ForEach(x => _taskLinkService.AddSelfLink(x));
+            tasks.ForEach(x =>
+            {
+                _taskLinkService.AddSelfLink(x);
+                _taskLinkService.AddLinksToChildObjects(x);
+            });
 
             return tasks;
         }

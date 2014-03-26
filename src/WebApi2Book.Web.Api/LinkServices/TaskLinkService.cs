@@ -11,18 +11,30 @@ namespace WebApi2Book.Web.Api.LinkServices
     public class TaskLinkService : ITaskLinkService
     {
         private readonly ICommonLinkService _commonLinkService;
+        private readonly IStatusLinkService _statusLinkService;
+        private readonly IUserLinkService _userLinkService;
         private readonly IWebUserSession _userSession;
 
-        public TaskLinkService(IWebUserSession userSession, ICommonLinkService commonLinkService)
+        public TaskLinkService(IWebUserSession userSession, ICommonLinkService commonLinkService,
+            IStatusLinkService statusLinkService, IUserLinkService userLinkService)
         {
             _userSession = userSession;
             _commonLinkService = commonLinkService;
+            _statusLinkService = statusLinkService;
+            _userLinkService = userLinkService;
         }
 
         public void AddLinks(Task task)
         {
             AddSelfLink(task);
             AddAllTasksLink(task);
+            AddLinksToChildObjects(task);
+        }
+
+        public void AddLinksToChildObjects(Task task)
+        {
+            task.Assignees.ForEach(x => _userLinkService.AddSelfLink(x));
+            _statusLinkService.AddSelfLink(task.Status);
         }
 
         public virtual void AddSelfLink(Task task)

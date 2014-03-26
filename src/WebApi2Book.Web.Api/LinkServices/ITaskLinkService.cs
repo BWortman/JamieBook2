@@ -11,5 +11,6 @@ namespace WebApi2Book.Web.Api.LinkServices
         Link GetAllTasksLink();
         void AddAllTasksLink(Task task);
         void AddSelfLink(Task task);
+        void AddLinksToChildObjects(Task task);
     }
 }
