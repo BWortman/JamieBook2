@@ -75,7 +75,10 @@ namespace WebApi2Book.Web.Api
             container.Bind<IUserLinkService>().To<UserLinkService>().InRequestScope();
 
             container.Bind<IAddTaskMaintenanceProcessor>().To<AddTaskMaintenanceProcessor>().InRequestScope();
+            container.Bind<IUpdateTaskMaintenanceProcessor>().To<UpdateTaskMaintenanceProcessor>().InRequestScope();
             container.Bind<IAddTaskQueryProcessor>().To<AddTaskQueryProcessor>().InRequestScope();
+            container.Bind<IUpdateTaskQueryProcessor>().To<UpdateTaskQueryProcessor>().InRequestScope();
+            container.Bind<IUpdateablePropertyDetector>().To<JObjectUpdateablePropertyDetector>().InSingletonScope();
             container.Bind<IAllTasksInquiryProcessor>().To<AllTasksInquiryProcessor>().InRequestScope();
             container.Bind<IAllTasksQueryProcessor>().To<AllTasksQueryProcessor>().InRequestScope();
             container.Bind<ITaskByIdInquiryProcessor>().To<TaskByIdInquiryProcessor>().InRequestScope();
@@ -86,22 +89,36 @@ namespace WebApi2Book.Web.Api
         private void ConfigureAutoMapper(IKernel container)
         {
             container.Bind<IAutoMapper>().To<AutoMapperAdapter>().InSingletonScope();
-            container.Bind<IAutoMapperTypeConfigurator>().To<StatusEntityToStatusAutoMapperTypeConfigurator>().InSingletonScope();
-            container.Bind<IAutoMapperTypeConfigurator>().To<StatusToStatusEntityAutoMapperTypeConfigurator>().InSingletonScope();
-            container.Bind<IAutoMapperTypeConfigurator>().To<UserEntityToUserAutoMapperTypeConfigurator>().InSingletonScope();
-            container.Bind<IAutoMapperTypeConfigurator>().To<UserToUserEntityAutoMapperTypeConfigurator>().InSingletonScope();
+            container.Bind<IAutoMapperTypeConfigurator>()
+                .To<StatusEntityToStatusAutoMapperTypeConfigurator>()
+                .InSingletonScope();
+            container.Bind<IAutoMapperTypeConfigurator>()
+                .To<StatusToStatusEntityAutoMapperTypeConfigurator>()
+                .InSingletonScope();
+            container.Bind<IAutoMapperTypeConfigurator>()
+                .To<UserEntityToUserAutoMapperTypeConfigurator>()
+                .InSingletonScope();
+            container.Bind<IAutoMapperTypeConfigurator>()
+                .To<UserToUserEntityAutoMapperTypeConfigurator>()
+                .InSingletonScope();
             container.Bind<IAutoMapperTypeConfigurator>()
                 .To<NewTaskToTaskEntityAutoMapperTypeConfigurator>()
                 .InSingletonScope();
-            container.Bind<IAutoMapperTypeConfigurator>().To<TaskEntityToTaskAutoMapperTypeConfigurator>().InSingletonScope();
-            container.Bind<IAutoMapperTypeConfigurator>().To<TaskToTaskEntityAutoMapperTypeConfigurator>().InSingletonScope();
+            container.Bind<IAutoMapperTypeConfigurator>()
+                .To<TaskEntityToTaskAutoMapperTypeConfigurator>()
+                .InSingletonScope();
+            container.Bind<IAutoMapperTypeConfigurator>()
+                .To<TaskToTaskEntityAutoMapperTypeConfigurator>()
+                .InSingletonScope();
         }
 
         private void ConfigureUserSession(IKernel container)
         {
             container.Bind<IUserSession>()
                 .ToMethod(x => new UserSession(Thread.CurrentPrincipal as GenericPrincipal)).InRequestScope();
-            container.Bind<IWebUserSession>().ToMethod(x => x.Kernel.Get<IUserSession>() as IWebUserSession).InRequestScope();
+            container.Bind<IWebUserSession>()
+                .ToMethod(x => x.Kernel.Get<IUserSession>() as IWebUserSession)
+                .InRequestScope();
         }
 
         private void ConfigureNHibernate(IKernel container)
@@ -139,8 +156,12 @@ namespace WebApi2Book.Web.Api
             container.Bind<ILegacyMessageParser>().To<LegacyMessageParser>().InSingletonScope();
             container.Bind<ILegacyMessageTypeFormatter>().To<LegacyMessageTypeFormatter>().InSingletonScope();
 
-            container.Bind<ILegacyMessageProcessingStrategy>().To<GetStatusesMessageProcessingStrategy>().InRequestScope();
-            container.Bind<ILegacyMessageProcessingStrategy>().To<GetStatusByIdMessageProcessingStrategy>().InRequestScope();
+            container.Bind<ILegacyMessageProcessingStrategy>()
+                .To<GetStatusesMessageProcessingStrategy>()
+                .InRequestScope();
+            container.Bind<ILegacyMessageProcessingStrategy>()
+                .To<GetStatusByIdMessageProcessingStrategy>()
+                .InRequestScope();
         }
 
         private void ConfigureLog4net(IKernel container)

@@ -20,16 +20,19 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         private readonly IAllTasksInquiryProcessor _allTasksInquiryProcessor;
         private readonly IPagedDataRequestFactory _pagedDataRequestFactory;
         private readonly ITaskByIdInquiryProcessor _taskByIdInquiryProcessor;
+        private readonly IUpdateTaskMaintenanceProcessor _updateTaskMaintenanceProcessor;
 
         public TasksController(IPagedDataRequestFactory pagedDataRequestFactory,
             IAllTasksInquiryProcessor allTasksInquiryProcessor,
             ITaskByIdInquiryProcessor taskByIdInquiryProcessor,
-            IAddTaskMaintenanceProcessor addTaskMaintenanceProcessor)
+            IAddTaskMaintenanceProcessor addTaskMaintenanceProcessor,
+            IUpdateTaskMaintenanceProcessor updateTaskMaintenanceProcessor)
         {
             _pagedDataRequestFactory = pagedDataRequestFactory;
             _allTasksInquiryProcessor = allTasksInquiryProcessor;
             _taskByIdInquiryProcessor = taskByIdInquiryProcessor;
             _addTaskMaintenanceProcessor = addTaskMaintenanceProcessor;
+            _updateTaskMaintenanceProcessor = updateTaskMaintenanceProcessor;
         }
 
         [Route("", Name = "GetTasksRoute")]
@@ -58,6 +61,15 @@ namespace WebApi2Book.Web.Api.Controllers.V1
             var result = new ItemCreatedActionResult(requestMessage, task);
 
             return result;
+        }
+
+        [Route("{updatedTask}", Name = "UpdateTaskRoute")]
+        [HttpPut]
+        [HttpPatch]
+        public Task UpdateTask(HttpRequestMessage requestMessage, [FromBody] object updatedTask)
+        {
+            var task = _updateTaskMaintenanceProcessor.UpdateTask(updatedTask);
+            return task;
         }
     }
 }

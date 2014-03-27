@@ -62,6 +62,7 @@
       <HintPath>..\..\lib\Ninject.Web.WebApi.3.2.0.0\lib\net45-full\Ninject.Web.WebApi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -91,6 +92,8 @@
     <Compile Include="CurrentSessionContextAdapter.cs" />
     <Compile Include="IActionTransactionHelper.cs" />
     <Compile Include="ICurrentSessionContextAdapter.cs" />
+    <Compile Include="IUpdateablePropertyDetector.cs" />
+    <Compile Include="JObjectUpdateablePropertyDetector.cs" />
     <Compile Include="Routing\ApiVersion1RoutePrefixAttribute.cs" />
     <Compile Include="Routing\ApiVersionConstraint.cs" />
     <Compile Include="ErrorHandling\GlobalExceptionHandler.cs" />
