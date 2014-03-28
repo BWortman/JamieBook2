@@ -3,13 +3,13 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Newtonsoft.Json.Linq;
 using WebApi2Book.Common.TypeMapping;
 using WebApi2Book.Data.SqlServer.QueryProcessors;
 using WebApi2Book.Web.Api.LinkServices;
 using WebApi2Book.Web.Api.Models;
 using WebApi2Book.Web.Common;
+using PropertyValueMapType = System.Collections.Generic.Dictionary<string, object>;
 
 namespace WebApi2Book.Web.Api.MaintenanceProcessing
 {
@@ -18,7 +18,7 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
     /// </summary>
     /// <remarks>
     ///     This implementation only supports Json. Support for other content types is
-    ///     left as an exercise for the reader :-)
+    ///     left as an exercise for the reader.
     /// </remarks>
     public class UpdateTaskMaintenanceProcessor : IUpdateTaskMaintenanceProcessor
     {
@@ -36,38 +36,46 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
             _updateablePropertyDetector = updateablePropertyDetector;
         }
 
-        public Task UpdateTask(object taskFragment)
+        public Task UpdateTask(long taskId, object taskFragment)
         {
-            var taskWithUpdates = ((JObject) taskFragment).ToObject<Task>();
+            var taskFragmentAsJObject = (JObject) taskFragment;
+            var taskContainingUpdateData = taskFragmentAsJObject.ToObject<Task>();
 
-            var propertiesToUpdate = _updateablePropertyDetector.GetNamesOfPropertiesToUpdate(typeof (Task),
-                taskFragment).ToList();
+            var updatedPropertyValueMap = GetPropertyValueMap(taskFragmentAsJObject, taskContainingUpdateData);
 
-            var propertyInfos = typeof (Task).GetProperties(BindingFlags.Instance | BindingFlags.Public);
-            var updatedPropertyValueMap = new Dictionary<string, object>();
-            foreach (var propertyName in propertiesToUpdate)
-            {
-                var propertyValue = propertyInfos.Single(x => x.Name == propertyName).GetValue(taskWithUpdates);
-
-                if (propertyName == "Assignees")
-                {
-                    var users = propertyValue as IEnumerable<User>;
-                    var valueToAdd = users == null ? null : users.Select(x => x.UserId);
-                    updatedPropertyValueMap.Add(propertyName, valueToAdd);
-                }
-                else
-                {
-                    updatedPropertyValueMap.Add(propertyName, propertyValue);
-                }
-            }
-
-            var updatedTaskEntity = _queryProcessor.GetUpdatedTask(taskWithUpdates.TaskId, updatedPropertyValueMap);
+            var updatedTaskEntity = _queryProcessor.GetUpdatedTask(taskId,updatedPropertyValueMap);
 
             var task = _autoMapper.Map<Task>(updatedTaskEntity);
 
             _taskLinkService.AddLinks(task);
 
             return task;
+        }
+
+        public virtual PropertyValueMapType GetPropertyValueMap(JObject taskFragment, Task taskContainingUpdateData)
+        {
+            var namesOfModifiedProperties = _updateablePropertyDetector.GetNamesOfPropertiesToUpdate(typeof (Task),
+                taskFragment).ToList();
+
+            var propertyInfos = typeof (Task).GetProperties();
+            var updatedPropertyValueMap = new PropertyValueMapType();
+            foreach (var propertyName in namesOfModifiedProperties)
+            {
+                var propertyValue = propertyInfos.Single(x => x.Name == propertyName).GetValue(taskContainingUpdateData);
+                switch (propertyName)
+                {
+                    case "Assignees":
+                        var users = propertyValue as IEnumerable<User>;
+                        var userIds = users == null ? null : users.Select(x => x.UserId);
+                        updatedPropertyValueMap.Add(propertyName, userIds);
+                        break;
+                    default:
+                        updatedPropertyValueMap.Add(propertyName, propertyValue);
+                        break;
+                }
+            }
+
+            return updatedPropertyValueMap;
         }
     }
 }

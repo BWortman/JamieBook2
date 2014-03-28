@@ -12,7 +12,7 @@ namespace WebApi2Book.Web.Api.Models
         private readonly List<Link> _links = new List<Link>();
 
         [Key]
-        public long TaskId { get; set; }
+        public long? TaskId { get; set; }
 
         [Editable(true)]
         public string Subject { get; set; }

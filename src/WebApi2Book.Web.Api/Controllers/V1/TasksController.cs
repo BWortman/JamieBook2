@@ -63,12 +63,13 @@ namespace WebApi2Book.Web.Api.Controllers.V1
             return result;
         }
 
-        [Route("{updatedTask}", Name = "UpdateTaskRoute")]
+        [Route("{id:long}", Name = "UpdateTaskRoute")]
         [HttpPut]
         [HttpPatch]
-        public Task UpdateTask(HttpRequestMessage requestMessage, [FromBody] object updatedTask)
+        [ValidateTaskUpdateRequest]
+        public Task UpdateTask(HttpRequestMessage requestMessage, long id, [FromBody] object updatedTask)
         {
-            var task = _updateTaskMaintenanceProcessor.UpdateTask(updatedTask);
+            var task = _updateTaskMaintenanceProcessor.UpdateTask(id, updatedTask);
             return task;
         }
     }

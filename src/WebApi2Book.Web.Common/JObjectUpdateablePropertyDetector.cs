@@ -17,7 +17,7 @@ namespace WebApi2Book.Web.Common
         {
             var objectDataAsJObject = (JObject) objectContainingUpdatedData;
 
-            var propertyInfos = targetModelType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var propertyInfos = targetModelType.GetProperties();
 
             var modifiablePropertyInfos = propertyInfos
                 .Where(x =>

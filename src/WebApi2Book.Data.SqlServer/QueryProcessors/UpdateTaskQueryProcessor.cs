@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿// UpdateTaskQueryProcessor.cs
+// Copyright Jamie Kurtz, Brian Wortman 2014.
+
+using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using NHibernate;
-using NHibernate.Util;
-using WebApi2Book.Common;
-using WebApi2Book.Common.Security;
 using WebApi2Book.Data.Entities;
 using WebApi2Book.Data.Exceptions;
+using PropertyValueMapType = System.Collections.Generic.Dictionary<string, object>;
 
 namespace WebApi2Book.Data.SqlServer.QueryProcessors
 {
@@ -19,7 +19,17 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
             _session = session;
         }
 
-        public Task GetUpdatedTask(long taskId, Dictionary<string, object> updatedPropertyValueMap)
+        /// <summary>
+        /// Updates the specified task.
+        /// </summary>
+        /// <param name="taskId">Uniquely identifies the Task to update.</param>
+        /// <param name="updatedPropertyValueMap">
+        /// Associates names of updated properties to the corresponding new values. Note that the
+        /// "Assignees" property value must either be null (to remove all assignees) or an
+        /// enumerable of User Ids (type long).
+        /// </param>
+        /// <returns>The updated task.</returns>
+        public Task GetUpdatedTask(long taskId, PropertyValueMapType updatedPropertyValueMap)
         {
             var task = _session.Get<Task>(taskId);
             if (task == null)
@@ -27,36 +37,43 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
                 throw new RootObjectNotFoundException("Task not found");
             }
 
-            var propertyInfos = typeof(Task).GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            var propertyInfos = typeof (Task).GetProperties();
             foreach (var propertyValuePair in updatedPropertyValueMap)
             {
-                if (propertyValuePair.Key == "Assignees")
+                switch (propertyValuePair.Key)
                 {
-                    task.Users.Clear();
-                    var userIds = propertyValuePair.Value as IEnumerable<long>;
-                    if (userIds != null)
-                    {
-                        foreach (var userId in userIds)
-                        {
-                            var user = _session.Get<User>(userId);
-                            if (user == null)
-                            {
-                                throw new ChildObjectNotFoundException("User not found");
-                            }
-
-                            task.Users.Add(user);
-                        }       
-                    }
-                }
-                else
-                {
-                    propertyInfos.Single(x => x.Name == propertyValuePair.Key).SetValue(task, propertyValuePair.Value);
+                    case "Assignees":
+                        var userIds = propertyValuePair.Value as IEnumerable<long>;
+                        UpdateTaskUsers(task, userIds);
+                        break;
+                    default:
+                        propertyInfos.Single(x => x.Name == propertyValuePair.Key)
+                            .SetValue(task, propertyValuePair.Value);
+                        break;
                 }
             }
 
             _session.SaveOrUpdate(task);
 
             return task;
+        }
+
+        public virtual void UpdateTaskUsers(Task task, IEnumerable<long> userIds)
+        {
+            task.Users.Clear();
+            if (userIds != null)
+            {
+                foreach (var userId in userIds)
+                {
+                    var user = _session.Get<User>(userId);
+                    if (user == null)
+                    {
+                        throw new ChildObjectNotFoundException("User not found");
+                    }
+
+                    task.Users.Add(user);
+                }
+            }
         }
     }
 }

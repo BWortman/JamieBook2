@@ -187,6 +187,7 @@
     <Compile Include="MaintenanceProcessing\ItemCreatedActionResult.cs" />
     <Compile Include="MaintenanceProcessing\IUpdateTaskMaintenanceProcessor.cs" />
     <Compile Include="MaintenanceProcessing\UpdateTaskMaintenanceProcessor.cs" />
+    <Compile Include="MaintenanceProcessing\ValidateAccountUpdateRequestAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

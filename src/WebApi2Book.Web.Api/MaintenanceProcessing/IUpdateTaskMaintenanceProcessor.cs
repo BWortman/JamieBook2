@@ -7,6 +7,6 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
 {
     public interface IUpdateTaskMaintenanceProcessor
     {
-        Task UpdateTask(object taskFragment);
+        Task UpdateTask(long taskId, object taskFragment);
     }
 }
