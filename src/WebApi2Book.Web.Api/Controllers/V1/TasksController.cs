@@ -1,8 +1,10 @@
 ﻿// TasksController.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebApi2Book.Data.SqlServer.QueryProcessors;
 using WebApi2Book.Web.Api.InquiryProcessing;
 using WebApi2Book.Web.Api.MaintenanceProcessing;
 using WebApi2Book.Web.Api.Models;
@@ -18,6 +20,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
     {
         private readonly IAddTaskMaintenanceProcessor _addTaskMaintenanceProcessor;
         private readonly IAllTasksInquiryProcessor _allTasksInquiryProcessor;
+        private readonly IDeleteTaskQueryProcessor _deleteTaskQueryProcessor;
         private readonly IPagedDataRequestFactory _pagedDataRequestFactory;
         private readonly ITaskByIdInquiryProcessor _taskByIdInquiryProcessor;
         private readonly IUpdateTaskMaintenanceProcessor _updateTaskMaintenanceProcessor;
@@ -26,13 +29,15 @@ namespace WebApi2Book.Web.Api.Controllers.V1
             IAllTasksInquiryProcessor allTasksInquiryProcessor,
             ITaskByIdInquiryProcessor taskByIdInquiryProcessor,
             IAddTaskMaintenanceProcessor addTaskMaintenanceProcessor,
-            IUpdateTaskMaintenanceProcessor updateTaskMaintenanceProcessor)
+            IUpdateTaskMaintenanceProcessor updateTaskMaintenanceProcessor,
+            IDeleteTaskQueryProcessor deleteTaskQueryProcessor)
         {
             _pagedDataRequestFactory = pagedDataRequestFactory;
             _allTasksInquiryProcessor = allTasksInquiryProcessor;
             _taskByIdInquiryProcessor = taskByIdInquiryProcessor;
             _addTaskMaintenanceProcessor = addTaskMaintenanceProcessor;
             _updateTaskMaintenanceProcessor = updateTaskMaintenanceProcessor;
+            _deleteTaskQueryProcessor = deleteTaskQueryProcessor;
         }
 
         [Route("", Name = "GetTasksRoute")]
@@ -71,6 +76,14 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         {
             var task = _updateTaskMaintenanceProcessor.UpdateTask(id, updatedTask);
             return task;
+        }
+
+        [Route("{id:long}", Name = "DeleteTaskRoute")]
+        [HttpDelete]
+        public HttpResponseMessage DeleteTask(long id)
+        {
+            _deleteTaskQueryProcessor.DeleteTask(id);
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
     }
 }

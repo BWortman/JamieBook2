@@ -60,9 +60,11 @@
     <Compile Include="QueryProcessors\AllStatusesQueryProcessor.cs" />
     <Compile Include="QueryProcessors\AllTasksQueryProcessor.cs" />
     <Compile Include="QueryProcessors\AllUsersQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\DeleteTaskQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IAddTaskQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IAllTasksQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IAllUsersQueryProcessor.cs" />
+    <Compile Include="QueryProcessors\IDeleteTaskQueryProcessor.cs" />
     <Compile Include="QueryProcessors\ITaskByIdQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IUpdateTaskQueryProcessor.cs" />
     <Compile Include="QueryProcessors\IUserByIdQueryProcessor.cs" />

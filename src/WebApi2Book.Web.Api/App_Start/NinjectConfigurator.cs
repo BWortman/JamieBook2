@@ -84,6 +84,7 @@ namespace WebApi2Book.Web.Api
             container.Bind<ITaskByIdInquiryProcessor>().To<TaskByIdInquiryProcessor>().InRequestScope();
             container.Bind<ITaskByIdQueryProcessor>().To<TaskByIdQueryProcessor>().InRequestScope();
             container.Bind<ITaskLinkService>().To<TaskLinkService>().InRequestScope();
+            container.Bind<IDeleteTaskQueryProcessor>().To<DeleteTaskQueryProcessor>();
         }
 
         private void ConfigureAutoMapper(IKernel container)
