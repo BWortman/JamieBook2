@@ -145,6 +145,7 @@
     <Compile Include="AutoMappingConfiguration\UserToUserEntityAutoMapperTypeConfigurator.cs" />
     <Compile Include="Controllers\V1\StatusesController.cs" />
     <Compile Include="Controllers\V1\TasksController.cs" />
+    <Compile Include="Controllers\V1\TaskWorkflowController.cs" />
     <Compile Include="Controllers\V1\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -184,8 +185,10 @@
     <Compile Include="LinkServices\TaskLinkService.cs" />
     <Compile Include="LinkServices\UserLinkService.cs" />
     <Compile Include="MaintenanceProcessing\IAddTaskMaintenanceProcessor.cs" />
+    <Compile Include="MaintenanceProcessing\IStartTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\ItemCreatedActionResult.cs" />
     <Compile Include="MaintenanceProcessing\IUpdateTaskMaintenanceProcessor.cs" />
+    <Compile Include="MaintenanceProcessing\StartTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\UpdateTaskMaintenanceProcessor.cs" />
     <Compile Include="MaintenanceProcessing\ValidateAccountUpdateRequestAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
