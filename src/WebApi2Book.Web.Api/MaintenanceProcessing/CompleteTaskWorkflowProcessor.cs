@@ -1,4 +1,4 @@
-﻿// StartTaskMaintenanceProcessor.cs
+﻿// CompleteTaskWorkflowProcessor.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using WebApi2Book.Common;
@@ -10,7 +10,7 @@ using WebApi2Book.Web.Api.Models;
 
 namespace WebApi2Book.Web.Api.MaintenanceProcessing
 {
-    public class StartTaskWorkflowProcessor : IStartTaskWorkflowProcessor
+    public class CompleteTaskWorkflowProcessor : ICompleteTaskWorkflowProcessor
     {
         private readonly IAutoMapper _autoMapper;
         private readonly ITaskByIdQueryProcessor _taskByIdQueryProcessor;
@@ -18,7 +18,7 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
         private readonly IDateTime _dateTime;
         private readonly IUpdateTaskStatusQueryProcessor _updateTaskStatusQueryProcessor;
 
-        public StartTaskWorkflowProcessor(ITaskByIdQueryProcessor taskByIdQueryProcessor,
+        public CompleteTaskWorkflowProcessor(ITaskByIdQueryProcessor taskByIdQueryProcessor,
             IUpdateTaskStatusQueryProcessor updateTaskStatusQueryProcessor, IAutoMapper autoMapper,
             ITaskLinkService taskLinkService, IDateTime dateTime)
         {
@@ -29,7 +29,7 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
             _dateTime = dateTime;
         }
 
-        public Task StartTask(long taskId)
+        public Task CompleteTask(long taskId)
         {
             var taskEntity = _taskByIdQueryProcessor.GetTask(taskId);
             if (taskEntity == null)
@@ -38,13 +38,13 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
             }
 
             // Simulate some workflow logic...
-            if (taskEntity.Status.Name != "Not Started")
+            if (taskEntity.Status.Name != "In Progress")
             {
-                throw new BusinessRuleViolationException("Incorrect task status. Expected status of 'Not Started'.");
+                throw new BusinessRuleViolationException("Incorrect task status. Expected status of 'In Progress'.");
             }
 
-            taskEntity.StartDate = _dateTime.UtcNow;
-            _updateTaskStatusQueryProcessor.UpdateTaskStatus(taskEntity, "In Progress");
+            taskEntity.DateCompleted = _dateTime.UtcNow;
+            _updateTaskStatusQueryProcessor.UpdateTaskStatus(taskEntity, "Completed");
 
             var task = _autoMapper.Map<Task>(taskEntity);
 

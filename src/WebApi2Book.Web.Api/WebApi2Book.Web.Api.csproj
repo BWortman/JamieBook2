@@ -184,10 +184,14 @@
     <Compile Include="LinkServices\CommonLinkService.cs" />
     <Compile Include="LinkServices\TaskLinkService.cs" />
     <Compile Include="LinkServices\UserLinkService.cs" />
+    <Compile Include="MaintenanceProcessing\CompleteTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\IAddTaskMaintenanceProcessor.cs" />
+    <Compile Include="MaintenanceProcessing\ICompleteTaskWorkflowProcessor.cs" />
+    <Compile Include="MaintenanceProcessing\IReactivateTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\IStartTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\ItemCreatedActionResult.cs" />
     <Compile Include="MaintenanceProcessing\IUpdateTaskMaintenanceProcessor.cs" />
+    <Compile Include="MaintenanceProcessing\ReactivateTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\StartTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\UpdateTaskMaintenanceProcessor.cs" />
     <Compile Include="MaintenanceProcessing\ValidateAccountUpdateRequestAttribute.cs" />

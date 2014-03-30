@@ -1,4 +1,4 @@
-﻿// StartTaskMaintenanceProcessor.cs
+﻿// ReactivateTaskWorkflowProcessor.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using WebApi2Book.Common;
@@ -10,26 +10,24 @@ using WebApi2Book.Web.Api.Models;
 
 namespace WebApi2Book.Web.Api.MaintenanceProcessing
 {
-    public class StartTaskWorkflowProcessor : IStartTaskWorkflowProcessor
+    public class ReactivateTaskWorkflowProcessor : IReactivateTaskWorkflowProcessor
     {
         private readonly IAutoMapper _autoMapper;
         private readonly ITaskByIdQueryProcessor _taskByIdQueryProcessor;
         private readonly ITaskLinkService _taskLinkService;
-        private readonly IDateTime _dateTime;
         private readonly IUpdateTaskStatusQueryProcessor _updateTaskStatusQueryProcessor;
 
-        public StartTaskWorkflowProcessor(ITaskByIdQueryProcessor taskByIdQueryProcessor,
+        public ReactivateTaskWorkflowProcessor(ITaskByIdQueryProcessor taskByIdQueryProcessor,
             IUpdateTaskStatusQueryProcessor updateTaskStatusQueryProcessor, IAutoMapper autoMapper,
-            ITaskLinkService taskLinkService, IDateTime dateTime)
+            ITaskLinkService taskLinkService)
         {
             _taskByIdQueryProcessor = taskByIdQueryProcessor;
             _updateTaskStatusQueryProcessor = updateTaskStatusQueryProcessor;
             _autoMapper = autoMapper;
             _taskLinkService = taskLinkService;
-            _dateTime = dateTime;
         }
 
-        public Task StartTask(long taskId)
+        public Task ReactivateTask(long taskId)
         {
             var taskEntity = _taskByIdQueryProcessor.GetTask(taskId);
             if (taskEntity == null)
@@ -38,12 +36,12 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
             }
 
             // Simulate some workflow logic...
-            if (taskEntity.Status.Name != "Not Started")
+            if (taskEntity.Status.Name != "Completed")
             {
-                throw new BusinessRuleViolationException("Incorrect task status. Expected status of 'Not Started'.");
+                throw new BusinessRuleViolationException("Incorrect task status. Expected status of 'Completed'.");
             }
 
-            taskEntity.StartDate = _dateTime.UtcNow;
+            taskEntity.DateCompleted = null;
             _updateTaskStatusQueryProcessor.UpdateTaskStatus(taskEntity, "In Progress");
 
             var task = _autoMapper.Map<Task>(taskEntity);
