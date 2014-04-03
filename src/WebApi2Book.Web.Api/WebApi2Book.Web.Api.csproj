@@ -136,6 +136,7 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="AutoMappingConfiguration\NewTaskToTaskEntityAutoMapperTypeConfigurator.cs" />
+    <Compile Include="AutoMappingConfiguration\NewTaskV2ToTaskEntityAutoMapperTypeConfigurator.cs" />
     <Compile Include="AutoMappingConfiguration\StatusEntityToStatusAutoMapperTypeConfigurator.cs" />
     <Compile Include="AutoMappingConfiguration\StatusToStatusEntityAutoMapperTypeConfigurator.cs" />
     <Compile Include="AutoMappingConfiguration\TaskAssigneesResolver.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Controllers\V1\TasksController.cs" />
     <Compile Include="Controllers\V1\TaskWorkflowController.cs" />
     <Compile Include="Controllers\V1\UsersController.cs" />
+    <Compile Include="Controllers\V2\TasksController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -184,8 +186,10 @@
     <Compile Include="LinkServices\CommonLinkService.cs" />
     <Compile Include="LinkServices\TaskLinkService.cs" />
     <Compile Include="LinkServices\UserLinkService.cs" />
+    <Compile Include="MaintenanceProcessing\AddTaskMaintenanceProcessorV2.cs" />
     <Compile Include="MaintenanceProcessing\CompleteTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\IAddTaskMaintenanceProcessor.cs" />
+    <Compile Include="MaintenanceProcessing\IAddTaskMaintenanceProcessorV2.cs" />
     <Compile Include="MaintenanceProcessing\ICompleteTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\IReactivateTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\IStartTaskWorkflowProcessor.cs" />

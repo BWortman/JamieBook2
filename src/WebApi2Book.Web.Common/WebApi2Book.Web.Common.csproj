@@ -94,7 +94,9 @@
     <Compile Include="ICurrentSessionContextAdapter.cs" />
     <Compile Include="IUpdateablePropertyDetector.cs" />
     <Compile Include="JObjectUpdateablePropertyDetector.cs" />
+    <Compile Include="NamespaceHttpControllerSelector.cs" />
     <Compile Include="Routing\ApiVersion1RoutePrefixAttribute.cs" />
+    <Compile Include="Routing\ApiVersion2RoutePrefixAttribute.cs" />
     <Compile Include="Routing\ApiVersionConstraint.cs" />
     <Compile Include="ErrorHandling\GlobalExceptionHandler.cs" />
     <Compile Include="NinjectDependencyResolver.cs" />
