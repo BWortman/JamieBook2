@@ -43,7 +43,7 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
                 throw new BusinessRuleViolationException("Incorrect task status. Expected status of 'In Progress'.");
             }
 
-            taskEntity.DateCompleted = _dateTime.UtcNow;
+            taskEntity.CompletedDate = _dateTime.UtcNow;
             _updateTaskStatusQueryProcessor.UpdateTaskStatus(taskEntity, "Completed");
 
             var task = _autoMapper.Map<Task>(taskEntity);

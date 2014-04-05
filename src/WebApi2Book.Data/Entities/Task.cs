@@ -13,7 +13,7 @@ namespace WebApi2Book.Data.Entities
         public virtual string Subject { get; set; }
         public virtual DateTime? StartDate { get; set; }
         public virtual DateTime? DueDate { get; set; }
-        public virtual DateTime? DateCompleted { get; set; }
+        public virtual DateTime? CompletedDate { get; set; }
         public virtual Status Status { get; set; }
         public virtual DateTime CreatedDate { get; set; }
         public virtual User CreatedBy { get; set; }

@@ -24,10 +24,10 @@ namespace WebApi2Book.Web.Api.Models
         public DateTime? DueDate { get; set; }
 
         [Editable(false)]
-        public DateTime? DateCompleted { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         [Editable(false)]
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? CompletedDate { get; set; }
 
         [Editable(false)]
         public Status Status { get; set; }
