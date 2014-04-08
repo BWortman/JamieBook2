@@ -6,6 +6,7 @@ using WebApi2Book.Web.Api.MaintenanceProcessing;
 using WebApi2Book.Web.Api.Models;
 using WebApi2Book.Web.Common;
 using WebApi2Book.Web.Common.Routing;
+using WebApi2Book.Web.Common.Security;
 
 namespace WebApi2Book.Web.Api.Controllers.V1
 {
@@ -40,6 +41,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
             return task;
         }
 
+        [UserAudit]
         [Route("taskReactivations/{id:long}", Name = "ReactivateTaskRoute")]
         public Task ReactivateTask(long id)
         {
