@@ -27,25 +27,25 @@ namespace WebApi2Book.Web.Api.Controllers.V1
             _reactivateTaskWorkflowProcessor = reactivateTaskWorkflowProcessor;
         }
 
-        [Route("taskActivations/{id:long}", Name = "StartTaskRoute")]
-        public Task StartTask(long id)
+        [Route("tasks/{taskId:long}/activations", Name = "StartTaskRoute")]
+        public Task StartTask(long taskId)
         {
-            var task = _startTaskWorkflowProcessor.StartTask(id);
+            var task = _startTaskWorkflowProcessor.StartTask(taskId);
             return task;
         }
 
-        [Route("taskCompletions/{id:long}", Name = "CompleteTaskRoute")]
-        public Task CompleteTask(long id)
+        [Route("tasks/{taskId:long}/completions", Name = "CompleteTaskRoute")]
+        public Task CompleteTask(long taskId)
         {
-            var task = _completeTaskWorkflowProcessor.CompleteTask(id);
+            var task = _completeTaskWorkflowProcessor.CompleteTask(taskId);
             return task;
         }
 
         [UserAudit]
-        [Route("taskReactivations/{id:long}", Name = "ReactivateTaskRoute")]
-        public Task ReactivateTask(long id)
+        [Route("tasks/{taskId:long}/reactivations", Name = "ReactivateTaskRoute")]
+        public Task ReactivateTask(long taskId)
         {
-            var task = _reactivateTaskWorkflowProcessor.ReactivateTask(id);
+            var task = _reactivateTaskWorkflowProcessor.ReactivateTask(taskId);
             return task;
         }
     }
