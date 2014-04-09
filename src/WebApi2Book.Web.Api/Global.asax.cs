@@ -32,6 +32,8 @@ namespace WebApi2Book.Web.Api
 
         private void RegisterHandlers()
         {
+            GlobalConfiguration.Configuration.MessageHandlers.Add(
+                new BasicAuthenticationMessageHandler(WebContainerManager.Get<ILogManager>()));
         }
 
         protected void Application_Error()

@@ -5,10 +5,11 @@
     <Members>
       <Field Name="_links" Hidden="true" />
       <Method Name="AddLink" Hidden="true" />
+      <Property Name="Location" Hidden="true" />
       <Method Name="ShouldSerializeLocation" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAgAAAEAAAQACAABIIQAAAAAAgAAgAACgAAAEAAAAA=</HashCode>
+      <HashCode>AAAgAAAECAAQACAABIIQAAAAAAgAAAAACgAAAEAAAAA=</HashCode>
       <FileName>Task.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -54,7 +55,7 @@
   <Class Name="WebApi2Book.Web.Api.Models.Link">
     <Position X="6.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAgAAAAAgAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAkAAAAAgAAAAAAAAAABAAAAAAAAAAAA=</HashCode>
       <FileName>Link.cs</FileName>
     </TypeIdentifier>
   </Class>
