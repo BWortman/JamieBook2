@@ -158,6 +158,7 @@
     <Compile Include="InquiryProcessing\AllUsersInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\PagedDataRequestFactory.cs" />
     <Compile Include="InquiryProcessing\IPagedDataRequestFactory.cs" />
+    <Compile Include="LegacyProcessing\LegacyAuthenticationMessageHandler.cs" />
     <Compile Include="MaintenanceProcessing\AddTaskMaintenanceProcessor.cs" />
     <Compile Include="InquiryProcessing\IAllTasksInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\IAllUsersInquiryProcessor.cs" />

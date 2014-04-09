@@ -42,9 +42,9 @@ namespace WebApi2Book.Web.Api
                 routeTemplate: "TeamTaskService/TeamTaskService.asmx",
                 defaults: null,
                 constraints: null,
-                handler: new LegacyMessageHandler()
+                handler: new LegacyAuthenticationMessageHandler(WebContainerManager.Get<ILogManager>())
                 {
-                    InnerHandler = new HttpControllerDispatcher(config)
+                    InnerHandler = new LegacyMessageHandler {InnerHandler = new HttpControllerDispatcher(config)}
                 });
 
             var constraintsResolver = new DefaultInlineConstraintResolver();
