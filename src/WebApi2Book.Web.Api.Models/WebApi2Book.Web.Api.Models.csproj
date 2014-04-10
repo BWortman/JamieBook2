@@ -53,6 +53,7 @@
     <Compile Include="Status.cs" />
     <Compile Include="StatusesInquiryResponse.cs" />
     <Compile Include="Task.cs" />
+    <Compile Include="TaskUsersInquiryResponse.cs" />
     <Compile Include="User.cs" />
     <Compile Include="PagedDataInquiryResponse.cs" />
   </ItemGroup>

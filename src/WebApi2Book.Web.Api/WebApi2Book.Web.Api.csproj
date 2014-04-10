@@ -147,6 +147,7 @@
     <Compile Include="AutoMappingConfiguration\UserToUserEntityAutoMapperTypeConfigurator.cs" />
     <Compile Include="Controllers\V1\StatusesController.cs" />
     <Compile Include="Controllers\V1\TasksController.cs" />
+    <Compile Include="Controllers\V1\TaskUsersController.cs" />
     <Compile Include="Controllers\V1\TaskWorkflowController.cs" />
     <Compile Include="Controllers\V1\UsersController.cs" />
     <Compile Include="Controllers\V2\TasksController.cs" />
@@ -156,8 +157,12 @@
     <Compile Include="InquiryProcessing\AllStatusesInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\AllTasksInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\AllUsersInquiryProcessor.cs" />
+    <Compile Include="InquiryProcessing\ITaskUsersInquiryProcessor.cs" />
+    <Compile Include="LinkServices\ITaskUsersLinkService.cs" />
     <Compile Include="InquiryProcessing\PagedDataRequestFactory.cs" />
     <Compile Include="InquiryProcessing\IPagedDataRequestFactory.cs" />
+    <Compile Include="InquiryProcessing\TaskUsersInquiryProcessor.cs" />
+    <Compile Include="LinkServices\TaskUsersLinkService.cs" />
     <Compile Include="LegacyProcessing\LegacyAuthenticationMessageHandler.cs" />
     <Compile Include="MaintenanceProcessing\AddTaskMaintenanceProcessor.cs" />
     <Compile Include="InquiryProcessing\IAllTasksInquiryProcessor.cs" />

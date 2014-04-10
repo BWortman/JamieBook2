@@ -39,7 +39,7 @@ namespace WebApi2Book.Web.Api.LinkServices
 
         public virtual void AddSelfLink(Task task)
         {
-            task.AddLink(GetSelfLink(task));
+            task.AddLink(GetSelfLink(task.TaskId.Value));
         }
 
         public virtual Link GetAllTasksLink()
@@ -56,12 +56,12 @@ namespace WebApi2Book.Web.Api.LinkServices
             task.AddLink(GetAllTasksLink());
         }
 
-        public virtual Link GetSelfLink(Task task)
+        public virtual Link GetSelfLink(long taskId)
         {
             var path =
                 string.Format(
                     Constants.CommonRoutingDefinitions.DelimitedVersionedApiRouteBaseFormatString + "tasks/{1}",
-                    _userSession.ApiVersionInUse, task.TaskId);
+                    _userSession.ApiVersionInUse, taskId);
             var link = _commonLinkService.GetLink(path, Constants.CommonLinkRelValues.Self, HttpMethod.Get);
             return link;
         }
