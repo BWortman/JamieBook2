@@ -9,7 +9,7 @@ namespace WebApi2Book.Web.Api.Models
 {
     public class Task : ILinkContaining, ILocationContaining
     {
-        private readonly List<Link> _links = new List<Link>();
+        private List<Link> _links;
 
         [Key]
         public long? TaskId { get; set; }
@@ -36,14 +36,15 @@ namespace WebApi2Book.Web.Api.Models
         public List<User> Assignees { get; set; }
 
         [Editable(false)]
-        public IEnumerable<Link> Links
+        public List<Link> Links
         {
-            get { return _links; }
+            get { return _links ?? (_links = new List<Link>()); }
+            set { _links = value; }
         }
 
         public void AddLink(Link link)
         {
-            _links.Add(link);
+            Links.Add(link);
         }
 
         [Editable(false)]

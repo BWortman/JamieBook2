@@ -33,7 +33,7 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
 
             var task = _autoMapper.Map<Task>(taskEntity);
 
-            var inquiryResponse = new TaskUsersInquiryResponse(taskId) {Users = task.Assignees};
+            var inquiryResponse = new TaskUsersInquiryResponse {TaskId = taskId, Users = task.Assignees};
 
             _taskUsersLinkService.AddLinks(inquiryResponse);
 

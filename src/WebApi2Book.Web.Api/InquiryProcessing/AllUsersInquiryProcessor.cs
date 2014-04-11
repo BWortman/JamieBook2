@@ -34,7 +34,7 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
         {
             var queryResult = _queryProcessor.GetUsers(requestInfo);
 
-            var users = GetUsers(queryResult.QueriedItems);
+            var users = GetUsers(queryResult.QueriedItems).ToList();
 
             var inquiryResponse = new PagedUserDataInquiryResponse
             {

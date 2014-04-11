@@ -7,7 +7,7 @@ namespace WebApi2Book.Web.Api.Models
 {
     public class User : ILinkContaining
     {
-        private readonly List<Link> _links = new List<Link>();
+        private List<Link> _links;
 
         public long UserId { get; set; }
         public string Username { get; set; }
@@ -15,14 +15,15 @@ namespace WebApi2Book.Web.Api.Models
         public string Lastname { get; set; }
         //public string Email { get; set; }
 
-        public IEnumerable<Link> Links
+        public List<Link> Links
         {
-            get { return _links; }
+            get { return _links ?? (_links = new List<Link>()); }
+            set { _links = value; }
         }
 
         public void AddLink(Link link)
         {
-            _links.Add(link);
+            Links.Add(link);
         }
     }
 }

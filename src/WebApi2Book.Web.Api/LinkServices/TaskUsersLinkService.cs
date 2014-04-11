@@ -1,7 +1,7 @@
 // TaskUsersLinkService.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using NHibernate.Linq;
+using System.Collections.Generic;
 using WebApi2Book.Web.Api.Models;
 
 namespace WebApi2Book.Web.Api.LinkServices
@@ -21,7 +21,7 @@ namespace WebApi2Book.Web.Api.LinkServices
         {
             var taskDetailLink = _taskLinkService.GetSelfLink(inquiryResponse.TaskId);
             taskDetailLink.Rel = "Task";
-            inquiryResponse.Links = new[] {taskDetailLink};
+            inquiryResponse.Links = new List<Link> {taskDetailLink};
 
             inquiryResponse.Users.ForEach(x => _userLinkService.AddSelfLink(x));
         }

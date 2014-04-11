@@ -30,7 +30,7 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
 
             var statuses = GetStatuses(statusEntities);
             var allLink = _statusLinkService.GetAllStatusesLink();
-            var inquiryResponse = new StatusesInquiryResponse(statuses, new[] {allLink});
+            var inquiryResponse = new StatusesInquiryResponse{ Statuses = statuses.ToList(), Links = new List<Link> {allLink}};
 
             return inquiryResponse;
         }

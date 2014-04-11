@@ -7,15 +7,10 @@ namespace WebApi2Book.Web.Api.Models
 {
     public class TaskUsersInquiryResponse
     {
-        public TaskUsersInquiryResponse(long taskId)
-        {
-            TaskId = taskId;
-        }
+        public long TaskId { get; set; }
 
-        public long TaskId { get; private set; }
-
-        public IEnumerable<User> Users { get; set; }
-        public IEnumerable<Link> Links { get; set; }
+        public List<User> Users { get; set; }
+        public List<Link> Links { get; set; }
 
         public bool ShouldSerializeTaskId()
         {

@@ -35,7 +35,7 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
         {
             var queryResult = _queryProcessor.GetTasks(requestInfo);
 
-            var tasks = GetTasks(queryResult.QueriedItems);
+            var tasks = GetTasks(queryResult.QueriedItems).ToList();
 
             var inquiryResponse = new PagedTaskDataInquiryResponse
             {

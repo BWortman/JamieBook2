@@ -7,11 +7,10 @@ namespace WebApi2Book.Web.Api.Models
 {
     public class PagedDataInquiryResponse<T> : IPageLinkContaining
     {
-        private readonly List<Link> _links = new List<Link>();
+        private List<T> _items;
+        private List<Link> _links;
 
-        private IEnumerable<T> _items;
-
-        public IEnumerable<T> Items
+        public List<T> Items
         {
             get { return _items ?? (_items = new List<T>()); }
             set { _items = value; }
@@ -19,14 +18,15 @@ namespace WebApi2Book.Web.Api.Models
 
         public int PageSize { get; set; }
 
-        public IEnumerable<Link> Links
+        public List<Link> Links
         {
-            get { return _links; }
+            get { return _links ?? (_links = new List<Link>()); }
+            set { _links = value; }
         }
 
         public void AddLink(Link link)
         {
-            _links.Add(link);
+            Links.Add(link);
         }
 
         public int PageNumber { get; set; }
