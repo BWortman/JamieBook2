@@ -32,7 +32,7 @@ namespace WebApi2Book.Web.Api.Models
         [Editable(false)]
         public Status Status { get; set; }
 
-        [Editable(true)]
+        [Editable(false)]
         public List<User> Assignees { get; set; }
 
         [Editable(false)]

@@ -1,7 +1,6 @@
 ﻿// UpdateTaskMaintenanceProcessor.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using WebApi2Book.Common.TypeMapping;
@@ -43,7 +42,7 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
 
             var updatedPropertyValueMap = GetPropertyValueMap(taskFragmentAsJObject, taskContainingUpdateData);
 
-            var updatedTaskEntity = _queryProcessor.GetUpdatedTask(taskId,updatedPropertyValueMap);
+            var updatedTaskEntity = _queryProcessor.GetUpdatedTask(taskId, updatedPropertyValueMap);
 
             var task = _autoMapper.Map<Task>(updatedTaskEntity);
 
@@ -62,17 +61,7 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
             foreach (var propertyName in namesOfModifiedProperties)
             {
                 var propertyValue = propertyInfos.Single(x => x.Name == propertyName).GetValue(taskContainingUpdateData);
-                switch (propertyName)
-                {
-                    case "Assignees":
-                        var users = propertyValue as IEnumerable<User>;
-                        var userIds = users == null ? null : users.Select(x => x.UserId);
-                        updatedPropertyValueMap.Add(propertyName, userIds);
-                        break;
-                    default:
-                        updatedPropertyValueMap.Add(propertyName, propertyValue);
-                        break;
-                }
+                updatedPropertyValueMap.Add(propertyName, propertyValue);
             }
 
             return updatedPropertyValueMap;

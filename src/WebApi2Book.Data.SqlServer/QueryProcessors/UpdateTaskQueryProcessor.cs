@@ -24,9 +24,7 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
         /// </summary>
         /// <param name="taskId">Uniquely identifies the Task to update.</param>
         /// <param name="updatedPropertyValueMap">
-        ///     Associates names of updated properties to the corresponding new values. Note that the
-        ///     "Assignees" property value must either be null (to remove all assignees) or an
-        ///     enumerable of User Ids (type long).
+        ///     Associates names of updated properties to the corresponding new values.
         /// </param>
         /// <returns>The updated task.</returns>
         public Task GetUpdatedTask(long taskId, PropertyValueMapType updatedPropertyValueMap)
@@ -36,17 +34,8 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
             var propertyInfos = typeof (Task).GetProperties();
             foreach (var propertyValuePair in updatedPropertyValueMap)
             {
-                switch (propertyValuePair.Key)
-                {
-                    case "Assignees":
-                        var userIds = propertyValuePair.Value as IEnumerable<long>;
-                        UpdateTaskUsers(task, userIds, false);
-                        break;
-                    default:
-                        propertyInfos.Single(x => x.Name == propertyValuePair.Key)
-                            .SetValue(task, propertyValuePair.Value);
-                        break;
-                }
+                propertyInfos.Single(x => x.Name == propertyValuePair.Key)
+                    .SetValue(task, propertyValuePair.Value);
             }
 
             _session.SaveOrUpdate(task);
