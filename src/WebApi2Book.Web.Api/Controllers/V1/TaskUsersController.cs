@@ -34,26 +34,26 @@ namespace WebApi2Book.Web.Api.Controllers.V1
 
         [Route("{taskId:long}/users", Name = "ReplaceTaskUsersRoute")]
         [HttpPut]
-        public TaskUsersInquiryResponse UpdateTaskUsers(long taskId, [FromBody] IEnumerable<long> userIds)
+        public Task UpdateTaskUsers(long taskId, [FromBody] IEnumerable<long> userIds)
         {
-            var users = _taskUsersMaintenanceProcessor.ReplaceTaskUsers(taskId, userIds);
-            return users;
+            var task = _taskUsersMaintenanceProcessor.ReplaceTaskUsers(taskId, userIds);
+            return task;
         }
 
         [Route("{taskId:long}/users", Name = "DeleteTaskUsersRoute")]
         [HttpDelete]
-        public TaskUsersInquiryResponse DeleteTaskUsers(long taskId)
+        public Task DeleteTaskUsers(long taskId)
         {
-            var users = _taskUsersMaintenanceProcessor.DeleteTaskUsers(taskId);
-            return users;
+            var task = _taskUsersMaintenanceProcessor.DeleteTaskUsers(taskId);
+            return task;
         }
 
         [Route("{taskId:long}/users/{userId:long}", Name = "AddTaskUserRoute")]
         [HttpPut]
-        public TaskUsersInquiryResponse AddTaskUsers(long taskId, long userId)
+        public Task AddTaskUsers(long taskId, long userId)
         {
-            var users = _taskUsersMaintenanceProcessor.AddTaskUser(taskId, userId);
-            return users;
+            var task = _taskUsersMaintenanceProcessor.AddTaskUser(taskId, userId);
+            return task;
         }
     }
 }

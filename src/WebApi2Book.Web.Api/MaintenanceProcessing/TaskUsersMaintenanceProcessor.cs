@@ -13,43 +13,39 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
     {
         private readonly IAutoMapper _autoMapper;
         private readonly IUpdateTaskQueryProcessor _queryProcessor;
-        private readonly ITaskUsersLinkService _taskUsersLinkService;
+        private readonly ITaskLinkService _taskLinkService;
 
         public TaskUsersMaintenanceProcessor(IUpdateTaskQueryProcessor queryProcessor, IAutoMapper autoMapper,
-            ITaskUsersLinkService taskUsersLinkService)
+            ITaskLinkService taskLinkService)
         {
             _queryProcessor = queryProcessor;
             _autoMapper = autoMapper;
-            _taskUsersLinkService = taskUsersLinkService;
+            _taskLinkService = taskLinkService;
         }
 
-        public TaskUsersInquiryResponse ReplaceTaskUsers(long taskId, IEnumerable<long> userIds)
+        public Task ReplaceTaskUsers(long taskId, IEnumerable<long> userIds)
         {
             var taskEntity = _queryProcessor.ReplaceTaskUsers(taskId, userIds);
-            return CreateResponse(taskEntity);
+            return CreateTaskResponse(taskEntity);
         }
 
-        public TaskUsersInquiryResponse DeleteTaskUsers(long taskId)
+        public Task DeleteTaskUsers(long taskId)
         {
             var taskEntity = _queryProcessor.DeleteTaskUsers(taskId);
-            return CreateResponse(taskEntity);
+            return CreateTaskResponse(taskEntity);
         }
 
-        public TaskUsersInquiryResponse AddTaskUser(long taskId, long userId)
+        public Task AddTaskUser(long taskId, long userId)
         {
             var taskEntity = _queryProcessor.AddTaskUser(taskId, userId);
-            return CreateResponse(taskEntity);
+            return CreateTaskResponse(taskEntity);
         }
 
-        public virtual TaskUsersInquiryResponse CreateResponse(Data.Entities.Task taskEntity)
+        public virtual Task CreateTaskResponse(Data.Entities.Task taskEntity)
         {
             var task = _autoMapper.Map<Task>(taskEntity);
-
-            var inquiryResponse = new TaskUsersInquiryResponse(taskEntity.TaskId) { Users = task.Assignees };
-
-            _taskUsersLinkService.AddLinks(inquiryResponse);
-
-            return inquiryResponse;
+            _taskLinkService.AddLinks(task);
+            return task;
         }
     }
 }
