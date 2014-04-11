@@ -9,5 +9,6 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
     public interface ITaskUsersMaintenanceProcessor
     {
         TaskUsersInquiryResponse ReplaceTaskUsers(long taskId, IEnumerable<long> userIds);
+        TaskUsersInquiryResponse DeleteTaskUsers(long taskId);
     }
 }

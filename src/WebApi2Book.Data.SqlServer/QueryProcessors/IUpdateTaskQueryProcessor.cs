@@ -25,5 +25,6 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
         Task GetUpdatedTask(long taskId, PropertyValueMapType updatedPropertyValueMap);
 
         Task ReplaceTaskUsers(long taskId, IEnumerable<long> userIds);
+        Task DeleteTaskUsers(long taskId);
     }
 }

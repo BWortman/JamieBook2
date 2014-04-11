@@ -26,10 +26,20 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
         public TaskUsersInquiryResponse ReplaceTaskUsers(long taskId, IEnumerable<long> userIds)
         {
             var taskEntity = _queryProcessor.ReplaceTaskUsers(taskId, userIds);
+            return CreateResponse(taskEntity);
+        }
 
+        public TaskUsersInquiryResponse DeleteTaskUsers(long taskId)
+        {
+            var taskEntity = _queryProcessor.DeleteTaskUsers(taskId);
+            return CreateResponse(taskEntity);
+        }
+
+        public virtual TaskUsersInquiryResponse CreateResponse(Data.Entities.Task taskEntity)
+        {
             var task = _autoMapper.Map<Task>(taskEntity);
 
-            var inquiryResponse = new TaskUsersInquiryResponse(taskId) {Users = task.Assignees};
+            var inquiryResponse = new TaskUsersInquiryResponse(taskEntity.TaskId) { Users = task.Assignees };
 
             _taskUsersLinkService.AddLinks(inquiryResponse);
 

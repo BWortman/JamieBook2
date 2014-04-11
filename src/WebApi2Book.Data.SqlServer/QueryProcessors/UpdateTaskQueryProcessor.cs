@@ -31,11 +31,7 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
         /// <returns>The updated task.</returns>
         public Task GetUpdatedTask(long taskId, PropertyValueMapType updatedPropertyValueMap)
         {
-            var task = _session.Get<Task>(taskId);
-            if (task == null)
-            {
-                throw new RootObjectNotFoundException("Task not found");
-            }
+            var task = GetValidTask(taskId);
 
             var propertyInfos = typeof (Task).GetProperties();
             foreach (var propertyValuePair in updatedPropertyValueMap)
@@ -58,7 +54,7 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
             return task;
         }
 
-        public Task ReplaceTaskUsers(long taskId, IEnumerable<long> userIds)
+        public virtual Task GetValidTask(long taskId)
         {
             var task = _session.Get<Task>(taskId);
             if (task == null)
@@ -66,7 +62,25 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
                 throw new RootObjectNotFoundException("Task not found");
             }
 
+            return task;
+        }
+
+        public Task ReplaceTaskUsers(long taskId, IEnumerable<long> userIds)
+        {
+            var task = GetValidTask(taskId);
+
             UpdateTaskUsers(task, userIds);
+
+            _session.SaveOrUpdate(task);
+
+            return task;
+        }
+
+        public Task DeleteTaskUsers(long taskId)
+        {
+            var task = GetValidTask(taskId);
+
+            UpdateTaskUsers(task, null);
 
             _session.SaveOrUpdate(task);
 

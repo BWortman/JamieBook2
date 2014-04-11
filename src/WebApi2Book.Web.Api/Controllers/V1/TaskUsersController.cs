@@ -35,10 +35,17 @@ namespace WebApi2Book.Web.Api.Controllers.V1
 
         [Route("{taskId:long}/users", Name = "ReplaceTaskUsersRoute")]
         [HttpPut]
-        // TODO[ValidateTaskUsersUpdateRequest]
         public TaskUsersInquiryResponse UpdateTaskUsers(long taskId, [FromBody] IEnumerable<long> userIds)
         {
             var users = _taskUsersMaintenanceProcessor.ReplaceTaskUsers(taskId, userIds);
+            return users;
+        }
+
+        [Route("{taskId:long}/users", Name = "DeleteTaskUsersRoute")]
+        [HttpDelete]
+        public TaskUsersInquiryResponse DeleteTaskUsers(long taskId)
+        {
+            var users = _taskUsersMaintenanceProcessor.DeleteTaskUsers(taskId);
             return users;
         }
     }
