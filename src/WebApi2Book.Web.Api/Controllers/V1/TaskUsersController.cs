@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Web.Http;
-using NHibernate.Proxy;
 using WebApi2Book.Web.Api.InquiryProcessing;
 using WebApi2Book.Web.Api.MaintenanceProcessing;
 using WebApi2Book.Web.Api.Models;
@@ -46,6 +45,14 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         public TaskUsersInquiryResponse DeleteTaskUsers(long taskId)
         {
             var users = _taskUsersMaintenanceProcessor.DeleteTaskUsers(taskId);
+            return users;
+        }
+
+        [Route("{taskId:long}/users/{userId:long}", Name = "AddTaskUserRoute")]
+        [HttpPut]
+        public TaskUsersInquiryResponse AddTaskUsers(long taskId, long userId)
+        {
+            var users = _taskUsersMaintenanceProcessor.AddTaskUser(taskId, userId);
             return users;
         }
     }

@@ -35,6 +35,12 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
             return CreateResponse(taskEntity);
         }
 
+        public TaskUsersInquiryResponse AddTaskUser(long taskId, long userId)
+        {
+            var taskEntity = _queryProcessor.AddTaskUser(taskId, userId);
+            return CreateResponse(taskEntity);
+        }
+
         public virtual TaskUsersInquiryResponse CreateResponse(Data.Entities.Task taskEntity)
         {
             var task = _autoMapper.Map<Task>(taskEntity);

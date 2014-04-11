@@ -20,13 +20,13 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
         }
 
         /// <summary>
-        /// Updates the specified task.
+        ///     Updates the specified task.
         /// </summary>
         /// <param name="taskId">Uniquely identifies the Task to update.</param>
         /// <param name="updatedPropertyValueMap">
-        /// Associates names of updated properties to the corresponding new values. Note that the
-        /// "Assignees" property value must either be null (to remove all assignees) or an
-        /// enumerable of User Ids (type long).
+        ///     Associates names of updated properties to the corresponding new values. Note that the
+        ///     "Assignees" property value must either be null (to remove all assignees) or an
+        ///     enumerable of User Ids (type long).
         /// </param>
         /// <returns>The updated task.</returns>
         public Task GetUpdatedTask(long taskId, PropertyValueMapType updatedPropertyValueMap)
@@ -40,7 +40,7 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
                 {
                     case "Assignees":
                         var userIds = propertyValuePair.Value as IEnumerable<long>;
-                        UpdateTaskUsers(task, userIds);
+                        UpdateTaskUsers(task, userIds, false);
                         break;
                     default:
                         propertyInfos.Single(x => x.Name == propertyValuePair.Key)
@@ -48,6 +48,39 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
                         break;
                 }
             }
+
+            _session.SaveOrUpdate(task);
+
+            return task;
+        }
+
+        public Task ReplaceTaskUsers(long taskId, IEnumerable<long> userIds)
+        {
+            var task = GetValidTask(taskId);
+
+            UpdateTaskUsers(task, userIds, false);
+
+            _session.SaveOrUpdate(task);
+
+            return task;
+        }
+
+        public Task DeleteTaskUsers(long taskId)
+        {
+            var task = GetValidTask(taskId);
+
+            UpdateTaskUsers(task, null, false);
+
+            _session.SaveOrUpdate(task);
+
+            return task;
+        }
+
+        public Task AddTaskUser(long taskId, long userId)
+        {
+            var task = GetValidTask(taskId);
+
+            UpdateTaskUsers(task, new[] {userId}, true);
 
             _session.SaveOrUpdate(task);
 
@@ -65,31 +98,13 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
             return task;
         }
 
-        public Task ReplaceTaskUsers(long taskId, IEnumerable<long> userIds)
+        public virtual void UpdateTaskUsers(Task task, IEnumerable<long> userIds, bool appendToExisting)
         {
-            var task = GetValidTask(taskId);
+            if (!appendToExisting)
+            {
+                task.Users.Clear();
+            }
 
-            UpdateTaskUsers(task, userIds);
-
-            _session.SaveOrUpdate(task);
-
-            return task;
-        }
-
-        public Task DeleteTaskUsers(long taskId)
-        {
-            var task = GetValidTask(taskId);
-
-            UpdateTaskUsers(task, null);
-
-            _session.SaveOrUpdate(task);
-
-            return task;
-        }
-
-        public virtual void UpdateTaskUsers(Task task, IEnumerable<long> userIds)
-        {
-            task.Users.Clear();
             if (userIds != null)
             {
                 foreach (var userId in userIds)
