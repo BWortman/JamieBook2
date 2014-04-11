@@ -200,10 +200,12 @@
     <Compile Include="MaintenanceProcessing\ICompleteTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\IReactivateTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\IStartTaskWorkflowProcessor.cs" />
+    <Compile Include="MaintenanceProcessing\ITaskUsersMaintenanceProcessor.cs" />
     <Compile Include="MaintenanceProcessing\ItemCreatedActionResult.cs" />
     <Compile Include="MaintenanceProcessing\IUpdateTaskMaintenanceProcessor.cs" />
     <Compile Include="MaintenanceProcessing\ReactivateTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\StartTaskWorkflowProcessor.cs" />
+    <Compile Include="MaintenanceProcessing\TaskUsersMaintenanceProcessor.cs" />
     <Compile Include="MaintenanceProcessing\UpdateTaskMaintenanceProcessor.cs" />
     <Compile Include="MaintenanceProcessing\ValidateAccountUpdateRequestAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

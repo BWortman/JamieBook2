@@ -91,6 +91,7 @@ namespace WebApi2Book.Web.Api
             container.Bind<ITaskLinkService>().To<TaskLinkService>().InRequestScope();
 
             container.Bind<ITaskUsersInquiryProcessor>().To<TaskUsersInquiryProcessor>().InRequestScope();
+            container.Bind<ITaskUsersMaintenanceProcessor>().To<TaskUsersMaintenanceProcessor>().InRequestScope();
             container.Bind<ITaskUsersLinkService>().To<TaskUsersLinkService>().InRequestScope();
 
             container.Bind<IAddTaskMaintenanceProcessorV2>().To<AddTaskMaintenanceProcessorV2>().InRequestScope();

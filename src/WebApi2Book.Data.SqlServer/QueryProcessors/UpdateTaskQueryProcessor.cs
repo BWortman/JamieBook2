@@ -58,6 +58,21 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
             return task;
         }
 
+        public Task ReplaceTaskUsers(long taskId, IEnumerable<long> userIds)
+        {
+            var task = _session.Get<Task>(taskId);
+            if (task == null)
+            {
+                throw new RootObjectNotFoundException("Task not found");
+            }
+
+            UpdateTaskUsers(task, userIds);
+
+            _session.SaveOrUpdate(task);
+
+            return task;
+        }
+
         public virtual void UpdateTaskUsers(Task task, IEnumerable<long> userIds)
         {
             task.Users.Clear();
