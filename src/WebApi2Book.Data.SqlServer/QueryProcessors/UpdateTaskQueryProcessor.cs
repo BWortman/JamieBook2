@@ -87,6 +87,20 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
             return task;
         }
 
+        public Task DeleteTaskUser(long taskId, long userId)
+        {
+            var task = GetValidTask(taskId);
+
+            var user = task.Users.FirstOrDefault(x => x.UserId == userId);
+            if (user != null)
+            {
+                task.Users.Remove(user);
+                _session.SaveOrUpdate(task);
+            }
+
+            return task;
+        }
+
         public virtual Task GetValidTask(long taskId)
         {
             var task = _session.Get<Task>(taskId);
@@ -98,6 +112,17 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
             return task;
         }
 
+        public virtual User GetValidUser(long userId)
+        {
+            var user = _session.Get<User>(userId);
+            if (user == null)
+            {
+                throw new ChildObjectNotFoundException("User not found");
+            }
+
+            return user;
+        }
+
         public virtual void UpdateTaskUsers(Task task, IEnumerable<long> userIds, bool appendToExisting)
         {
             if (!appendToExisting)
@@ -107,14 +132,8 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
 
             if (userIds != null)
             {
-                foreach (var userId in userIds)
+                foreach (var user in userIds.Select(GetValidUser))
                 {
-                    var user = _session.Get<User>(userId);
-                    if (user == null)
-                    {
-                        throw new ChildObjectNotFoundException("User not found");
-                    }
-
                     task.Users.Add(user);
                 }
             }

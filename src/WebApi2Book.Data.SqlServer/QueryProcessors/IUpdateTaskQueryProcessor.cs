@@ -27,5 +27,6 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
         Task ReplaceTaskUsers(long taskId, IEnumerable<long> userIds);
         Task DeleteTaskUsers(long taskId);
         Task AddTaskUser(long taskId, long userId);
+        Task DeleteTaskUser(long taskId, long userId);
     }
 }

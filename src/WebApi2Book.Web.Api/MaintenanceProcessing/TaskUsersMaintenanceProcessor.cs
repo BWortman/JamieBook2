@@ -41,6 +41,12 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
             return CreateTaskResponse(taskEntity);
         }
 
+        public Task DeleteTaskUser(long taskId, long userId)
+        {
+            var taskEntity = _queryProcessor.DeleteTaskUser(taskId, userId);
+            return CreateTaskResponse(taskEntity);
+        }
+
         public virtual Task CreateTaskResponse(Data.Entities.Task taskEntity)
         {
             var task = _autoMapper.Map<Task>(taskEntity);

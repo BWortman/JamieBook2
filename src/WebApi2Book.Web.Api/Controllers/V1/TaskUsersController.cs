@@ -34,7 +34,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
 
         [Route("{taskId:long}/users", Name = "ReplaceTaskUsersRoute")]
         [HttpPut]
-        public Task UpdateTaskUsers(long taskId, [FromBody] IEnumerable<long> userIds)
+        public Task ReplaceTaskUsers(long taskId, [FromBody] IEnumerable<long> userIds)
         {
             var task = _taskUsersMaintenanceProcessor.ReplaceTaskUsers(taskId, userIds);
             return task;
@@ -50,9 +50,17 @@ namespace WebApi2Book.Web.Api.Controllers.V1
 
         [Route("{taskId:long}/users/{userId:long}", Name = "AddTaskUserRoute")]
         [HttpPut]
-        public Task AddTaskUsers(long taskId, long userId)
+        public Task AddTaskUser(long taskId, long userId)
         {
             var task = _taskUsersMaintenanceProcessor.AddTaskUser(taskId, userId);
+            return task;
+        }
+
+        [Route("{taskId:long}/users/{userId:long}", Name = "DeleteTaskUserRoute")]
+        [HttpDelete]
+        public Task DeleteTaskUser(long taskId, long userId)
+        {
+            var task = _taskUsersMaintenanceProcessor.DeleteTaskUser(taskId, userId);
             return task;
         }
     }
