@@ -3,6 +3,7 @@
 	[Firstname] [nvarchar](50) NOT NULL,
 	[Lastname] [nvarchar](50) NOT NULL,
 	[ts] [rowversion] NOT NULL, 
+    [Username] NVARCHAR(50) NOT NULL, 
     CONSTRAINT [PK_User] PRIMARY KEY ([UserId])
 )
 go
