@@ -7,7 +7,7 @@ namespace WebApi2Book.Web.Api.Models
 {
     public interface ILinkContaining
     {
-        List<Link> Links { get; }
+        List<Link> Links { get; set; }
         void AddLink(Link link);
     }
 }

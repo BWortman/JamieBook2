@@ -63,7 +63,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         {
             var task = _addTaskMaintenanceProcessor.AddTask(newTask);
 
-            var result = new ItemCreatedActionResult(requestMessage, task);
+            var result = new TaskCreatedActionResult(requestMessage, task);
 
             return result;
         }

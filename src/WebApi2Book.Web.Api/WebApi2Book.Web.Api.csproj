@@ -201,7 +201,7 @@
     <Compile Include="MaintenanceProcessing\IReactivateTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\IStartTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\ITaskUsersMaintenanceProcessor.cs" />
-    <Compile Include="MaintenanceProcessing\ItemCreatedActionResult.cs" />
+    <Compile Include="MaintenanceProcessing\TaskCreatedActionResult.cs" />
     <Compile Include="MaintenanceProcessing\IUpdateTaskMaintenanceProcessor.cs" />
     <Compile Include="MaintenanceProcessing\ReactivateTaskWorkflowProcessor.cs" />
     <Compile Include="MaintenanceProcessing\StartTaskWorkflowProcessor.cs" />
