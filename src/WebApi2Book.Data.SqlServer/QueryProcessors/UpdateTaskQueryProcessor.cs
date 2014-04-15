@@ -123,7 +123,10 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
             {
                 foreach (var user in userIds.Select(GetValidUser))
                 {
-                    task.Users.Add(user);
+                    if (!task.Users.Contains(user))
+                    {
+                        task.Users.Add(user);
+                    }
                 }
             }
         }
