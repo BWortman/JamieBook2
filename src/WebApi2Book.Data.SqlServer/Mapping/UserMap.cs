@@ -12,8 +12,7 @@ namespace WebApi2Book.Data.SqlServer.Mapping
             Id(x => x.UserId);
             Map(x => x.Firstname).Not.Nullable();
             Map(x => x.Lastname).Not.Nullable();
-            //Map(x => x.Email).Nullable();
-            //Map(x => x.Username).Not.Nullable();
+            Map(x => x.Username).Not.Nullable();
         }
     }
 }

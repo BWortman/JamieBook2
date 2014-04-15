@@ -12,8 +12,7 @@ namespace WebApi2Book.Web.Api.AutoMappingConfiguration
         public void Configure()
         {
             Mapper.CreateMap<User, Models.User>()
-                .ForMember(opt => opt.Links, x => x.Ignore())
-                .ForMember(opt => opt.Username, x => x.Ignore());
+                .ForMember(opt => opt.Links, x => x.Ignore());
         }
     }
 }
