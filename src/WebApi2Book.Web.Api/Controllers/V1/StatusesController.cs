@@ -14,12 +14,9 @@ namespace WebApi2Book.Web.Api.Controllers.V1
     public class StatusesController : ApiController
     {
         private readonly IAllStatusesInquiryProcessor _allStatusesInquiryProcessor;
-        private readonly IStatusByIdInquiryProcessor _statusByIdInquiryProcessor;
 
-        public StatusesController(IStatusByIdInquiryProcessor statusByIdInquiryProcessor,
-            IAllStatusesInquiryProcessor allStatusesInquiryProcessor)
+        public StatusesController(IAllStatusesInquiryProcessor allStatusesInquiryProcessor)
         {
-            _statusByIdInquiryProcessor = statusByIdInquiryProcessor;
             _allStatusesInquiryProcessor = allStatusesInquiryProcessor;
         }
 
@@ -28,13 +25,6 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         {
             var inquiryResponse = _allStatusesInquiryProcessor.GetStatuses();
             return inquiryResponse;
-        }
-
-        [Route("{id:long}", Name = "GetStatusRoute")]
-        public Status GetStatus(long id)
-        {
-            var status = _statusByIdInquiryProcessor.GetStatus(id);
-            return status;
         }
     }
 }

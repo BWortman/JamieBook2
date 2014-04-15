@@ -7,9 +7,6 @@ namespace WebApi2Book.Web.Api.LinkServices
 {
     public interface IStatusLinkService
     {
-        void AddLinks(Status status);
         Link GetAllStatusesLink();
-        void AddAllStatusesLink(Status status);
-        void AddSelfLink(Status status);
     }
 }
