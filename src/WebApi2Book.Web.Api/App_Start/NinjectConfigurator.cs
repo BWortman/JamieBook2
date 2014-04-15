@@ -172,10 +172,10 @@ namespace WebApi2Book.Web.Api
             container.Bind<ILegacyMessageTypeFormatter>().To<LegacyMessageTypeFormatter>().InSingletonScope();
 
             container.Bind<ILegacyMessageProcessingStrategy>()
-                .To<GetStatusesMessageProcessingStrategy>()
+                .To<GetTasksMessageProcessingStrategy>()
                 .InRequestScope();
             container.Bind<ILegacyMessageProcessingStrategy>()
-                .To<GetStatusByIdMessageProcessingStrategy>()
+                .To<GetTaskByIdMessageProcessingStrategy>()
                 .InRequestScope();
         }
 

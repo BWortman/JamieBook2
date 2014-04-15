@@ -13,5 +13,6 @@ namespace WebApi2Book.Data
 
         public int PageNumber { get; private set; }
         public int PageSize { get; private set; }
+        public bool ExcludeLinks { get; set; }
     }
 }

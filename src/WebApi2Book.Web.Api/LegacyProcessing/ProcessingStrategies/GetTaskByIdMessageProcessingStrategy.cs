@@ -1,4 +1,4 @@
-﻿// GetStatusByIdMessageProcessingStrategy.cs
+﻿// GetTaskByIdMessageProcessingStrategy.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System.IO;
@@ -12,11 +12,11 @@ using WebApi2Book.Web.Api.Models;
 
 namespace WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies
 {
-    public class GetStatusByIdMessageProcessingStrategy : ILegacyMessageProcessingStrategy
+    public class GetTaskByIdMessageProcessingStrategy : ILegacyMessageProcessingStrategy
     {
-        private readonly IStatusByIdInquiryProcessor _inquiryProcessor;
+        private readonly ITaskByIdInquiryProcessor _inquiryProcessor;
 
-        public GetStatusByIdMessageProcessingStrategy(IStatusByIdInquiryProcessor inquiryProcessor)
+        public GetTaskByIdMessageProcessingStrategy(ITaskByIdInquiryProcessor inquiryProcessor)
         {
             _inquiryProcessor = inquiryProcessor;
         }
@@ -25,12 +25,12 @@ namespace WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies
         {
             XNamespace ns = Constants.DefaultLegacyNamespace;
 
-            var id = PrimitiveTypeParser.Parse<long>(operationElement.Descendants(ns + "statusId").First().Value);
+            var id = PrimitiveTypeParser.Parse<long>(operationElement.Descendants(ns + "taskId").First().Value);
 
-            Status modelStatus = null;
+            Task task = null;
             try
             {
-                modelStatus = _inquiryProcessor.GetStatus(id);
+                task = _inquiryProcessor.GetTask(id);
             }
             catch (RootObjectNotFoundException)
             {
@@ -39,20 +39,20 @@ namespace WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies
 
             using (var stream = new MemoryStream())
             {
-                var serializer = new XmlSerializer(typeof (Status), Constants.DefaultLegacyNamespace);
-                serializer.Serialize(stream, modelStatus);
+                var serializer = new XmlSerializer(typeof (Task), Constants.DefaultLegacyNamespace);
+                serializer.Serialize(stream, task);
 
                 stream.Seek(0, 0);
 
                 var xDocument = XDocument.Load(stream, LoadOptions.None);
-                var statusAsXElement = xDocument.Descendants(ns + "Status");
-                return statusAsXElement.Elements();
+                var taskAsXElement = xDocument.Descendants(ns + "Task");
+                return taskAsXElement.Elements();
             }
         }
 
         public bool CanProcess(string operationName)
         {
-            return operationName == "GetStatusById";
+            return operationName == "GetTaskById";
         }
     }
 }

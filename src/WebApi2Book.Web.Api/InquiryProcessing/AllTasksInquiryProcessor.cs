@@ -45,7 +45,10 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
                 PageSize = requestInfo.PageSize
             };
 
-            AddLinksToInquiryResponse(inquiryResponse);
+            if (!requestInfo.ExcludeLinks)
+            {
+                AddLinksToInquiryResponse(inquiryResponse);
+            }
 
             return inquiryResponse;
         }

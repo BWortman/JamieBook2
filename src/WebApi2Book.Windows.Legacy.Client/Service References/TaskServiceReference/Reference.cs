@@ -15,6 +15,174 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Task", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class Task : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private System.Nullable<long> TaskIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SubjectField;
+        
+        private System.Nullable<System.DateTime> StartDateField;
+        
+        private System.Nullable<System.DateTime> DueDateField;
+        
+        private System.Nullable<System.DateTime> CreatedDateField;
+        
+        private System.Nullable<System.DateTime> CompletedDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Status StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApi2Book.Windows.Legacy.Client.TaskServiceReference.User[] AssigneesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Link[] LinksField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public System.Nullable<long> TaskId {
+            get {
+                return this.TaskIdField;
+            }
+            set {
+                if ((this.TaskIdField.Equals(value) != true)) {
+                    this.TaskIdField = value;
+                    this.RaisePropertyChanged("TaskId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string Subject {
+            get {
+                return this.SubjectField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SubjectField, value) != true)) {
+                    this.SubjectField = value;
+                    this.RaisePropertyChanged("Subject");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public System.Nullable<System.DateTime> StartDate {
+            get {
+                return this.StartDateField;
+            }
+            set {
+                if ((this.StartDateField.Equals(value) != true)) {
+                    this.StartDateField = value;
+                    this.RaisePropertyChanged("StartDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public System.Nullable<System.DateTime> DueDate {
+            get {
+                return this.DueDateField;
+            }
+            set {
+                if ((this.DueDateField.Equals(value) != true)) {
+                    this.DueDateField = value;
+                    this.RaisePropertyChanged("DueDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
+        public System.Nullable<System.DateTime> CreatedDate {
+            get {
+                return this.CreatedDateField;
+            }
+            set {
+                if ((this.CreatedDateField.Equals(value) != true)) {
+                    this.CreatedDateField = value;
+                    this.RaisePropertyChanged("CreatedDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=5)]
+        public System.Nullable<System.DateTime> CompletedDate {
+            get {
+                return this.CompletedDateField;
+            }
+            set {
+                if ((this.CompletedDateField.Equals(value) != true)) {
+                    this.CompletedDateField = value;
+                    this.RaisePropertyChanged("CompletedDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Status Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.User[] Assignees {
+            get {
+                return this.AssigneesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AssigneesField, value) != true)) {
+                    this.AssigneesField = value;
+                    this.RaisePropertyChanged("Assignees");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Link[] Links {
+            get {
+                return this.LinksField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LinksField, value) != true)) {
+                    this.LinksField = value;
+                    this.RaisePropertyChanged("Links");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Status", Namespace="http://tempuri.org/")]
     [System.SerializableAttribute()]
     public partial class Status : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -28,6 +196,9 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
         private string NameField;
         
         private int OrdinalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Link[] LinksField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -78,6 +249,204 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Link[] Links {
+            get {
+                return this.LinksField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LinksField, value) != true)) {
+                    this.LinksField = value;
+                    this.RaisePropertyChanged("Links");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private long UserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UsernameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FirstnameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LastnameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Link[] LinksField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public long UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Username {
+            get {
+                return this.UsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
+                    this.UsernameField = value;
+                    this.RaisePropertyChanged("Username");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string Firstname {
+            get {
+                return this.FirstnameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FirstnameField, value) != true)) {
+                    this.FirstnameField = value;
+                    this.RaisePropertyChanged("Firstname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string Lastname {
+            get {
+                return this.LastnameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LastnameField, value) != true)) {
+                    this.LastnameField = value;
+                    this.RaisePropertyChanged("Lastname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Link[] Links {
+            get {
+                return this.LinksField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LinksField, value) != true)) {
+                    this.LinksField = value;
+                    this.RaisePropertyChanged("Links");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Link", Namespace="http://tempuri.org/")]
+    [System.SerializableAttribute()]
+    public partial class Link : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string HrefField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MethodField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Rel {
+            get {
+                return this.RelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RelField, value) != true)) {
+                    this.RelField = value;
+                    this.RaisePropertyChanged("Rel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string Href {
+            get {
+                return this.HrefField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.HrefField, value) != true)) {
+                    this.HrefField = value;
+                    this.RaisePropertyChanged("Href");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string Method {
+            get {
+                return this.MethodField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MethodField, value) != true)) {
+                    this.MethodField = value;
+                    this.RaisePropertyChanged("Method");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -92,34 +461,34 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="TaskServiceReference.TeamTaskServiceSoap")]
     public interface TeamTaskServiceSoap {
         
-        // CODEGEN: Generating message contract since element name GetStatusesResult from namespace http://tempuri.org/ is not marked nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStatuses", ReplyAction="*")]
-        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponse GetStatuses(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest request);
+        // CODEGEN: Generating message contract since element name GetTasksResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTasks", ReplyAction="*")]
+        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksResponse GetTasks(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStatuses", ReplyAction="*")]
-        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponse> GetStatusesAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTasks", ReplyAction="*")]
+        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksResponse> GetTasksAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksRequest request);
         
-        // CODEGEN: Generating message contract since element name GetStatusByIdResult from namespace http://tempuri.org/ is not marked nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStatusById", ReplyAction="*")]
-        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponse GetStatusById(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest request);
+        // CODEGEN: Generating message contract since element name GetTaskByIdResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTaskById", ReplyAction="*")]
+        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdResponse GetTaskById(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetStatusById", ReplyAction="*")]
-        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponse> GetStatusByIdAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest request);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GetTaskById", ReplyAction="*")]
+        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdResponse> GetTaskByIdAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetStatusesRequest {
+    public partial class GetTasksRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetStatuses", Namespace="http://tempuri.org/", Order=0)]
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetTasks", Namespace="http://tempuri.org/", Order=0)]
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksRequestBody Body;
         
-        public GetStatusesRequest() {
+        public GetTasksRequest() {
         }
         
-        public GetStatusesRequest(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequestBody Body) {
+        public GetTasksRequest(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -128,9 +497,9 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute()]
-    public partial class GetStatusesRequestBody {
+    public partial class GetTasksRequestBody {
         
-        public GetStatusesRequestBody() {
+        public GetTasksRequestBody() {
         }
     }
     
@@ -138,15 +507,15 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetStatusesResponse {
+    public partial class GetTasksResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetStatusesResponse", Namespace="http://tempuri.org/", Order=0)]
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetTasksResponse", Namespace="http://tempuri.org/", Order=0)]
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksResponseBody Body;
         
-        public GetStatusesResponse() {
+        public GetTasksResponse() {
         }
         
-        public GetStatusesResponse(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponseBody Body) {
+        public GetTasksResponse(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -155,16 +524,16 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class GetStatusesResponseBody {
+    public partial class GetTasksResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Status[] GetStatusesResult;
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Task[] GetTasksResult;
         
-        public GetStatusesResponseBody() {
+        public GetTasksResponseBody() {
         }
         
-        public GetStatusesResponseBody(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Status[] GetStatusesResult) {
-            this.GetStatusesResult = GetStatusesResult;
+        public GetTasksResponseBody(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Task[] GetTasksResult) {
+            this.GetTasksResult = GetTasksResult;
         }
     }
     
@@ -172,15 +541,15 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetStatusByIdRequest {
+    public partial class GetTaskByIdRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetStatusById", Namespace="http://tempuri.org/", Order=0)]
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetTaskById", Namespace="http://tempuri.org/", Order=0)]
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdRequestBody Body;
         
-        public GetStatusByIdRequest() {
+        public GetTaskByIdRequest() {
         }
         
-        public GetStatusByIdRequest(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequestBody Body) {
+        public GetTaskByIdRequest(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -189,16 +558,16 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class GetStatusByIdRequestBody {
+    public partial class GetTaskByIdRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
-        public int statusId;
+        public int taskId;
         
-        public GetStatusByIdRequestBody() {
+        public GetTaskByIdRequestBody() {
         }
         
-        public GetStatusByIdRequestBody(int statusId) {
-            this.statusId = statusId;
+        public GetTaskByIdRequestBody(int taskId) {
+            this.taskId = taskId;
         }
     }
     
@@ -206,15 +575,15 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetStatusByIdResponse {
+    public partial class GetTaskByIdResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetStatusByIdResponse", Namespace="http://tempuri.org/", Order=0)]
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetTaskByIdResponse", Namespace="http://tempuri.org/", Order=0)]
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdResponseBody Body;
         
-        public GetStatusByIdResponse() {
+        public GetTaskByIdResponse() {
         }
         
-        public GetStatusByIdResponse(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponseBody Body) {
+        public GetTaskByIdResponse(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -223,16 +592,16 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class GetStatusByIdResponseBody {
+    public partial class GetTaskByIdResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Status GetStatusByIdResult;
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Task GetTaskByIdResult;
         
-        public GetStatusByIdResponseBody() {
+        public GetTaskByIdResponseBody() {
         }
         
-        public GetStatusByIdResponseBody(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Status GetStatusByIdResult) {
-            this.GetStatusByIdResult = GetStatusByIdResult;
+        public GetTaskByIdResponseBody(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Task GetTaskByIdResult) {
+            this.GetTaskByIdResult = GetTaskByIdResult;
         }
     }
     
@@ -264,51 +633,51 @@ namespace WebApi2Book.Windows.Legacy.Client.TaskServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponse WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetStatuses(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest request) {
-            return base.Channel.GetStatuses(request);
+        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksResponse WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetTasks(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksRequest request) {
+            return base.Channel.GetTasks(request);
         }
         
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Status[] GetStatuses() {
-            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest();
-            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequestBody();
-            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponse retVal = ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetStatuses(inValue);
-            return retVal.Body.GetStatusesResult;
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponse> WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetStatusesAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest request) {
-            return base.Channel.GetStatusesAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesResponse> GetStatusesAsync() {
-            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequest();
-            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusesRequestBody();
-            return ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetStatusesAsync(inValue);
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Task[] GetTasks() {
+            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksRequest();
+            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksRequestBody();
+            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksResponse retVal = ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetTasks(inValue);
+            return retVal.Body.GetTasksResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponse WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetStatusById(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest request) {
-            return base.Channel.GetStatusById(request);
+        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksResponse> WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetTasksAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksRequest request) {
+            return base.Channel.GetTasksAsync(request);
         }
         
-        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Status GetStatusById(int statusId) {
-            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest();
-            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequestBody();
-            inValue.Body.statusId = statusId;
-            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponse retVal = ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetStatusById(inValue);
-            return retVal.Body.GetStatusByIdResult;
+        public System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksResponse> GetTasksAsync() {
+            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksRequest();
+            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTasksRequestBody();
+            return ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetTasksAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponse> WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetStatusByIdAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest request) {
-            return base.Channel.GetStatusByIdAsync(request);
+        WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdResponse WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetTaskById(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdRequest request) {
+            return base.Channel.GetTaskById(request);
         }
         
-        public System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdResponse> GetStatusByIdAsync(int statusId) {
-            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequest();
-            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetStatusByIdRequestBody();
-            inValue.Body.statusId = statusId;
-            return ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetStatusByIdAsync(inValue);
+        public WebApi2Book.Windows.Legacy.Client.TaskServiceReference.Task GetTaskById(int taskId) {
+            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdRequest();
+            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdRequestBody();
+            inValue.Body.taskId = taskId;
+            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdResponse retVal = ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetTaskById(inValue);
+            return retVal.Body.GetTaskByIdResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdResponse> WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap.GetTaskByIdAsync(WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdRequest request) {
+            return base.Channel.GetTaskByIdAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdResponse> GetTaskByIdAsync(int taskId) {
+            WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdRequest inValue = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdRequest();
+            inValue.Body = new WebApi2Book.Windows.Legacy.Client.TaskServiceReference.GetTaskByIdRequestBody();
+            inValue.Body.taskId = taskId;
+            return ((WebApi2Book.Windows.Legacy.Client.TaskServiceReference.TeamTaskServiceSoap)(this)).GetTaskByIdAsync(inValue);
         }
     }
 }

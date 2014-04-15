@@ -158,6 +158,7 @@
     <Compile Include="InquiryProcessing\AllTasksInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\AllUsersInquiryProcessor.cs" />
     <Compile Include="InquiryProcessing\ITaskUsersInquiryProcessor.cs" />
+    <Compile Include="LegacyProcessing\ProcessingStrategies\GetTaskByIdMessageProcessingStrategy.cs" />
     <Compile Include="LinkServices\ITaskUsersLinkService.cs" />
     <Compile Include="InquiryProcessing\PagedDataRequestFactory.cs" />
     <Compile Include="InquiryProcessing\IPagedDataRequestFactory.cs" />
@@ -182,8 +183,7 @@
     <Compile Include="LegacyProcessing\LegacyMessageProcessor.cs" />
     <Compile Include="LegacyProcessing\LegacyMessageTypeFormatter.cs" />
     <Compile Include="LegacyProcessing\LegacyResponse.cs" />
-    <Compile Include="LegacyProcessing\ProcessingStrategies\GetStatusesMessageProcessingStrategy.cs" />
-    <Compile Include="LegacyProcessing\ProcessingStrategies\GetStatusByIdMessageProcessingStrategy.cs" />
+    <Compile Include="LegacyProcessing\ProcessingStrategies\GetTasksMessageProcessingStrategy.cs" />
     <Compile Include="LegacyProcessing\ProcessingStrategies\ILegacyMessageProcessingStrategy.cs" />
     <Compile Include="LinkServices\ITaskLinkService.cs" />
     <Compile Include="LinkServices\IUserLinkService.cs" />

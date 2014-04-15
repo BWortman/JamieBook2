@@ -17,18 +17,18 @@ using WebApi2Book.Web.Api.Models;
 public class TeamTaskService : WebService
 {
     [WebMethod]
-    public Status[] GetStatuses()
+    public Task[] GetTasks()
     {
         return new[]
         {
-            new Status {StatusId = 1, Name = "status1", Ordinal = 1},
-            new Status {StatusId = 2, Name = "status2", Ordinal = 2}
+            new Task {TaskId = 1, Subject = "Fix printer."},
+            new Task {TaskId = 2, Subject = "Finish API design."}
         };
     }
 
     [WebMethod]
-    public Status GetStatusById(int statusId)
+    public Task GetTaskById(int taskId)
     {
-        return new Status {StatusId = statusId, Name = "status" + statusId, Ordinal = statusId};
+        return new Task {TaskId = taskId, Subject = "Topic #" + taskId};
     }
 }
