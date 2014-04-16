@@ -19,8 +19,14 @@ namespace WebApi2Book.Web.Api.LinkServices
             _userSession = userSession;
         }
 
-        public virtual Link GetLink(string path, string relValue, HttpMethod httpMethod)
+        public virtual Link GetLink(string pathFragment, string relValue, HttpMethod httpMethod)
         {
+            var path =
+                string.Concat(
+                    string.Format(
+                        Constants.CommonRoutingDefinitions.DelimitedVersionedApiRouteBaseFormatString,
+                        _userSession.ApiVersionInUse), pathFragment);
+
             var uriBuilder = new UriBuilder
             {
                 Scheme = _userSession.RequestUri.Scheme,
@@ -64,7 +70,8 @@ namespace WebApi2Book.Web.Api.LinkServices
             }
         }
 
-        public virtual void AddCurrentPageLink(IPageLinkContaining linkContainer, Uri versionedBaseUri, string pageQueryString)
+        public virtual void AddCurrentPageLink(IPageLinkContaining linkContainer, Uri versionedBaseUri,
+            string pageQueryString)
         {
             var currentPageUriBuilder = new UriBuilder(versionedBaseUri)
             {
@@ -73,7 +80,8 @@ namespace WebApi2Book.Web.Api.LinkServices
             linkContainer.AddLink(GetCurrentPageLink(currentPageUriBuilder.Uri));
         }
 
-        public virtual void AddPreviousPageLink(IPageLinkContaining linkContainer, Uri versionedBaseUri, string pageQueryString)
+        public virtual void AddPreviousPageLink(IPageLinkContaining linkContainer, Uri versionedBaseUri,
+            string pageQueryString)
         {
             var uriBuilder = new UriBuilder(versionedBaseUri)
             {
@@ -82,7 +90,8 @@ namespace WebApi2Book.Web.Api.LinkServices
             linkContainer.AddLink(GetPreviousPageLink(uriBuilder.Uri));
         }
 
-        public virtual void AddNextPageLink(IPageLinkContaining linkContainer, Uri versionedBaseUri, string pageQueryString)
+        public virtual void AddNextPageLink(IPageLinkContaining linkContainer, Uri versionedBaseUri,
+            string pageQueryString)
         {
             var uriBuilder = new UriBuilder(versionedBaseUri)
             {

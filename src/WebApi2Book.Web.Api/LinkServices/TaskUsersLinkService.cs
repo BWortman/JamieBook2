@@ -1,7 +1,6 @@
 // TaskUsersLinkService.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using System.Collections.Generic;
 using WebApi2Book.Web.Api.Models;
 
 namespace WebApi2Book.Web.Api.LinkServices
@@ -11,7 +10,8 @@ namespace WebApi2Book.Web.Api.LinkServices
         private readonly ITaskLinkService _taskLinkService;
         private readonly IUserLinkService _userLinkService;
 
-        public TaskUsersLinkService(ITaskLinkService taskLinkService, IUserLinkService userLinkService)
+        public TaskUsersLinkService(ITaskLinkService taskLinkService,
+            IUserLinkService userLinkService)
         {
             _taskLinkService = taskLinkService;
             _userLinkService = userLinkService;
@@ -21,7 +21,7 @@ namespace WebApi2Book.Web.Api.LinkServices
         {
             var taskDetailLink = _taskLinkService.GetSelfLink(inquiryResponse.TaskId);
             taskDetailLink.Rel = "Task";
-            inquiryResponse.Links = new List<Link> {taskDetailLink};
+            inquiryResponse.AddLink(taskDetailLink);
 
             inquiryResponse.Users.ForEach(x => _userLinkService.AddSelfLink(x));
         }
