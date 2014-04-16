@@ -21,10 +21,13 @@ namespace WebApi2Book.Web.Api.LinkServices
 
         public virtual Link GetLink(string pathFragment, string relValue, HttpMethod httpMethod)
         {
+            const string delimitedVersionedApiRouteBaseFormatString =
+                Constants.CommonRoutingDefinitions.ApiSegmentName + "/{0}/";
+
             var path =
                 string.Concat(
                     string.Format(
-                        Constants.CommonRoutingDefinitions.DelimitedVersionedApiRouteBaseFormatString,
+                        delimitedVersionedApiRouteBaseFormatString,
                         _userSession.ApiVersionInUse), pathFragment);
 
             var uriBuilder = new UriBuilder
@@ -49,7 +52,7 @@ namespace WebApi2Book.Web.Api.LinkServices
             string previousPageQueryString,
             string nextPageQueryString)
         {
-            var versionedBaseUri = GetVersionedBaseUri(_userSession.RequestUri);
+            var versionedBaseUri = _userSession.RequestUri.GetBaseUri();
 
             AddCurrentPageLink(linkContainer, versionedBaseUri, currentPageQueryString);
 
@@ -98,31 +101,6 @@ namespace WebApi2Book.Web.Api.LinkServices
                 Query = pageQueryString
             };
             linkContainer.AddLink(GetNextPageLink(uriBuilder.Uri));
-        }
-
-        public virtual Uri GetVersionedBaseUri(Uri uri)
-        {
-            var requestingBaseUriString = uri.GetBaseUri().AbsoluteUri;
-            var fullyDelimitedVersionSegment = string.Format("/{0}/", _userSession.ApiVersionInUse);
-            var versionSegmentStartIndex = requestingBaseUriString.IndexOf(fullyDelimitedVersionSegment,
-                StringComparison.Ordinal);
-
-            if (versionSegmentStartIndex < 0)
-            {
-                var fullyDelimitedApiSegmentName = string.Format("/{0}/",
-                    Constants.CommonRoutingDefinitions.ApiSegmentName);
-                var fullyDelimitedApiSegmentLength = fullyDelimitedApiSegmentName.Length;
-                var fullyDelimitedApiSegmentIndex = requestingBaseUriString.IndexOf(fullyDelimitedApiSegmentName,
-                    StringComparison.Ordinal);
-                var versionUri =
-                    string.Concat(
-                        requestingBaseUriString.Substring(0,
-                            fullyDelimitedApiSegmentIndex + fullyDelimitedApiSegmentLength - 1),
-                        fullyDelimitedVersionSegment,
-                        requestingBaseUriString.Substring(fullyDelimitedApiSegmentIndex + fullyDelimitedApiSegmentLength));
-                return new Uri(versionUri);
-            }
-            return uri.GetBaseUri();
         }
 
         public virtual Link GetCurrentPageLink(Uri uri)
