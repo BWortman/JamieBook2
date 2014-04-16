@@ -13,6 +13,6 @@ namespace WebApi2Book.Web.Api.LinkServices
             string previousPageQueryString,
             string nextPageQueryString);
 
-        Link GetLink(string path, string relValue, HttpMethod httpMethod);
+        Link GetLink(string pathFragment, string relValue, HttpMethod httpMethod);
     }
 }

@@ -30,12 +30,12 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
 
             var statuses = GetStatuses(statusEntities);
             var allLink = _statusLinkService.GetAllStatusesLink();
-            var inquiryResponse = new StatusesInquiryResponse{ Statuses = statuses.ToList(), Links = new List<Link> {allLink}};
+            var inquiryResponse = new StatusesInquiryResponse{ Statuses = statuses, Links = new List<Link> {allLink}};
 
             return inquiryResponse;
         }
 
-        public virtual IEnumerable<Status> GetStatuses(IEnumerable<Data.Entities.Status> statusEntities)
+        public virtual List<Status> GetStatuses(IEnumerable<Data.Entities.Status> statusEntities)
         {
             var statuses = statusEntities.Select(x => _autoMapper.Map<Status>(x)).ToList();
             return statuses;

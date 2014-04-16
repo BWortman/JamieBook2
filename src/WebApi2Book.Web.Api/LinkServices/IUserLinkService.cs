@@ -9,7 +9,6 @@ namespace WebApi2Book.Web.Api.LinkServices
     {
         void AddLinks(User user);
         Link GetAllUsersLink();
-        void AddAllUsersLink(User user);
         void AddSelfLink(User user);
     }
 }
