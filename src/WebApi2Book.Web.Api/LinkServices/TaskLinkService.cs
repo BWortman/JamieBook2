@@ -28,13 +28,15 @@ namespace WebApi2Book.Web.Api.LinkServices
         {
             AddSelfLink(task);
             AddAllTasksLink(task);
+
+            task.AddLink(_statusLinkService.GetAllStatusesLink());
+
             AddLinksToChildObjects(task);
         }
 
         public void AddLinksToChildObjects(Task task)
         {
             task.Assignees.ForEach(x => _userLinkService.AddSelfLink(x));
-            _statusLinkService.AddSelfLink(task.Status);
         }
 
         public virtual void AddSelfLink(Task task)

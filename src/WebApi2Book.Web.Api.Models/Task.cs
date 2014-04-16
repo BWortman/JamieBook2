@@ -4,10 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Xml.Serialization;
 
 namespace WebApi2Book.Web.Api.Models
 {
-    public class Task : ILinkContaining, ILocationContaining
+    public class Task : ILinkContaining
     {
         private List<Link> _links;
 
@@ -47,6 +48,7 @@ namespace WebApi2Book.Web.Api.Models
             Links.Add(link);
         }
 
+        [XmlIgnore]
         [Editable(false)]
         public Uri Location
         {

@@ -38,9 +38,6 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
         public virtual IEnumerable<Status> GetStatuses(IEnumerable<Data.Entities.Status> statusEntities)
         {
             var statuses = statusEntities.Select(x => _autoMapper.Map<Status>(x)).ToList();
-
-            statuses.ForEach(x => _statusLinkService.AddSelfLink(x));
-
             return statuses;
         }
     }

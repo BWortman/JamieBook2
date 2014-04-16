@@ -18,8 +18,8 @@ namespace WebApi2Book.Windows.Legacy.Client
     public partial class MainWindow : INotifyPropertyChanged
     {
         private bool _isProcessing;
-        private Status _status;
-        private int? _statusId;
+        private TaskServiceReference.Task _task;
+        private int? _taskId;
         private bool _useWebApi;
 
         public MainWindow()
@@ -27,35 +27,35 @@ namespace WebApi2Book.Windows.Legacy.Client
             InitializeComponent();
             DataContext = this;
 
-            GetStatusesCommand = new DelegateCommand(GetStatuses, AllowFetch);
-            GetStatusCommand = new DelegateCommand(GetStatus, AllowIndividialStatusFetch);
+            GetTasksCommand = new DelegateCommand(GetTasks, AllowFetch);
+            GetTaskCommand = new DelegateCommand(GetTask, AllowIndividialTaskFetch);
 
-            Statuses = new ObservableCollection<Status>();
+            Tasks = new ObservableCollection<TaskServiceReference.Task>();
         }
 
-        public ObservableCollection<Status> Statuses { get; private set; }
+        public ObservableCollection<TaskServiceReference.Task> Tasks { get; private set; }
 
-        public DelegateCommand GetStatusesCommand { get; private set; }
-        public DelegateCommand GetStatusCommand { get; private set; }
+        public DelegateCommand GetTasksCommand { get; private set; }
+        public DelegateCommand GetTaskCommand { get; private set; }
 
-        public Status Status
+        public TaskServiceReference.Task Task
         {
-            get { return _status; }
+            get { return _task; }
             set
             {
-                _status = value;
-                OnPropertyChanged("Status");
+                _task = value;
+                OnPropertyChanged("Task");
             }
         }
 
-        public int? StatusId
+        public int? TaskId
         {
-            get { return _statusId; }
+            get { return _taskId; }
             set
             {
-                _statusId = value;
-                OnPropertyChanged("StatusId");
-                GetStatusCommand.RaiseCanExecuteChanged();
+                _taskId = value;
+                OnPropertyChanged("TaskId");
+                GetTaskCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -77,16 +77,16 @@ namespace WebApi2Book.Windows.Legacy.Client
                 _isProcessing = value;
                 OnPropertyChanged("IsProcessing");
 
-                GetStatusCommand.RaiseCanExecuteChanged();
-                GetStatusesCommand.RaiseCanExecuteChanged();
+                GetTaskCommand.RaiseCanExecuteChanged();
+                GetTasksCommand.RaiseCanExecuteChanged();
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
 
-        private bool AllowIndividialStatusFetch()
+        private bool AllowIndividialTaskFetch()
         {
-            return AllowFetch() && StatusId.HasValue;
+            return AllowFetch() && TaskId.HasValue;
         }
 
         private bool AllowFetch()
@@ -103,15 +103,15 @@ namespace WebApi2Book.Windows.Legacy.Client
             MessageBox.Show(formattedErrorMessage, "System Message");
         }
 
-        public async void GetStatuses()
+        public async void GetTasks()
         {
             IsProcessing = true;
 
             try
             {
-                Statuses.Clear();
-                var result = await Task.Run(() => GetStatusesAsync());
-                result.Body.GetStatusesResult.ToList().ForEach(x => Statuses.Add(x));
+                Tasks.Clear();
+                var result = await System.Threading.Tasks.Task.Run(() => GetTasksAsync());
+                result.Body.GetTasksResult.ToList().ForEach(x => Tasks.Add(x));
             }
             catch (Exception e)
             {
@@ -123,15 +123,15 @@ namespace WebApi2Book.Windows.Legacy.Client
             }
         }
 
-        private async void GetStatus()
+        private async void GetTask()
         {
             IsProcessing = true;
 
             try
             {
-                Status = null;
-                var result = await Task.Run(() => GetStatusAsync());
-                Status = result.Body.GetStatusByIdResult;
+                Task = null;
+                var result = await System.Threading.Tasks.Task.Run(() => GetTaskAsync());
+                Task = result.Body.GetTaskByIdResult;
             }
             catch (Exception e)
             {
@@ -151,14 +151,14 @@ namespace WebApi2Book.Windows.Legacy.Client
             return taskServiceSoapClient;
         }
 
-        public async Task<GetStatusesResponse> GetStatusesAsync()
+        public async Task<GetTasksResponse> GetTasksAsync()
         {
             var taskServiceSoapClient = GetServiceClient();
             taskServiceSoapClient.Open();
 
             try
             {
-                var result = await taskServiceSoapClient.GetStatusesAsync();
+                var result = await taskServiceSoapClient.GetTasksAsync();
                 return result;
             }
             finally
@@ -167,14 +167,14 @@ namespace WebApi2Book.Windows.Legacy.Client
             }
         }
 
-        public async Task<GetStatusByIdResponse> GetStatusAsync()
+        public async Task<GetTaskByIdResponse> GetTaskAsync()
         {
             var taskServiceSoapClient = GetServiceClient();
             taskServiceSoapClient.Open();
 
             try
             {
-                var result = await taskServiceSoapClient.GetStatusByIdAsync(StatusId.Value);
+                var result = await taskServiceSoapClient.GetTaskByIdAsync(TaskId.Value);
                 return result;
             }
             finally
