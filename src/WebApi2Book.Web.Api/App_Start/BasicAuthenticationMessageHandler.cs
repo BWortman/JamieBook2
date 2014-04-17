@@ -2,18 +2,17 @@
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Claims;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using log4net;
+using WebApi2Book.Common;
 using WebApi2Book.Common.Logging;
-using WebApi2Book.Common.Security;
+using WebApi2Book.Web.Api.Security;
 
 namespace WebApi2Book.Web.Api
 {
@@ -24,11 +23,12 @@ namespace WebApi2Book.Web.Api
         private const int PasswordIndex = 1;
         private const int ExpectedCredentialCount = 2;
 
-        public const string SchemeType = "basic";
         private readonly ILog _log;
+        private readonly ISecurityService _securityService;
 
-        public BasicAuthenticationMessageHandler(ILogManager logManager)
+        public BasicAuthenticationMessageHandler(ILogManager logManager, ISecurityService securityService)
         {
+            _securityService = securityService;
             _log = logManager.GetLog(typeof (BasicAuthenticationMessageHandler));
         }
 
@@ -72,7 +72,7 @@ namespace WebApi2Book.Web.Api
         {
             return (request.Headers != null
                     && request.Headers.Authorization != null
-                    && request.Headers.Authorization.Scheme.ToLowerInvariant() == SchemeType);
+                    && request.Headers.Authorization.Scheme.ToLowerInvariant() == Constants.SchemeTypes.Basic);
         }
 
         public bool Authenticate(HttpRequestMessage request)
@@ -91,20 +91,7 @@ namespace WebApi2Book.Web.Api
                 return false;
             }
 
-            // TODO: do it!
-            return true; //SecurityService.Authenticate(GetClaims(credentials));
-        }
-
-        public Dictionary<string, string> GetClaims(string[] credentials)
-        {
-            var username = credentials[UsernameIndex].Trim();
-            var password = credentials[PasswordIndex].Trim();
-            var claims = new Dictionary<string, string>
-            {
-                {ClaimTypes.Name, username},
-                {CustomClaimTypes.Password, password}
-            };
-            return claims;
+            return _securityService.SetPrincipal(credentials[UsernameIndex], credentials[PasswordIndex]);
         }
 
         public string[] GetCredentials(AuthenticationHeaderValue authHeader)
@@ -119,7 +106,7 @@ namespace WebApi2Book.Web.Api
         public HttpResponseMessage CreateUnauthorizedResponse()
         {
             var response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
-            response.Headers.WwwAuthenticate.Add(new AuthenticationHeaderValue(SchemeType));
+            response.Headers.WwwAuthenticate.Add(new AuthenticationHeaderValue(Constants.SchemeTypes.Basic));
             return response;
         }
     }

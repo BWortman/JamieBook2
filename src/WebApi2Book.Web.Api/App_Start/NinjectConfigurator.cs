@@ -23,6 +23,7 @@ using WebApi2Book.Web.Api.LegacyProcessing;
 using WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies;
 using WebApi2Book.Web.Api.LinkServices;
 using WebApi2Book.Web.Api.MaintenanceProcessing;
+using WebApi2Book.Web.Api.Security;
 using WebApi2Book.Web.Common;
 using WebApi2Book.Web.Common.Security;
 
@@ -46,8 +47,8 @@ namespace WebApi2Book.Web.Api
         private void AddBindings(IKernel container)
         {
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-            // IMPORTANT NOTE! *Never* configure a type as singleton if it depends upon IUnitOfWork!!! This is because
-            // IUnitOfWork is disposed of at the end of every request. For the same reason, make sure that types
+            // IMPORTANT NOTE! *Never* configure a type as singleton if it depends upon ISession!!! This is because
+            // ISession is disposed of at the end of every request. For the same reason, make sure that types
             // dependent upon such types aren't configured as singleton.
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -57,6 +58,7 @@ namespace WebApi2Book.Web.Api
             ConfigureDependenciesOnlyUsedForLegacyProcessing(container);
             ConfigureAutoMapper(container);
 
+            container.Bind<ISecurityService>().To<SecurityService>().InSingletonScope();
             container.Bind<IDateTime>().To<DateTimeAdapter>().InSingletonScope();
 
             container.Bind<ICommonLinkService>().To<CommonLinkService>().InRequestScope();

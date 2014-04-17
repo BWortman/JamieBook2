@@ -4,6 +4,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebApi2Book.Common;
 using WebApi2Book.Data.SqlServer.QueryProcessors;
 using WebApi2Book.Web.Api.InquiryProcessing;
 using WebApi2Book.Web.Api.MaintenanceProcessing;
@@ -41,6 +42,9 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         }
 
         [Route("", Name = "GetTasksRoute")]
+        [Authorize(Roles = Constants.RoleNames.TemporaryWorker)]
+        [Authorize(Roles = Constants.RoleNames.Manager)]
+        [Authorize(Roles = Constants.RoleNames.SeniorWorker)]
         public PagedDataInquiryResponse<Task> GetTasks(HttpRequestMessage requestMessage)
         {
             var request = _pagedDataRequestFactory.Create(requestMessage.RequestUri);
@@ -59,6 +63,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         [Route("", Name = "AddTaskRoute")]
         [HttpPost]
         [ValidateModel]
+        [Authorize(Roles = Constants.RoleNames.Manager)]
         public IHttpActionResult AddTask(HttpRequestMessage requestMessage, NewTask newTask)
         {
             var task = _addTaskMaintenanceProcessor.AddTask(newTask);

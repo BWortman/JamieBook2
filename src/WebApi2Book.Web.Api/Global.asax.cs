@@ -7,6 +7,7 @@ using System.Web.Http;
 using WebApi2Book.Common.Logging;
 using WebApi2Book.Common.TypeMapping;
 using WebApi2Book.Web.Api.LegacyProcessing;
+using WebApi2Book.Web.Api.Security;
 using WebApi2Book.Web.Common;
 
 namespace WebApi2Book.Web.Api
@@ -33,7 +34,8 @@ namespace WebApi2Book.Web.Api
         private void RegisterHandlers()
         {
             GlobalConfiguration.Configuration.MessageHandlers.Add(
-                new BasicAuthenticationMessageHandler(WebContainerManager.Get<ILogManager>()));
+                new BasicAuthenticationMessageHandler(WebContainerManager.Get<ILogManager>(),
+                    WebContainerManager.Get<ISecurityService>()));
         }
 
         protected void Application_Error()
