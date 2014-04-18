@@ -4,7 +4,6 @@
 using System;
 using System.Security.Claims;
 using System.Web;
-using WebApi2Book.Common;
 
 namespace WebApi2Book.Web.Common.Security
 {
@@ -39,10 +38,9 @@ namespace WebApi2Book.Web.Common.Security
         {
             get
             {
-                var apiVersionInRequest =
-                    (string) HttpContext.Current.Request.RequestContext.RouteData.Values[
-                        Constants.CommonRoutingDefinitions.ApiVersionSegmentName];
-                return apiVersionInRequest;
+                const int versionIndex = 2;
+                var apiVersionInUse = HttpContext.Current.Request.Url.Segments[versionIndex].Replace("/", string.Empty);
+                return apiVersionInUse;
             }
         }
     }
