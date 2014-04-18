@@ -51,7 +51,7 @@ namespace WebApi2Book.Common
         {
             public const string Manager = "Manager";
             public const string SeniorWorker = "SeniorWorker";
-            public const string TemporaryWorker = "TemporaryWorker";
+            public const string JuniorWorker = "JuniorWorker";
         }
 
         public const string DefaultLegacyNamespace = "http://tempuri.org/";

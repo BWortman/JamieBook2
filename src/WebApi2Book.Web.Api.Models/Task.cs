@@ -4,7 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 using System.Xml.Serialization;
+using WebApi2Book.Common;
 
 namespace WebApi2Book.Web.Api.Models
 {
@@ -58,6 +60,20 @@ namespace WebApi2Book.Web.Api.Models
         public bool ShouldSerializeLocation()
         {
             return false;
+        }
+
+        private bool _shouldSerializeAssignees;
+
+        public void SetShouldSerializeAssignees(bool shouldSerialize)
+        {
+            _shouldSerializeAssignees = shouldSerialize;
+        }
+
+        public bool ShouldSerializeAssignees()
+        {
+            return _shouldSerializeAssignees;
+            // In handlers do like this: ((System.Net.Http.ObjectContent)(response.Content)).ObjectType == typeof(WebApi2Book.Web.Api.Models.PagedDataInquiryResponse<WebApi2Book.Web.Api.Models.Task>);
+            //return HttpContext.Current.User.IsInRole(Constants.RoleNames.SeniorWorker);
         }
     }
 }

@@ -65,14 +65,14 @@ namespace WebApi2Book.Web.Api.Security
                 case "bhogg":
                     identity.AddClaim(new Claim(ClaimTypes.Role, Constants.RoleNames.Manager));
                     identity.AddClaim(new Claim(ClaimTypes.Role, Constants.RoleNames.SeniorWorker));
-                    identity.AddClaim(new Claim(ClaimTypes.Role, Constants.RoleNames.TemporaryWorker));
+                    identity.AddClaim(new Claim(ClaimTypes.Role, Constants.RoleNames.JuniorWorker));
                     break;
                 case "jbob":
                     identity.AddClaim(new Claim(ClaimTypes.Role, Constants.RoleNames.SeniorWorker));
-                    identity.AddClaim(new Claim(ClaimTypes.Role, Constants.RoleNames.TemporaryWorker));
+                    identity.AddClaim(new Claim(ClaimTypes.Role, Constants.RoleNames.JuniorWorker));
                     break;
                 case "jdoe":
-                    identity.AddClaim(new Claim(ClaimTypes.Role, Constants.RoleNames.TemporaryWorker));
+                    identity.AddClaim(new Claim(ClaimTypes.Role, Constants.RoleNames.JuniorWorker));
                     break;
                 default:
                     return null;

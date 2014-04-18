@@ -128,7 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutoMapperConfigurator.cs" />
-    <Compile Include="App_Start\BasicAuthenticationMessageHandler.cs" />
+    <Compile Include="Security\BasicAuthenticationMessageHandler.cs" />
     <Compile Include="App_Start\NinjectConfigurator.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -204,7 +204,9 @@
     <Compile Include="MaintenanceProcessing\ValidateAccountUpdateRequestAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\ISecurityService.cs" />
+    <Compile Include="Security\PagedTaskDataSecurityMessageHandler.cs" />
     <Compile Include="Security\SecurityService.cs" />
+    <Compile Include="Security\TaskDataSecurityMessageHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -12,9 +12,8 @@ using System.Web;
 using log4net;
 using WebApi2Book.Common;
 using WebApi2Book.Common.Logging;
-using WebApi2Book.Web.Api.Security;
 
-namespace WebApi2Book.Web.Api
+namespace WebApi2Book.Web.Api.Security
 {
     public class BasicAuthenticationMessageHandler : DelegatingHandler
     {

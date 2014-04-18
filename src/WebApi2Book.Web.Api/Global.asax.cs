@@ -33,9 +33,14 @@ namespace WebApi2Book.Web.Api
 
         private void RegisterHandlers()
         {
+            var logManager = WebContainerManager.Get<ILogManager>();
+
             GlobalConfiguration.Configuration.MessageHandlers.Add(
-                new BasicAuthenticationMessageHandler(WebContainerManager.Get<ILogManager>(),
+                new BasicAuthenticationMessageHandler(logManager,
                     WebContainerManager.Get<ISecurityService>()));
+
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new TaskDataSecurityMessageHandler(logManager));
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new PagedTaskDataSecurityMessageHandler(logManager));
         }
 
         protected void Application_Error()

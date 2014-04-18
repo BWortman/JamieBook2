@@ -24,6 +24,11 @@ namespace WebApi2Book.Web.Common.Security
             get { return ((ClaimsPrincipal) HttpContext.Current.User).FindFirst(ClaimTypes.Name).Value; }
         }
 
+        public bool IsInRole(string roleName)
+        {
+            return HttpContext.Current.User.IsInRole(roleName);
+        }
+
         public Uri RequestUri
         {
             get { return HttpContext.Current.Request.Url; }

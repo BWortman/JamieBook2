@@ -11,5 +11,6 @@ namespace WebApi2Book.Common.Security
         string Firstname { get; }
         string Lastname { get; }
         string Username { get; }
+        bool IsInRole(string roleName);
     }
 }

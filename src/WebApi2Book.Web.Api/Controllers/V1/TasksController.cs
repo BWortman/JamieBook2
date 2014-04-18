@@ -17,6 +17,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
 {
     [ApiVersion1RoutePrefix("tasks")]
     [UnitOfWorkActionFilter]
+    [Authorize(Roles = Constants.RoleNames.JuniorWorker)]
     public class TasksController : ApiController
     {
         private readonly IAddTaskMaintenanceProcessor _addTaskMaintenanceProcessor;
@@ -42,9 +43,6 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         }
 
         [Route("", Name = "GetTasksRoute")]
-        [Authorize(Roles = Constants.RoleNames.TemporaryWorker)]
-        [Authorize(Roles = Constants.RoleNames.Manager)]
-        [Authorize(Roles = Constants.RoleNames.SeniorWorker)]
         public PagedDataInquiryResponse<Task> GetTasks(HttpRequestMessage requestMessage)
         {
             var request = _pagedDataRequestFactory.Create(requestMessage.RequestUri);

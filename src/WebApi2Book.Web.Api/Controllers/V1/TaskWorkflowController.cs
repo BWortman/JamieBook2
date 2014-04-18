@@ -13,6 +13,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
 {
     [ApiVersion1RoutePrefix("")]
     [UnitOfWorkActionFilter]
+    [Authorize(Roles = Constants.RoleNames.JuniorWorker)]
     public class TaskWorkflowController : ApiController
     {
         private readonly ICompleteTaskWorkflowProcessor _completeTaskWorkflowProcessor;

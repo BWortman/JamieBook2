@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Web.Http;
+using WebApi2Book.Common;
 using WebApi2Book.Web.Api.InquiryProcessing;
 using WebApi2Book.Web.Api.MaintenanceProcessing;
 using WebApi2Book.Web.Api.Models;
@@ -13,6 +14,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
 {
     [ApiVersion1RoutePrefix("tasks")]
     [UnitOfWorkActionFilter]
+    [Authorize(Roles = Constants.RoleNames.JuniorWorker)]
     public class TaskUsersController : ApiController
     {
         private readonly ITaskUsersInquiryProcessor _taskUsersInquiryProcessor;
