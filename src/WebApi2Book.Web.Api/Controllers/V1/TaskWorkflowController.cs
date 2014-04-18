@@ -2,6 +2,7 @@
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System.Web.Http;
+using WebApi2Book.Common;
 using WebApi2Book.Web.Api.MaintenanceProcessing;
 using WebApi2Book.Web.Api.Models;
 using WebApi2Book.Web.Common;
@@ -43,6 +44,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
 
         [UserAudit]
         [Route("tasks/{taskId:long}/reactivations", Name = "ReactivateTaskRoute")]
+        [Authorize(Roles = Constants.RoleNames.Manager)]
         public Task ReactivateTask(long taskId)
         {
             var task = _reactivateTaskWorkflowProcessor.ReactivateTask(taskId);

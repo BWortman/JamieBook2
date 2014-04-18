@@ -8,10 +8,8 @@ namespace WebApi2Book.Common.Security
     /// </summary>
     public interface IUserSession
     {
-        long UserId { get; }
         string Firstname { get; }
         string Lastname { get; }
         string Username { get; }
-        string Email { get; }
     }
 }

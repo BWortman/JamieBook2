@@ -45,13 +45,12 @@ namespace WebApi2Book.Web.Common.Security
         public void AuditCurrentUser()
         {
             // Simulate long auditing process
-            _log.InfoFormat("Action being executed by user={0}", UserSession.UserId);
             Thread.Sleep(3000);
         }
 
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            _log.InfoFormat("Action executed by user={0}", UserSession.UserId);
+            _log.InfoFormat("Action executed by user={0}", UserSession.Username);
         }
     }
 }

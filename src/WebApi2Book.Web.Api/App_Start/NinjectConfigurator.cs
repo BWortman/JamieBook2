@@ -129,11 +129,9 @@ namespace WebApi2Book.Web.Api
 
         private void ConfigureUserSession(IKernel container)
         {
-            container.Bind<IUserSession>()
-                .ToMethod(x => new UserSession(Thread.CurrentPrincipal as GenericPrincipal)).InRequestScope();
-            container.Bind<IWebUserSession>()
-                .ToMethod(x => x.Kernel.Get<IUserSession>() as IWebUserSession)
-                .InRequestScope();
+            var userSession = new UserSession();
+            container.Bind<IUserSession>().ToConstant(userSession).InSingletonScope();
+            container.Bind<IWebUserSession>().ToConstant(userSession).InSingletonScope();
         }
 
         private void ConfigureNHibernate(IKernel container)
