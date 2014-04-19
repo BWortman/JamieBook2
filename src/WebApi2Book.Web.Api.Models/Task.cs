@@ -4,15 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web;
-using System.Xml.Serialization;
-using WebApi2Book.Common;
 
 namespace WebApi2Book.Web.Api.Models
 {
     public class Task : ILinkContaining
     {
         private List<Link> _links;
+        private bool _shouldSerializeAssignees;
 
         [Key]
         public long? TaskId { get; set; }
@@ -50,20 +48,6 @@ namespace WebApi2Book.Web.Api.Models
             Links.Add(link);
         }
 
-        [XmlIgnore]
-        [Editable(false)]
-        public Uri Location
-        {
-            get { return LocationLinkCalculator.GetLocationLink(this); }
-        }
-
-        public bool ShouldSerializeLocation()
-        {
-            return false;
-        }
-
-        private bool _shouldSerializeAssignees;
-
         public void SetShouldSerializeAssignees(bool shouldSerialize)
         {
             _shouldSerializeAssignees = shouldSerialize;
@@ -72,8 +56,6 @@ namespace WebApi2Book.Web.Api.Models
         public bool ShouldSerializeAssignees()
         {
             return _shouldSerializeAssignees;
-            // In handlers do like this: ((System.Net.Http.ObjectContent)(response.Content)).ObjectType == typeof(WebApi2Book.Web.Api.Models.PagedDataInquiryResponse<WebApi2Book.Web.Api.Models.Task>);
-            //return HttpContext.Current.User.IsInRole(Constants.RoleNames.SeniorWorker);
         }
     }
 }

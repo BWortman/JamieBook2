@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using WebApi2Book.Web.Api.MaintenanceProcessing;
 using WebApi2Book.Web.Api.Models;
 
 namespace WebApi2Book.Web.Api.IntegrationTests

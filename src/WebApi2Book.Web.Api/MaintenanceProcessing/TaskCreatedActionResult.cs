@@ -7,8 +7,9 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Task = WebApi2Book.Web.Api.Models.Task;
 
-namespace WebApi2Book.Web.Api.Models
+namespace WebApi2Book.Web.Api.MaintenanceProcessing
 {
     public class TaskCreatedActionResult : IHttpActionResult
     {
@@ -36,7 +37,7 @@ namespace WebApi2Book.Web.Api.Models
                 ? _requestMessage.CreateResponse(HttpStatusCode.Created, _createdTask)
                 : _requestMessage.CreateResponse(HttpStatusCode.Created, _createdTask, mediaType);
 
-            responseMessage.Headers.Location = _createdTask.Location;
+            responseMessage.Headers.Location = LocationLinkCalculator.GetLocationLink(_createdTask);
 
             return responseMessage;
         }

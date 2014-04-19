@@ -4,8 +4,9 @@
 using System;
 using System.Linq;
 using WebApi2Book.Common;
+using WebApi2Book.Web.Api.Models;
 
-namespace WebApi2Book.Web.Api.Models
+namespace WebApi2Book.Web.Api.MaintenanceProcessing
 {
     public static class LocationLinkCalculator
     {

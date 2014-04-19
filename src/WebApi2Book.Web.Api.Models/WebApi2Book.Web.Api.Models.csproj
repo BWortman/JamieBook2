@@ -59,14 +59,12 @@
     <Compile Include="ILinkContaining.cs" />
     <Compile Include="IPageLinkContaining.cs" />
     <Compile Include="Link.cs" />
-    <Compile Include="LocationLinkCalculator.cs" />
     <Compile Include="NewTask.cs" />
     <Compile Include="NewTaskV2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Status.cs" />
     <Compile Include="StatusesInquiryResponse.cs" />
     <Compile Include="Task.cs" />
-    <Compile Include="TaskCreatedActionResult.cs" />
     <Compile Include="TaskUsersInquiryResponse.cs" />
     <Compile Include="User.cs" />
     <Compile Include="PagedDataInquiryResponse.cs" />

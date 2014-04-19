@@ -128,6 +128,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutoMapperConfigurator.cs" />
+    <Compile Include="MaintenanceProcessing\LocationLinkCalculator.cs" />
+    <Compile Include="MaintenanceProcessing\TaskCreatedActionResult.cs" />
     <Compile Include="Security\BasicAuthenticationMessageHandler.cs" />
     <Compile Include="App_Start\NinjectConfigurator.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
