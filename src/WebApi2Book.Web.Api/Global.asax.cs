@@ -5,6 +5,7 @@ using System.Net.Http.Formatting;
 using System.Web;
 using System.Web.Http;
 using WebApi2Book.Common.Logging;
+using WebApi2Book.Common.Security;
 using WebApi2Book.Common.TypeMapping;
 using WebApi2Book.Web.Api.LegacyProcessing;
 using WebApi2Book.Web.Api.Security;
@@ -34,13 +35,14 @@ namespace WebApi2Book.Web.Api
         private void RegisterHandlers()
         {
             var logManager = WebContainerManager.Get<ILogManager>();
+            var userSession = WebContainerManager.Get<IUserSession>();
 
             GlobalConfiguration.Configuration.MessageHandlers.Add(
                 new BasicAuthenticationMessageHandler(logManager,
                     WebContainerManager.Get<ISecurityService>()));
 
-            GlobalConfiguration.Configuration.MessageHandlers.Add(new TaskDataSecurityMessageHandler(logManager));
-            GlobalConfiguration.Configuration.MessageHandlers.Add(new PagedTaskDataSecurityMessageHandler(logManager));
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new TaskDataSecurityMessageHandler(logManager, userSession));
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new PagedTaskDataSecurityMessageHandler(logManager, userSession));
         }
 
         protected void Application_Error()

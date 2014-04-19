@@ -56,7 +56,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IisExpressHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TasksControllerTest.cs" />
     <Compile Include="WebClientHelper.cs" />

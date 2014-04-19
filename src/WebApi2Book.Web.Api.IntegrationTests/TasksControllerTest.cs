@@ -20,23 +20,7 @@ namespace WebApi2Book.Web.Api.IntegrationTests
 
         private const string UriRoot = "http://localhost:52975/api/v1/";
 
-        //private static IisExpressHelper _iisExpressHelper;
-
         private WebClientHelper _webClientHelper;
-
-        //[TestFixtureSetUp]
-        //public static void TestFixtureSetUp()
-        //{
-        //    // TODO: Fix the helper...
-        //    _iisExpressHelper = new IisExpressHelper();
-        //    _iisExpressHelper.StartServer();
-        //}
-
-        //[TestFixtureTearDown]
-        //public static void TestFixtureTearDown()
-        //{
-        //    _iisExpressHelper.StopServer();
-        //}
 
         [Test]
         public void AddTask()

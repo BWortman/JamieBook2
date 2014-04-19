@@ -17,24 +17,22 @@ namespace WebApi2Book.Web.Common.Security
     public class UserAuditAttribute : ActionFilterAttribute
     {
         private readonly ILog _log;
+        private readonly IUserSession _userSession;
 
-        public UserAuditAttribute() : this(WebContainerManager.Get<ILogManager>())
+        public UserAuditAttribute()
+            : this(WebContainerManager.Get<ILogManager>(), WebContainerManager.Get<IUserSession>())
         {
         }
 
-        public UserAuditAttribute(ILogManager logManager)
+        public UserAuditAttribute(ILogManager logManager, IUserSession userSession)
         {
+            _userSession = userSession;
             _log = logManager.GetLog(typeof (UserAuditAttribute));
         }
 
         public override bool AllowMultiple
         {
             get { return false; }
-        }
-
-        public virtual IUserSession UserSession
-        {
-            get { return WebContainerManager.Get<IUserSession>(); }
         }
 
         public override Task OnActionExecutingAsync(HttpActionContext actionContext, CancellationToken cancellationToken)
@@ -50,7 +48,7 @@ namespace WebApi2Book.Web.Common.Security
 
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            _log.InfoFormat("Action executed by user={0}", UserSession.Username);
+            _log.InfoFormat("Action executed by user={0}", _userSession.Username);
         }
     }
 }

@@ -8,7 +8,6 @@ using log4net;
 using WebApi2Book.Common;
 using WebApi2Book.Common.Logging;
 using WebApi2Book.Common.Security;
-using WebApi2Book.Web.Common;
 using Task = WebApi2Book.Web.Api.Models.Task;
 
 namespace WebApi2Book.Web.Api.Security
@@ -16,15 +15,12 @@ namespace WebApi2Book.Web.Api.Security
     public class TaskDataSecurityMessageHandler : DelegatingHandler
     {
         private readonly ILog _log;
+        private readonly IUserSession _userSession;
 
-        public TaskDataSecurityMessageHandler(ILogManager logManager)
+        public TaskDataSecurityMessageHandler(ILogManager logManager, IUserSession userSession)
         {
+            _userSession = userSession;
             _log = logManager.GetLog(typeof (TaskDataSecurityMessageHandler));
-        }
-
-        public IUserSession UserSession
-        {
-            get { return WebContainerManager.Get<IUserSession>(); }
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(
@@ -50,11 +46,11 @@ namespace WebApi2Book.Web.Api.Security
 
         public void ApplySecurityToResponseData(ObjectContent responseObjectContent)
         {
-            var maskData = !UserSession.IsInRole(Constants.RoleNames.SeniorWorker);
+            var maskData = !_userSession.IsInRole(Constants.RoleNames.SeniorWorker);
 
             if (maskData)
             {
-                _log.DebugFormat("Applying security data masking for user {0}", UserSession.Username);
+                _log.DebugFormat("Applying security data masking for user {0}", _userSession.Username);
             }
 
             ((Task) responseObjectContent.Value).SetShouldSerializeAssignees(!maskData);
