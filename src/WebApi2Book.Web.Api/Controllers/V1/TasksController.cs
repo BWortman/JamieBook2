@@ -75,6 +75,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         [HttpPut]
         [HttpPatch]
         [ValidateTaskUpdateRequest]
+        [Authorize(Roles = Constants.RoleNames.SeniorWorker)]
         public Task UpdateTask(HttpRequestMessage requestMessage, long id, [FromBody] object updatedTask)
         {
             var task = _updateTaskMaintenanceProcessor.UpdateTask(id, updatedTask);
@@ -83,6 +84,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
 
         [Route("{id:long}", Name = "DeleteTaskRoute")]
         [HttpDelete]
+        [Authorize(Roles = Constants.RoleNames.Manager)]
         public HttpResponseMessage DeleteTask(long id)
         {
             _deleteTaskQueryProcessor.DeleteTask(id);

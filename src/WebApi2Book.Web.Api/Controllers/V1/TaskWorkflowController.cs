@@ -13,7 +13,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
 {
     [ApiVersion1RoutePrefix("")]
     [UnitOfWorkActionFilter]
-    [Authorize(Roles = Constants.RoleNames.JuniorWorker)]
+    [Authorize(Roles = Constants.RoleNames.SeniorWorker)]
     public class TaskWorkflowController : ApiController
     {
         private readonly ICompleteTaskWorkflowProcessor _completeTaskWorkflowProcessor;
@@ -45,7 +45,6 @@ namespace WebApi2Book.Web.Api.Controllers.V1
 
         [UserAudit]
         [Route("tasks/{taskId:long}/reactivations", Name = "ReactivateTaskRoute")]
-        [Authorize(Roles = Constants.RoleNames.Manager)]
         public Task ReactivateTask(long taskId)
         {
             var task = _reactivateTaskWorkflowProcessor.ReactivateTask(taskId);

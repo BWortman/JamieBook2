@@ -18,24 +18,25 @@ namespace WebApi2Book.Web.Api.IntegrationTests
             _webClientHelper = new WebClientHelper();
         }
 
-        private const string uriRoot = "http://localhost:52975/api/v1/";
+        private const string UriRoot = "http://localhost:52975/api/v1/";
 
-        private static IisExpressHelper _iisExpressHelper;
+        //private static IisExpressHelper _iisExpressHelper;
 
         private WebClientHelper _webClientHelper;
 
-        [TestFixtureSetUp]
-        public static void TestFixtureSetUp()
-        {
-            _iisExpressHelper = new IisExpressHelper();
-            _iisExpressHelper.StartServer();
-        }
+        //[TestFixtureSetUp]
+        //public static void TestFixtureSetUp()
+        //{
+        //    // TODO: Fix the helper...
+        //    _iisExpressHelper = new IisExpressHelper();
+        //    _iisExpressHelper.StartServer();
+        //}
 
-        [TestFixtureTearDown]
-        public static void TestFixtureTearDown()
-        {
-            _iisExpressHelper.StopServer();
-        }
+        //[TestFixtureTearDown]
+        //public static void TestFixtureTearDown()
+        //{
+        //    _iisExpressHelper.StopServer();
+        //}
 
         [Test]
         public void AddTask()
@@ -43,13 +44,12 @@ namespace WebApi2Book.Web.Api.IntegrationTests
             const string data = "{\"Subject\":\"Fix something important\"}";
 
             var client = _webClientHelper.CreateWebClient();
-            const string address = uriRoot + "tasks";
+            const string address = UriRoot + "tasks";
 
             var responseString = client.UploadString(address, HttpMethod.Post.Method, data);
 
             var jsonResponse = JObject.Parse(responseString);
-            // TODO: need to move the return type class! Assert.IsNotNull(jsonResponse.ToObject<TaskCreatedActionResult>());
-            Assert.IsNotNull(jsonResponse);
+            Assert.IsNotNull(jsonResponse.ToObject<TaskCreatedActionResult>());
         }
 
         [Test]
@@ -58,11 +58,11 @@ namespace WebApi2Book.Web.Api.IntegrationTests
             const string data = "{\"Subject\":\"Fix something important\"}";
 
             var client = _webClientHelper.CreateWebClient(username: "jdoe");
-            const string address = uriRoot + "tasks";
+            const string address = UriRoot + "tasks";
 
             try
             {
-                var responseString = client.UploadString(address, HttpMethod.Post.Method, data);
+                client.UploadString(address, HttpMethod.Post.Method, data);
                 Assert.Fail();
             }
             catch (WebException e)
@@ -76,7 +76,7 @@ namespace WebApi2Book.Web.Api.IntegrationTests
         public void GetTasks()
         {
             var client = _webClientHelper.CreateWebClient();
-            const string address = uriRoot + "tasks";
+            const string address = UriRoot + "tasks";
 
             var responseString = client.DownloadString(address);
 

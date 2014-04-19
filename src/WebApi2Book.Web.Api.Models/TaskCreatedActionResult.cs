@@ -7,9 +7,8 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Task = WebApi2Book.Web.Api.Models.Task;
 
-namespace WebApi2Book.Web.Api.MaintenanceProcessing
+namespace WebApi2Book.Web.Api.Models
 {
     public class TaskCreatedActionResult : IHttpActionResult
     {

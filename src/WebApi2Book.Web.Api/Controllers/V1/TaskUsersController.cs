@@ -14,7 +14,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
 {
     [ApiVersion1RoutePrefix("tasks")]
     [UnitOfWorkActionFilter]
-    [Authorize(Roles = Constants.RoleNames.JuniorWorker)]
+    [Authorize(Roles = Constants.RoleNames.SeniorWorker)]
     public class TaskUsersController : ApiController
     {
         private readonly ITaskUsersInquiryProcessor _taskUsersInquiryProcessor;
