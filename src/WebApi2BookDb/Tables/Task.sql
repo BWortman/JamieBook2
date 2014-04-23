@@ -8,8 +8,8 @@
     [CreatedDate]   DATETIME2 (7)  NOT NULL,
     [CreatedUserId]   bigint  NOT NULL,
     [ts]            rowversion     NOT NULL,
-    CONSTRAINT [PK__Task__7C6949B149D1FB5F] PRIMARY KEY CLUSTERED ([TaskId] ASC),
-    CONSTRAINT [FK_Task_Status] FOREIGN KEY ([StatusId]) REFERENCES [dbo].[Status] ([StatusId]),
-    CONSTRAINT [FK_Task_User] FOREIGN KEY ([CreatedUserId]) REFERENCES [dbo].[User] ([UserId])
+    PRIMARY KEY CLUSTERED ([TaskId] ASC),
+    FOREIGN KEY ([StatusId]) REFERENCES [dbo].[Status] ([StatusId]),
+    FOREIGN KEY ([CreatedUserId]) REFERENCES [dbo].[User] ([UserId])
 );
 
