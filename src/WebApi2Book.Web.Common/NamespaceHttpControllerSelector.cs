@@ -15,7 +15,8 @@ using System.Web.Http.Routing;
 namespace WebApi2Book.Web.Common
 {
     /// <summary>
-    ///     Controller selector implementation that uses the controller namespace as part of the selection decision.
+    ///     Controller selector implementation that uses the controller namespace
+    ///     as part of the selection decision.
     /// </summary>
     /// <remarks>
     ///     Largely inspired by sample located at:

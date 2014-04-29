@@ -6,12 +6,11 @@ using System.Web.Http;
 using WebApi2Book.Web.Api.MaintenanceProcessing;
 using WebApi2Book.Web.Api.Models;
 using WebApi2Book.Web.Common;
-using WebApi2Book.Web.Common.Routing;
 using WebApi2Book.Web.Common.Validation;
 
 namespace WebApi2Book.Web.Api.Controllers.V2
 {
-    [ApiVersion2RoutePrefix("tasks")]
+    [RoutePrefix("api/{apiVersion:apiVersionConstraint(v2)}/tasks")]
     [UnitOfWorkActionFilter]
     public class TasksController : ApiController
     {
