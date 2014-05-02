@@ -1,8 +1,6 @@
 ﻿// NinjectConfigurator.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using System.Security.Principal;
-using System.Threading;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using log4net.Config;
@@ -15,7 +13,7 @@ using WebApi2Book.Common;
 using WebApi2Book.Common.Logging;
 using WebApi2Book.Common.Security;
 using WebApi2Book.Common.TypeMapping;
-using WebApi2Book.Data.SqlServer;
+using WebApi2Book.Data.SqlServer.Mapping;
 using WebApi2Book.Data.SqlServer.QueryProcessors;
 using WebApi2Book.Web.Api.AutoMappingConfiguration;
 using WebApi2Book.Web.Api.InquiryProcessing;
@@ -136,19 +134,18 @@ namespace WebApi2Book.Web.Api
 
         private void ConfigureNHibernate(IKernel container)
         {
-            var sessionFactory = Fluently.Configure()
+            ISessionFactory sessionFactory = Fluently.Configure()
                 .Database(
                     MsSqlConfiguration.MsSql2008.ConnectionString(
                         c => c.FromConnectionStringWithKey("WebApi2BookDb")))
                 .CurrentSessionContext("web")
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<SqlCommandFactory>())
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<TaskMap>())
                 .BuildSessionFactory();
 
             container.Bind<ISessionFactory>().ToConstant(sessionFactory);
             container.Bind<ISession>().ToMethod(CreateSession).InRequestScope();
             container.Bind<ICurrentSessionContextAdapter>().To<CurrentSessionContextAdapter>().InSingletonScope();
             container.Bind<IActionTransactionHelper>().To<ActionTransactionHelper>().InRequestScope();
-            container.Bind<ISqlCommandFactory>().To<SqlCommandFactory>().InRequestScope();
         }
 
         private ISession CreateSession(IContext context)
@@ -156,7 +153,7 @@ namespace WebApi2Book.Web.Api
             var sessionFactory = context.Kernel.Get<ISessionFactory>();
             if (!CurrentSessionContext.HasBind(sessionFactory))
             {
-                var session = sessionFactory.OpenSession();
+                ISession session = sessionFactory.OpenSession();
                 CurrentSessionContext.Bind(session);
             }
 
