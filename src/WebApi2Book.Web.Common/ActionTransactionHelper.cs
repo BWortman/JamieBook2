@@ -3,20 +3,17 @@
 
 using System.Web.Http.Filters;
 using NHibernate;
+using NHibernate.Context;
 
 namespace WebApi2Book.Web.Common
 {
     public class ActionTransactionHelper : IActionTransactionHelper
     {
-        private readonly ICurrentSessionContextAdapter _currentSessionContextAdapter;
         private readonly ISessionFactory _sessionFactory;
 
-        public ActionTransactionHelper(
-            ISessionFactory sessionFactory,
-            ICurrentSessionContextAdapter currentSessionContextAdapter)
+        public ActionTransactionHelper(ISessionFactory sessionFactory)
         {
             _sessionFactory = sessionFactory;
-            _currentSessionContextAdapter = currentSessionContextAdapter;
         }
 
         public bool TransactionHandled { get; private set; }
@@ -25,6 +22,8 @@ namespace WebApi2Book.Web.Common
 
         public void BeginTransaction()
         {
+            if (!CurrentSessionContext.HasBind(_sessionFactory)) return;
+
             var session = _sessionFactory.GetCurrentSession();
             if (session != null)
             {
@@ -34,6 +33,8 @@ namespace WebApi2Book.Web.Common
 
         public void EndTransaction(HttpActionExecutedContext filterContext)
         {
+            if (!CurrentSessionContext.HasBind(_sessionFactory)) return;
+
             var session = _sessionFactory.GetCurrentSession();
 
             if (session == null) return;
@@ -54,15 +55,13 @@ namespace WebApi2Book.Web.Common
 
         public void CloseSession()
         {
-            if (_currentSessionContextAdapter.HasBind(_sessionFactory))
-            {
-                var session = _sessionFactory.GetCurrentSession();
-                session.Close();
-                session.Dispose();
-                _currentSessionContextAdapter.Unbind(_sessionFactory);
+            if (!CurrentSessionContext.HasBind(_sessionFactory)) return;
 
-                SessionClosed = true;
-            }
+            var session = _sessionFactory.GetCurrentSession();
+            session.Close();
+            session.Dispose();
+            CurrentSessionContext.Unbind(_sessionFactory);
+            SessionClosed = true;
         }
     }
 }

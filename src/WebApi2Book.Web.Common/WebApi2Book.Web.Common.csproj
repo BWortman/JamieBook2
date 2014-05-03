@@ -85,9 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionTransactionHelper.cs" />
-    <Compile Include="CurrentSessionContextAdapter.cs" />
     <Compile Include="IActionTransactionHelper.cs" />
-    <Compile Include="ICurrentSessionContextAdapter.cs" />
     <Compile Include="IUpdateablePropertyDetector.cs" />
     <Compile Include="JObjectUpdateablePropertyDetector.cs" />
     <Compile Include="NamespaceHttpControllerSelector.cs" />

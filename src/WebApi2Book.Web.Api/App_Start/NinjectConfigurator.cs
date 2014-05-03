@@ -143,8 +143,7 @@ namespace WebApi2Book.Web.Api
                 .BuildSessionFactory();
 
             container.Bind<ISessionFactory>().ToConstant(sessionFactory);
-            container.Bind<ISession>().ToMethod(CreateSession).InRequestScope();
-            container.Bind<ICurrentSessionContextAdapter>().To<CurrentSessionContextAdapter>().InSingletonScope();
+            container.Bind<ISession>().ToMethod(CreateSession);
             container.Bind<IActionTransactionHelper>().To<ActionTransactionHelper>().InRequestScope();
         }
 
