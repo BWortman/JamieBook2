@@ -10,7 +10,11 @@ namespace WebApi2Book.Data.SqlServer.Mapping
     {
         protected VersionedClassMap()
         {
-            Version(x => x.Version).Column("ts").CustomSqlType("Rowversion").Generated.Always().UnsavedValue("null");
+            Version(x => x.Version)
+                .Column("ts")
+                .CustomSqlType("Rowversion")
+                .Generated.Always()
+                .UnsavedValue("null");
         }
     }
 }

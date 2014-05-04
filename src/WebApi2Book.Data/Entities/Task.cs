@@ -8,8 +8,6 @@ namespace WebApi2Book.Data.Entities
 {
     public class Task : IVersionedEntity
     {
-        private readonly IList<User> _users = new List<User>();
-
         public virtual long TaskId { get; set; }
         public virtual string Subject { get; set; }
         public virtual DateTime? StartDate { get; set; }
@@ -18,6 +16,8 @@ namespace WebApi2Book.Data.Entities
         public virtual Status Status { get; set; }
         public virtual DateTime CreatedDate { get; set; }
         public virtual User CreatedBy { get; set; }
+
+        private readonly IList<User> _users = new List<User>();
 
         public virtual IList<User> Users
         {

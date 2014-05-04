@@ -30,102 +30,41 @@ namespace WebApi2Book.Web.Common
             const string traceFormat =
                 "RequestId={0};{1}Kind={2};{3}Status={4};{5}Operation={6};{7}Operator={8};{9}Category={10}{11}Request={12}{13}Message={14}";
 
+            var args = new object[]
+            {
+                rec.RequestId,
+                Environment.NewLine,
+                rec.Kind,
+                Environment.NewLine,
+                rec.Status,
+                Environment.NewLine,
+                rec.Operation,
+                Environment.NewLine,
+                rec.Operator,
+                Environment.NewLine,
+                rec.Category,
+                Environment.NewLine,
+                rec.Request,
+                Environment.NewLine,
+                rec.Message
+            };
+
             switch (rec.Level)
             {
                 case TraceLevel.Debug:
-                    _log.DebugFormat(traceFormat,
-                        rec.RequestId,
-                        Environment.NewLine,
-                        rec.Kind,
-                        Environment.NewLine,
-                        rec.Status,
-                        Environment.NewLine,
-                        rec.Operation,
-                        Environment.NewLine,
-                        rec.Operator,
-                        Environment.NewLine,
-                        rec.Category,
-                        Environment.NewLine,
-                        rec.Request,
-                        Environment.NewLine,
-                        rec.Message
-                        );
+                    _log.DebugFormat(traceFormat, args);
                     break;
                 case TraceLevel.Info:
-                    _log.InfoFormat(traceFormat,
-                        rec.RequestId,
-                        Environment.NewLine,
-                        rec.Kind,
-                        Environment.NewLine,
-                        rec.Status,
-                        Environment.NewLine,
-                        rec.Operation,
-                        Environment.NewLine,
-                        rec.Operator,
-                        Environment.NewLine,
-                        rec.Category,
-                        Environment.NewLine,
-                        rec.Request,
-                        Environment.NewLine,
-                        rec.Message
-                        );
+                    _log.InfoFormat(traceFormat, args);
                     break;
                 case TraceLevel.Warn:
-                    _log.WarnFormat(traceFormat,
-                        rec.RequestId,
-                        Environment.NewLine,
-                        rec.Kind,
-                        Environment.NewLine,
-                        rec.Status,
-                        Environment.NewLine,
-                        rec.Operation,
-                        Environment.NewLine,
-                        rec.Operator,
-                        Environment.NewLine,
-                        rec.Category,
-                        Environment.NewLine,
-                        rec.Request,
-                        Environment.NewLine,
-                        rec.Message
-                        );
+                    _log.WarnFormat(traceFormat, args);
                     break;
                 case TraceLevel.Error:
-                    _log.ErrorFormat(traceFormat,
-                        rec.RequestId,
-                        Environment.NewLine,
-                        rec.Kind,
-                        Environment.NewLine,
-                        rec.Status,
-                        Environment.NewLine,
-                        rec.Operation,
-                        Environment.NewLine,
-                        rec.Operator,
-                        Environment.NewLine,
-                        rec.Category,
-                        Environment.NewLine,
-                        rec.Request,
-                        Environment.NewLine,
-                        rec.Message
-                        );
+                    _log.ErrorFormat(traceFormat, args);
                     break;
                 case TraceLevel.Fatal:
-                    _log.FatalFormat(traceFormat,
-                        rec.RequestId,
-                        Environment.NewLine,
-                        rec.Kind,
-                        Environment.NewLine,
-                        rec.Status,
-                        Environment.NewLine,
-                        rec.Operation,
-                        Environment.NewLine,
-                        rec.Operator,
-                        Environment.NewLine,
-                        rec.Category,
-                        Environment.NewLine,
-                        rec.Request,
-                        Environment.NewLine,
-                        rec.Message
-                        );
+                    _log.FatalFormat(traceFormat, args);
                     break;
             }
         }
