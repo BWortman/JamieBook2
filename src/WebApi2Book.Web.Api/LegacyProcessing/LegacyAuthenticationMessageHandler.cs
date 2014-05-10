@@ -49,7 +49,7 @@ namespace WebApi2Book.Web.Api.LegacyProcessing
             _log.Debug("Attempting to authenticate...");
 
             // TODO: do it!
-            return true; //SecurityService.Authenticate(GetClaims(credentials));
+            return true; //BasicSecurityService.Authenticate(GetClaims(credentials));
         }
 
         public HttpResponseMessage CreateUnauthorizedResponse()

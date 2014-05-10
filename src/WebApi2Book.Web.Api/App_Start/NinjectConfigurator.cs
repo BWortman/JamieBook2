@@ -56,7 +56,7 @@ namespace WebApi2Book.Web.Api
             ConfigureDependenciesOnlyUsedForLegacyProcessing(container);
             ConfigureAutoMapper(container);
 
-            container.Bind<ISecurityService>().To<SecurityService>().InSingletonScope();
+            container.Bind<IBasicSecurityService>().To<BasicSecurityService>().InSingletonScope();
             container.Bind<IDateTime>().To<DateTimeAdapter>().InSingletonScope();
 
             container.Bind<ICommonLinkService>().To<CommonLinkService>().InRequestScope();

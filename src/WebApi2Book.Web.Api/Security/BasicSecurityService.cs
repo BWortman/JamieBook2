@@ -1,4 +1,4 @@
-﻿// SecurityService.cs
+﻿// BasicSecurityService.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System.Security.Claims;
@@ -14,13 +14,13 @@ using WebApi2Book.Web.Common;
 
 namespace WebApi2Book.Web.Api.Security
 {
-    public class SecurityService : ISecurityService
+    public class BasicSecurityService : IBasicSecurityService
     {
         private readonly ILog _log;
 
-        public SecurityService(ILogManager logManager)
+        public BasicSecurityService(ILogManager logManager)
         {
-            _log = logManager.GetLog(typeof (SecurityService));
+            _log = logManager.GetLog(typeof (BasicSecurityService));
         }
 
         public virtual ISession Session
@@ -36,11 +36,11 @@ namespace WebApi2Book.Web.Api.Security
         /// <returns>true if the user was found; otherwise, false</returns>
         public bool SetPrincipal(string username, string password)
         {
-            var user = GetUser(username);
+           // var user = GetUser(username);
 
             var principal = GetPrincipal(username);
 
-            if (user == null || principal == null)
+            if (/*user == null || */principal == null)
             {
                 _log.DebugFormat("System could not validate user {0}", username);
                 return false;
@@ -81,11 +81,11 @@ namespace WebApi2Book.Web.Api.Security
             return new ClaimsPrincipal(identity);
         }
 
-        public virtual User GetUser(string username)
-        {
-            username = username.ToLowerInvariant();
-            return
-                Session.QueryOver<User>().Where(x => x.Username == username).SingleOrDefault();
-        }
+        //public virtual User GetUser(string username)
+        //{
+        //    username = username.ToLowerInvariant();
+        //    return
+        //        Session.QueryOver<User>().Where(x => x.Username == username).SingleOrDefault();
+        //}
     }
 }

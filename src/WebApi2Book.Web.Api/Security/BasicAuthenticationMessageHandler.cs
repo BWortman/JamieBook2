@@ -23,11 +23,11 @@ namespace WebApi2Book.Web.Api.Security
         private const int ExpectedCredentialCount = 2;
 
         private readonly ILog _log;
-        private readonly ISecurityService _securityService;
+        private readonly IBasicSecurityService _basicSecurityService;
 
-        public BasicAuthenticationMessageHandler(ILogManager logManager, ISecurityService securityService)
+        public BasicAuthenticationMessageHandler(ILogManager logManager, IBasicSecurityService basicSecurityService)
         {
-            _securityService = securityService;
+            _basicSecurityService = basicSecurityService;
             _log = logManager.GetLog(typeof (BasicAuthenticationMessageHandler));
         }
 
@@ -90,7 +90,7 @@ namespace WebApi2Book.Web.Api.Security
                 return false;
             }
 
-            return _securityService.SetPrincipal(credentials[UsernameIndex], credentials[PasswordIndex]);
+            return _basicSecurityService.SetPrincipal(credentials[UsernameIndex], credentials[PasswordIndex]);
         }
 
         public string[] GetCredentials(AuthenticationHeaderValue authHeader)
