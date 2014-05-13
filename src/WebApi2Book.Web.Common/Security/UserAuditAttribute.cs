@@ -37,12 +37,15 @@ namespace WebApi2Book.Web.Common.Security
 
         public override Task OnActionExecutingAsync(HttpActionContext actionContext, CancellationToken cancellationToken)
         {
-            return Task.Run(() => AuditCurrentUser(), cancellationToken);
+            _log.Debug("Starting execution...");
+            var userName = _userSession.Username;
+            return Task.Run(() => AuditCurrentUser(userName), cancellationToken);
         }
 
-        public void AuditCurrentUser()
+        public void AuditCurrentUser(string username)
         {
             // Simulate long auditing process
+            _log.InfoFormat("Action being executed by user={0}", username);
             Thread.Sleep(3000);
         }
 

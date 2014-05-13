@@ -36,11 +36,10 @@ namespace WebApi2Book.Web.Api.Security
         /// <returns>true if the user was found; otherwise, false</returns>
         public bool SetPrincipal(string username, string password)
         {
-           // var user = GetUser(username);
+            var user = GetUser(username);
 
-            var principal = GetPrincipal(username);
-
-            if (/*user == null || */principal == null)
+            IPrincipal principal = null;
+            if (user == null || (principal = GetPrincipal(user)) == null)
             {
                 _log.DebugFormat("System could not validate user {0}", username);
                 return false;
@@ -55,11 +54,14 @@ namespace WebApi2Book.Web.Api.Security
             return true;
         }
 
-        public virtual IPrincipal GetPrincipal(string username)
+        public virtual IPrincipal GetPrincipal(User user)
         {
-            var identity = new GenericIdentity(username, Constants.SchemeTypes.Basic);
+            var identity = new GenericIdentity(user.Username, Constants.SchemeTypes.Basic);
 
-            username = username.ToLowerInvariant();
+            identity.AddClaim(new Claim(ClaimTypes.GivenName, user.Firstname));
+            identity.AddClaim(new Claim(ClaimTypes.Surname, user.Lastname));
+
+            var username = user.Username.ToLowerInvariant();
             switch (username)
             {
                 case "bhogg":
@@ -81,11 +83,11 @@ namespace WebApi2Book.Web.Api.Security
             return new ClaimsPrincipal(identity);
         }
 
-        //public virtual User GetUser(string username)
-        //{
-        //    username = username.ToLowerInvariant();
-        //    return
-        //        Session.QueryOver<User>().Where(x => x.Username == username).SingleOrDefault();
-        //}
+        public virtual User GetUser(string username)
+        {
+            username = username.ToLowerInvariant();
+            return
+                Session.QueryOver<User>().Where(x => x.Username == username).SingleOrDefault();
+        }
     }
 }
