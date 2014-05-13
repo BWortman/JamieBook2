@@ -46,14 +46,14 @@ namespace WebApi2Book.Web.Api.Security
 
         public void ApplySecurityToResponseData(ObjectContent responseObjectContent)
         {
-            var maskData = !_userSession.IsInRole(Constants.RoleNames.SeniorWorker);
+            var removeSensitiveData = !_userSession.IsInRole(Constants.RoleNames.SeniorWorker);
 
-            if (maskData)
+            if (removeSensitiveData)
             {
                 _log.DebugFormat("Applying security data masking for user {0}", _userSession.Username);
             }
 
-            ((Task) responseObjectContent.Value).SetShouldSerializeAssignees(!maskData);
+            ((Task) responseObjectContent.Value).SetShouldSerializeAssignees(!removeSensitiveData);
         }
     }
 }
