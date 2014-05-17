@@ -1,7 +1,6 @@
 ﻿// IUpdateablePropertyDetector.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using System;
 using System.Collections.Generic;
 
 namespace WebApi2Book.Web.Common
@@ -15,9 +14,9 @@ namespace WebApi2Book.Web.Common
         ///     Detects which properties on the target may be updated based on the supplied data.
         /// </summary>
         /// <remarks>
-        ///     Editable properties on <paramref name="targetModelType" /> that have corresponding data in
+        ///     Editable properties on <typeparamref name="TTargetType"/> that have corresponding data in
         ///     <paramref name="objectContainingUpdatedData" /> are included in the response.
         /// </remarks>
-        IEnumerable<string> GetNamesOfPropertiesToUpdate(Type targetModelType, object objectContainingUpdatedData);
+        IEnumerable<string> GetNamesOfPropertiesToUpdate<TTargetType>(object objectContainingUpdatedData);
     }
 }

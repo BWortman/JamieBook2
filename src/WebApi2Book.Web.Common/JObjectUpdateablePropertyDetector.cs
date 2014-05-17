@@ -12,18 +12,17 @@ namespace WebApi2Book.Web.Common
 {
     public class JObjectUpdateablePropertyDetector : IUpdateablePropertyDetector
     {
-        public IEnumerable<string> GetNamesOfPropertiesToUpdate(Type targetModelType,
-            object objectContainingUpdatedData)
+        public IEnumerable<string> GetNamesOfPropertiesToUpdate<TTargetType>(object objectContainingUpdatedData)
         {
-            var objectDataAsJObject = (JObject) objectContainingUpdatedData;
+            var objectDataAsJObject = (JObject)objectContainingUpdatedData;
 
-            var propertyInfos = targetModelType.GetProperties();
+            var propertyInfos = typeof (TTargetType).GetProperties();
 
             var modifiablePropertyInfos = propertyInfos
                 .Where(x =>
                 {
                     var editableAttribute =
-                        x.GetCustomAttributes(typeof (EditableAttribute)).FirstOrDefault() as EditableAttribute;
+                        x.GetCustomAttributes(typeof(EditableAttribute)).FirstOrDefault() as EditableAttribute;
                     return editableAttribute != null && editableAttribute.AllowEdit;
                 }
                 );

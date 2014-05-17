@@ -76,7 +76,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         [HttpPatch]
         [ValidateTaskUpdateRequest]
         [Authorize(Roles = Constants.RoleNames.SeniorWorker)]
-        public Task UpdateTask(HttpRequestMessage requestMessage, long id, [FromBody] object updatedTask)
+        public Task UpdateTask(long id, [FromBody] object updatedTask)
         {
             var task = _updateTaskMaintenanceProcessor.UpdateTask(id, updatedTask);
             return task;

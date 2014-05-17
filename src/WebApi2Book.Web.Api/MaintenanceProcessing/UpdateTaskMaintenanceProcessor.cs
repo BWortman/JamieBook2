@@ -53,8 +53,7 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
 
         public virtual PropertyValueMapType GetPropertyValueMap(JObject taskFragment, Task taskContainingUpdateData)
         {
-            var namesOfModifiedProperties = _updateablePropertyDetector.GetNamesOfPropertiesToUpdate(typeof (Task),
-                taskFragment).ToList();
+            var namesOfModifiedProperties = _updateablePropertyDetector.GetNamesOfPropertiesToUpdate<Task>(taskFragment).ToList();
 
             var propertyInfos = typeof (Task).GetProperties();
             var updatedPropertyValueMap = new PropertyValueMapType();
