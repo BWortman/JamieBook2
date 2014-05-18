@@ -5,7 +5,6 @@ using WebApi2Book.Common;
 using WebApi2Book.Common.TypeMapping;
 using WebApi2Book.Data;
 using WebApi2Book.Data.Exceptions;
-using WebApi2Book.Data.SqlServer.QueryProcessors;
 using WebApi2Book.Web.Api.LinkServices;
 using WebApi2Book.Web.Api.Models;
 
@@ -14,9 +13,9 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
     public class CompleteTaskWorkflowProcessor : ICompleteTaskWorkflowProcessor
     {
         private readonly IAutoMapper _autoMapper;
+        private readonly IDateTime _dateTime;
         private readonly ITaskByIdQueryProcessor _taskByIdQueryProcessor;
         private readonly ITaskLinkService _taskLinkService;
-        private readonly IDateTime _dateTime;
         private readonly IUpdateTaskStatusQueryProcessor _updateTaskStatusQueryProcessor;
 
         public CompleteTaskWorkflowProcessor(ITaskByIdQueryProcessor taskByIdQueryProcessor,

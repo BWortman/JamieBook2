@@ -4,7 +4,6 @@
 using WebApi2Book.Common.TypeMapping;
 using WebApi2Book.Data;
 using WebApi2Book.Data.Exceptions;
-using WebApi2Book.Data.SqlServer.QueryProcessors;
 using WebApi2Book.Web.Api.LinkServices;
 using WebApi2Book.Web.Api.Models;
 

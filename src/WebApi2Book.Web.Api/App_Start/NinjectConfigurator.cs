@@ -135,7 +135,7 @@ namespace WebApi2Book.Web.Api
 
         private void ConfigureNHibernate(IKernel container)
         {
-            ISessionFactory sessionFactory = Fluently.Configure()
+            var sessionFactory = Fluently.Configure()
                 .Database(
                     MsSqlConfiguration.MsSql2008.ConnectionString(
                         c => c.FromConnectionStringWithKey("WebApi2BookDb")))
@@ -153,7 +153,7 @@ namespace WebApi2Book.Web.Api
             var sessionFactory = context.Kernel.Get<ISessionFactory>();
             if (!CurrentSessionContext.HasBind(sessionFactory))
             {
-                ISession session = sessionFactory.OpenSession();
+                var session = sessionFactory.OpenSession();
                 CurrentSessionContext.Bind(session);
             }
 

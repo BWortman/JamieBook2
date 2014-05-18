@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Web.Http;
 using WebApi2Book.Common;
 using WebApi2Book.Data;
-using WebApi2Book.Data.SqlServer.QueryProcessors;
 using WebApi2Book.Web.Api.InquiryProcessing;
 using WebApi2Book.Web.Api.MaintenanceProcessing;
 using WebApi2Book.Web.Api.Models;

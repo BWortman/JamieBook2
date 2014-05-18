@@ -17,7 +17,7 @@ namespace WebApi2Book.Web.Api.LegacyProcessing
 
         public LegacyAuthenticationMessageHandler(ILogManager logManager)
         {
-            _log = logManager.GetLog(typeof(LegacyAuthenticationMessageHandler));
+            _log = logManager.GetLog(typeof (LegacyAuthenticationMessageHandler));
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(

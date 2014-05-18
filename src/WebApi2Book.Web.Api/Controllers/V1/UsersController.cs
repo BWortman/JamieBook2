@@ -14,8 +14,8 @@ namespace WebApi2Book.Web.Api.Controllers.V1
     [UnitOfWorkActionFilter]
     public class UsersController : ApiController
     {
-        private readonly IPagedDataRequestFactory _pagedDataRequestFactory;
         private readonly IAllUsersInquiryProcessor _allUsersInquiryProcessor;
+        private readonly IPagedDataRequestFactory _pagedDataRequestFactory;
         private readonly IUserByIdInquiryProcessor _userByIdInquiryProcessor;
 
         public UsersController(IPagedDataRequestFactory pagedDataRequestFactory,

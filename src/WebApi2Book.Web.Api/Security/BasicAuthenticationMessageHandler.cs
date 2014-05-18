@@ -22,8 +22,8 @@ namespace WebApi2Book.Web.Api.Security
         private const int PasswordIndex = 1;
         private const int ExpectedCredentialCount = 2;
 
-        private readonly ILog _log;
         private readonly IBasicSecurityService _basicSecurityService;
+        private readonly ILog _log;
 
         public BasicAuthenticationMessageHandler(ILogManager logManager, IBasicSecurityService basicSecurityService)
         {

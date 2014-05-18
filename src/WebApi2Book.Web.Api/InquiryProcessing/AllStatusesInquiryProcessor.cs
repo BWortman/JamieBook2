@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using WebApi2Book.Common.TypeMapping;
 using WebApi2Book.Data;
-using WebApi2Book.Data.SqlServer.QueryProcessors;
 using WebApi2Book.Web.Api.LinkServices;
 using WebApi2Book.Web.Api.Models;
 
@@ -31,7 +30,7 @@ namespace WebApi2Book.Web.Api.InquiryProcessing
 
             var statuses = GetStatuses(statusEntities);
             var allLink = _statusLinkService.GetAllStatusesLink();
-            var inquiryResponse = new StatusesInquiryResponse{ Statuses = statuses, Links = new List<Link> {allLink}};
+            var inquiryResponse = new StatusesInquiryResponse {Statuses = statuses, Links = new List<Link> {allLink}};
 
             return inquiryResponse;
         }

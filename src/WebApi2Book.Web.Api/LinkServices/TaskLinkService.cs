@@ -3,7 +3,6 @@
 
 using System;
 using System.Net.Http;
-using System.Web.Hosting;
 using WebApi2Book.Common;
 using WebApi2Book.Web.Api.Models;
 
@@ -37,6 +36,29 @@ namespace WebApi2Book.Web.Api.LinkServices
             AddReplaceUsersLink(task);
             AddWorkflowLink(task);
             AddLinksToChildObjects(task);
+        }
+
+        public void AddLinksToChildObjects(Task task)
+        {
+            task.Assignees.ForEach(x => _userLinkService.AddSelfLink(x));
+        }
+
+        public virtual void AddSelfLink(Task task)
+        {
+            task.AddLink(GetSelfLink(task.TaskId.Value));
+        }
+
+        public virtual Link GetAllTasksLink()
+        {
+            const string pathFragment = "tasks";
+            return _commonLinkService.GetLink(pathFragment, Constants.CommonLinkRelValues.All, HttpMethod.Get);
+        }
+
+        public virtual Link GetSelfLink(long taskId)
+        {
+            var pathFragment = string.Format("tasks/{0}", taskId);
+            var link = _commonLinkService.GetLink(pathFragment, Constants.CommonLinkRelValues.Self, HttpMethod.Get);
+            return link;
         }
 
         public virtual void AddReplaceUsersLink(Task task)
@@ -115,29 +137,6 @@ namespace WebApi2Book.Web.Api.LinkServices
         public virtual void AddAllStatusesLink(Task task)
         {
             task.AddLink(_statusLinkService.GetAllStatusesLink());
-        }
-
-        public void AddLinksToChildObjects(Task task)
-        {
-            task.Assignees.ForEach(x => _userLinkService.AddSelfLink(x));
-        }
-
-        public virtual void AddSelfLink(Task task)
-        {
-            task.AddLink(GetSelfLink(task.TaskId.Value));
-        }
-
-        public virtual Link GetAllTasksLink()
-        {
-            const string pathFragment = "tasks";
-            return _commonLinkService.GetLink(pathFragment, Constants.CommonLinkRelValues.All, HttpMethod.Get);
-        }
-
-        public virtual Link GetSelfLink(long taskId)
-        {
-            var pathFragment = string.Format("tasks/{0}", taskId);
-            var link = _commonLinkService.GetLink(pathFragment, Constants.CommonLinkRelValues.Self, HttpMethod.Get);
-            return link;
         }
 
         public void AddTaskUsersLink(Task task)

@@ -41,8 +41,10 @@ namespace WebApi2Book.Web.Api
                 new BasicAuthenticationMessageHandler(logManager,
                     WebContainerManager.Get<IBasicSecurityService>()));
 
-            GlobalConfiguration.Configuration.MessageHandlers.Add(new TaskDataSecurityMessageHandler(logManager, userSession));
-            GlobalConfiguration.Configuration.MessageHandlers.Add(new PagedTaskDataSecurityMessageHandler(logManager, userSession));
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new TaskDataSecurityMessageHandler(logManager,
+                userSession));
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new PagedTaskDataSecurityMessageHandler(logManager,
+                userSession));
         }
 
         protected void Application_Error()

@@ -5,7 +5,6 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 using WebApi2Book.Common.TypeMapping;
 using WebApi2Book.Data;
-using WebApi2Book.Data.SqlServer.QueryProcessors;
 using WebApi2Book.Web.Api.LinkServices;
 using WebApi2Book.Web.Api.Models;
 using WebApi2Book.Web.Common;
@@ -54,7 +53,8 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
 
         public virtual PropertyValueMapType GetPropertyValueMap(JObject taskFragment, Task taskContainingUpdateData)
         {
-            var namesOfModifiedProperties = _updateablePropertyDetector.GetNamesOfPropertiesToUpdate<Task>(taskFragment).ToList();
+            var namesOfModifiedProperties =
+                _updateablePropertyDetector.GetNamesOfPropertiesToUpdate<Task>(taskFragment).ToList();
 
             var propertyInfos = typeof (Task).GetProperties();
             var updatedPropertyValueMap = new PropertyValueMapType();
