@@ -1,4 +1,4 @@
-﻿// ValidateAccountUpdateRequestAttribute.cs
+﻿// ValidateTaskUpdateRequestAttribute.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System.Net;
