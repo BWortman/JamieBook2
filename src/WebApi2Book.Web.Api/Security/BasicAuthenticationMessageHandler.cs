@@ -84,7 +84,7 @@ namespace WebApi2Book.Web.Api.Security
                 return false;
             }
 
-            var credentials = GetCredentials(authHeader);
+            var credentials = GetCredentialParts(authHeader);
             if (credentials.Length != ExpectedCredentialCount)
             {
                 return false;
@@ -93,7 +93,7 @@ namespace WebApi2Book.Web.Api.Security
             return _basicSecurityService.SetPrincipal(credentials[UsernameIndex], credentials[PasswordIndex]);
         }
 
-        public string[] GetCredentials(AuthenticationHeaderValue authHeader)
+        public string[] GetCredentialParts(AuthenticationHeaderValue authHeader)
         {
             var encodedCredentials = authHeader.Parameter;
             var credentialBytes = Convert.FromBase64String(encodedCredentials);
