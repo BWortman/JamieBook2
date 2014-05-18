@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using WebApi2Book.Data.Entities;
 
-namespace WebApi2Book.Data.SqlServer.QueryProcessors
+namespace WebApi2Book.Data
 {
     public interface IAllStatusesQueryProcessor
     {

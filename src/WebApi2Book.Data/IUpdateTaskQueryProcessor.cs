@@ -3,9 +3,8 @@
 
 using System.Collections.Generic;
 using WebApi2Book.Data.Entities;
-using PropertyValueMapType = System.Collections.Generic.Dictionary<string, object>;
 
-namespace WebApi2Book.Data.SqlServer.QueryProcessors
+namespace WebApi2Book.Data
 {
     /// <summary>
     /// Updates Task entities.
@@ -22,7 +21,7 @@ namespace WebApi2Book.Data.SqlServer.QueryProcessors
         /// enumerable of User Ids (type long).
         /// </param>
         /// <returns>The updated task.</returns>
-        Task GetUpdatedTask(long taskId, PropertyValueMapType updatedPropertyValueMap);
+        Task GetUpdatedTask(long taskId, Dictionary<string, object> updatedPropertyValueMap);
 
         Task ReplaceTaskUsers(long taskId, IEnumerable<long> userIds);
         Task DeleteTaskUsers(long taskId);
