@@ -78,6 +78,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
     </Reference>
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Tokens.Jwt">
       <HintPath>..\..\lib\System.IdentityModel.Tokens.Jwt.4.0.0-beta1\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>

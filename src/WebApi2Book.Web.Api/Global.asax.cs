@@ -4,6 +4,7 @@
 using System.Net.Http.Formatting;
 using System.Web;
 using System.Web.Http;
+using JwtAuthForWebAPI;
 using WebApi2Book.Common.Logging;
 using WebApi2Book.Common.Security;
 using WebApi2Book.Common.TypeMapping;
@@ -45,6 +46,15 @@ namespace WebApi2Book.Web.Api
                 userSession));
             GlobalConfiguration.Configuration.MessageHandlers.Add(new PagedTaskDataSecurityMessageHandler(logManager,
                 userSession));
+
+            var builder = new SecurityTokenBuilder();
+            GlobalConfiguration.Configuration.MessageHandlers.Add(
+                new JwtAuthenticationMessageHandler
+                {
+                    AllowedAudience = "http://www.example.com",
+                    Issuer = "corp",
+                    SigningToken = builder.CreateFromKey("cXdlcnR5dWlvcGFzZGZnaGprbHp4Y3Zibm0xMjM0NTY=")
+                });
         }
 
         protected void Application_Error()

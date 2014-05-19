@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\ReferenceData.sql" />
+    <None Include="WebApi2BookDb.localhost.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
