@@ -3,7 +3,6 @@
 
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using log4net;
@@ -27,8 +26,7 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
         private readonly ILog _log;
 
         public ValidateTaskUpdateRequestAttribute()
-            : this(
-                WebContainerManager.Get<ILogManager>())
+            : this(WebContainerManager.Get<ILogManager>())
         {
         }
 
@@ -44,17 +42,7 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
 
         public override void OnActionExecuting(HttpActionContext actionContext)
         {
-            var taskId = (long?) actionContext.ActionArguments[ActionParameterNames.TaskId];
-            if (!taskId.HasValue)
-            {
-                const string errorMessage = "Invalid taskId.";
-                _log.Debug(errorMessage);
-                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest)
-                {
-                    Content = new StringContent(errorMessage)
-                });
-            }
-
+            var taskId = (long) actionContext.ActionArguments[ActionParameterNames.TaskId];
             var taskFragment =
                 (JObject) actionContext.ActionArguments[ActionParameterNames.TaskFragment];
             _log.DebugFormat("{0} = {1}", ActionParameterNames.TaskFragment, taskFragment);
@@ -63,10 +51,9 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
             {
                 const string errorMessage = "Malformed or null request.";
                 _log.Debug(errorMessage);
-                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest)
-                {
-                    Content = new StringContent(errorMessage)
-                });
+                actionContext.Response = actionContext.Request.CreateErrorResponse(
+                    HttpStatusCode.BadRequest, errorMessage);
+                return;
             }
 
             try
@@ -76,19 +63,15 @@ namespace WebApi2Book.Web.Api.MaintenanceProcessing
                 {
                     const string errorMessage = "Task ids do not match.";
                     _log.Debug(errorMessage);
-                    throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest)
-                    {
-                        Content = new StringContent(errorMessage)
-                    });
+                    actionContext.Response = actionContext.Request.CreateErrorResponse(
+                        HttpStatusCode.BadRequest, errorMessage);
                 }
             }
             catch (JsonException ex)
             {
                 _log.Debug(ex.Message);
-                throw new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest)
-                {
-                    Content = new StringContent("Incorrect data in request.")
-                });
+                actionContext.Response = actionContext.Request.CreateErrorResponse(
+                    HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
