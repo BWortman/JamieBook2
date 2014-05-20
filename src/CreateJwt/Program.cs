@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics;
+using System.IdentityModel.Protocols.WSTrust;
 using System.IdentityModel.Tokens;
 using System.Security.Claims;
 
@@ -32,7 +33,8 @@ namespace CreateJwt
                 }),
                 TokenIssuerName = "corp",
                 AppliesToAddress = "http://www.example.com",
-                SigningCredentials = credentials
+                SigningCredentials = credentials,
+                Lifetime = new Lifetime(DateTime.UtcNow, DateTime.UtcNow.AddYears(10))
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();

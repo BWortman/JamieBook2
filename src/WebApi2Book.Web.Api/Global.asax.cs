@@ -48,12 +48,13 @@ namespace WebApi2Book.Web.Api
                 userSession));
 
             var builder = new SecurityTokenBuilder();
+            var reader = new ConfigurationReader();
             GlobalConfiguration.Configuration.MessageHandlers.Add(
                 new JwtAuthenticationMessageHandler
                 {
-                    AllowedAudience = "http://www.example.com",
-                    Issuer = "corp",
-                    SigningToken = builder.CreateFromKey("cXdlcnR5dWlvcGFzZGZnaGprbHp4Y3Zibm0xMjM0NTY=")
+                    AllowedAudience = reader.AllowedAudience,
+                    Issuer = reader.Issuer,
+                    SigningToken = builder.CreateFromKey(reader.SymmetricKey)
                 });
         }
 
