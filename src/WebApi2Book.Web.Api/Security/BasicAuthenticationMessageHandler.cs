@@ -84,13 +84,13 @@ namespace WebApi2Book.Web.Api.Security
                 return false;
             }
 
-            var credentials = GetCredentialParts(authHeader);
-            if (credentials.Length != ExpectedCredentialCount)
+            var credentialParts = GetCredentialParts(authHeader);
+            if (credentialParts.Length != ExpectedCredentialCount)
             {
                 return false;
             }
 
-            return _basicSecurityService.SetPrincipal(credentials[UsernameIndex], credentials[PasswordIndex]);
+            return _basicSecurityService.SetPrincipal(credentialParts[UsernameIndex], credentialParts[PasswordIndex]);
         }
 
         public string[] GetCredentialParts(AuthenticationHeaderValue authHeader)
