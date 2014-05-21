@@ -29,6 +29,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
             _reactivateTaskWorkflowProcessor = reactivateTaskWorkflowProcessor;
         }
 
+        [HttpPost]
         [Route("tasks/{taskId:long}/activations", Name = "StartTaskRoute")]
         public Task StartTask(long taskId)
         {
@@ -36,6 +37,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
             return task;
         }
 
+        [HttpPost]
         [Route("tasks/{taskId:long}/completions", Name = "CompleteTaskRoute")]
         public Task CompleteTask(long taskId)
         {
@@ -43,6 +45,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
             return task;
         }
 
+        [HttpPost]
         [UserAudit]
         [Route("tasks/{taskId:long}/reactivations", Name = "ReactivateTaskRoute")]
         public Task ReactivateTask(long taskId)

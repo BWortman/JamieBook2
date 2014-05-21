@@ -61,7 +61,7 @@ namespace WebApi2Book.Web.Api.Security
             if (isAuthenticated)
             {
                 var response = await base.SendAsync(request, cancellationToken);
-                return response.StatusCode == HttpStatusCode.Unauthorized ? CreateUnauthorizedResponse() : response;
+                return response;
             }
 
             return CreateUnauthorizedResponse();
