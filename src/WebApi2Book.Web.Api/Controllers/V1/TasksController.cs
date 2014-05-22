@@ -85,10 +85,10 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         [Route("{id:long}", Name = "DeleteTaskRoute")]
         [HttpDelete]
         [Authorize(Roles = Constants.RoleNames.Manager)]
-        public HttpResponseMessage DeleteTask(long id)
+        public IHttpActionResult DeleteTask(long id)
         {
             _deleteTaskQueryProcessor.DeleteTask(id);
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            return Ok();
         }
     }
 }
