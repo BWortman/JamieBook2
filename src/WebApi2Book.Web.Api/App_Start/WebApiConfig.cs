@@ -21,6 +21,8 @@ namespace WebApi2Book.Web.Api
             // http://stackoverflow.com/questions/12976352/asp-net-web-api-model-binding-not-working-with-xml-data-on-post
             config.Formatters.XmlFormatter.UseXmlSerializer = true;
 
+            config.EnableCors();
+
             ConfigureRouting(config);
 
             // To disable tracing in your application, please comment out or remove the following line of code
