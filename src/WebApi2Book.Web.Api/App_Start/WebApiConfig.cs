@@ -40,7 +40,7 @@ namespace WebApi2Book.Web.Api
         {
             config.Routes.MapHttpRoute(
                 name: "legacyRoute",
-                routeTemplate: "TeamTaskService/TeamTaskService.asmx",
+                routeTemplate: "TeamTaskService.asmx",
                 defaults: null,
                 constraints: null,
                 handler: new LegacyAuthenticationMessageHandler(WebContainerManager.Get<ILogManager>())

@@ -2,6 +2,7 @@
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Web;
 
@@ -44,6 +45,11 @@ namespace WebApi2Book.Web.Common.Security
             get
             {
                 const int versionIndex = 2;
+                if (HttpContext.Current.Request.Url.Segments.Count() < versionIndex + 1)
+                {
+                    return string.Empty;
+                }
+
                 var apiVersionInUse = HttpContext.Current.Request.Url.Segments[versionIndex].Replace("/", string.Empty);
                 return apiVersionInUse;
             }

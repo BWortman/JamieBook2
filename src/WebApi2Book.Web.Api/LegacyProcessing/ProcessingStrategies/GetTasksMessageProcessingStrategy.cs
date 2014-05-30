@@ -20,6 +20,12 @@ namespace WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies
             _inquiryProcessor = inquiryProcessor;
         }
 
+
+        public bool CanProcess(string operationName)
+        {
+            return operationName == "GetTasks";
+        }
+        
         public object Execute(XElement operationElement)
         {
             var modelTasks =
@@ -38,11 +44,6 @@ namespace WebApi2Book.Web.Api.LegacyProcessing.ProcessingStrategies
                 var categoriesAsXElements = xDocument.Descendants(ns + "Task");
                 return categoriesAsXElements;
             }
-        }
-
-        public bool CanProcess(string operationName)
-        {
-            return operationName == "GetTasks";
         }
     }
 }
