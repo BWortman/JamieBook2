@@ -1,7 +1,6 @@
 ﻿// TasksController.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
