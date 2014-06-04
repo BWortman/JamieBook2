@@ -1,9 +1,4 @@
-﻿
-@{
-    ViewBag.Title = "Tasks";
-}
-
-<h2>Tasks Viewer</h2>
+﻿<h2>Tasks Viewer</h2>
 <p>&nbsp;</p>
 
 <p>
@@ -14,13 +9,10 @@
     <pre data-bind="text: statusMessage" style="width: 1000px; height: 400px; overflow-x: scroll"></pre>
 </p>
 
-
 <script>
-
     $(function () {
         var viewModel = createIndexViewModel();
         ko.applyBindings(viewModel);
     });
-
 </script>
 
