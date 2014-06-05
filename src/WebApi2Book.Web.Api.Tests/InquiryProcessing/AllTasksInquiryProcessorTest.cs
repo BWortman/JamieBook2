@@ -13,6 +13,7 @@ using WebApi2Book.Web.Api.LinkServices;
 using WebApi2Book.Web.Api.Models;
 using PagedTaskDataInquiryResponse =
     WebApi2Book.Web.Api.Models.PagedDataInquiryResponse<WebApi2Book.Web.Api.Models.Task>;
+using Task = WebApi2Book.Data.Entities.Task;
 
 namespace WebApi2Book.Web.Api.Tests.InquiryProcessing
 {
@@ -51,22 +52,22 @@ namespace WebApi2Book.Web.Api.Tests.InquiryProcessing
             {
             }
 
-            public Func<IEnumerable<Data.Entities.Task>, IEnumerable<Task>> GetTasksTestDouble { get; set; }
+            public Func<IEnumerable<Task>, IEnumerable<Models.Task>> GetTasksTestDouble { get; set; }
 
-            public Action<PagedDataInquiryResponse<Task>> AddLinksToInquiryResponseTestDouble { get; set; }
+            public Action<PagedTaskDataInquiryResponse> AddLinksToInquiryResponseTestDouble { get; set; }
 
-            public Func<PagedDataInquiryResponse<Task>, string> GetCurrentPageQueryStringTestDouble { get; set; }
+            public Func<PagedTaskDataInquiryResponse, string> GetCurrentPageQueryStringTestDouble { get; set; }
 
-            public Func<PagedDataInquiryResponse<Task>, string> GetNextPageQueryStringTestDouble { get; set; }
+            public Func<PagedTaskDataInquiryResponse, string> GetNextPageQueryStringTestDouble { get; set; }
 
-            public Func<PagedDataInquiryResponse<Task>, string> GetPreviousPageQueryStringTestDouble { get; set; }
+            public Func<PagedTaskDataInquiryResponse, string> GetPreviousPageQueryStringTestDouble { get; set; }
 
-            public override IEnumerable<Task> GetTasks(IEnumerable<Data.Entities.Task> taskEntities)
+            public override IEnumerable<Models.Task> GetTasks(IEnumerable<Task> taskEntities)
             {
                 return GetTasksTestDouble == null ? base.GetTasks(taskEntities) : GetTasksTestDouble(taskEntities);
             }
 
-            public override void AddLinksToInquiryResponse(PagedDataInquiryResponse<Task> inquiryResponse)
+            public override void AddLinksToInquiryResponse(PagedTaskDataInquiryResponse inquiryResponse)
             {
                 if (AddLinksToInquiryResponseTestDouble == null)
                 {
@@ -78,21 +79,21 @@ namespace WebApi2Book.Web.Api.Tests.InquiryProcessing
                 }
             }
 
-            public override string GetCurrentPageQueryString(PagedDataInquiryResponse<Task> inquiryResponse)
+            public override string GetCurrentPageQueryString(PagedTaskDataInquiryResponse inquiryResponse)
             {
                 return GetCurrentPageQueryStringTestDouble == null
                     ? base.GetCurrentPageQueryString(inquiryResponse)
                     : GetCurrentPageQueryStringTestDouble(inquiryResponse);
             }
 
-            public override string GetNextPageQueryString(PagedDataInquiryResponse<Task> inquiryResponse)
+            public override string GetNextPageQueryString(PagedTaskDataInquiryResponse inquiryResponse)
             {
                 return GetNextPageQueryStringTestDouble == null
                     ? base.GetNextPageQueryString(inquiryResponse)
                     : GetNextPageQueryStringTestDouble(inquiryResponse);
             }
 
-            public override string GetPreviousPageQueryString(PagedDataInquiryResponse<Task> inquiryResponse)
+            public override string GetPreviousPageQueryString(PagedTaskDataInquiryResponse inquiryResponse)
             {
                 return GetPreviousPageQueryStringTestDouble == null
                     ? base.GetPreviousPageQueryString(inquiryResponse)
@@ -127,18 +128,71 @@ namespace WebApi2Book.Web.Api.Tests.InquiryProcessing
 
             _inquiryProcessor.AddLinksToInquiryResponse(inquiryResponse);
 
-            _commonLinkServiceMock.Verify(x => x.AddPageLinks(inquiryResponse, currentPageQueryString, previousPageQueryString, nextPageQueryString));
+            _commonLinkServiceMock.Verify(
+                x =>
+                    x.AddPageLinks(inquiryResponse, currentPageQueryString, previousPageQueryString, nextPageQueryString));
+        }
+
+        [Test]
+        public void GetCurrentPageQueryString_returns_correct_value()
+        {
+            var expectedResult = string.Format(QueryStringFormat, PageNumber, PageSize);
+            var inquiryResponse = new PagedTaskDataInquiryResponse {PageNumber = PageNumber, PageSize = PageSize};
+            var actualResult = _inquiryProcessor.GetCurrentPageQueryString(inquiryResponse);
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [Test]
+        public void GetNextPageQueryString_returns_correct_value()
+        {
+            var expectedResult = string.Format(QueryStringFormat, PageNumber + 1, PageSize);
+            var inquiryResponse = new PagedTaskDataInquiryResponse {PageNumber = PageNumber, PageSize = PageSize};
+            var actualResult = _inquiryProcessor.GetNextPageQueryString(inquiryResponse);
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [Test]
+        public void GetPreviousPageQueryString_returns_correct_value()
+        {
+            var expectedResult = string.Format(QueryStringFormat, PageNumber - 1, PageSize);
+            var inquiryResponse = new PagedTaskDataInquiryResponse {PageNumber = PageNumber, PageSize = PageSize};
+            var actualResult = _inquiryProcessor.GetPreviousPageQueryString(inquiryResponse);
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [Test]
+        public void GetTasks_adds_child_links()
+        {
+            var taskEntity1 = new Task {TaskId = 300};
+            var taskEntity2 = new Task {TaskId = 600};
+            var task1 = new Models.Task {TaskId = taskEntity1.TaskId};
+            var task2 = new Models.Task {TaskId = taskEntity2.TaskId};
+
+            var taskEntities = new List<Task> {taskEntity1, taskEntity2};
+            var tasks = new List<Models.Task> {task1, task2};
+
+            for (var i = 0; i < taskEntities.Count; ++i)
+            {
+                var index = i;
+                _autoMapperMock.Setup(x => x.Map<Models.Task>(taskEntities[index])).Returns(tasks[index]);
+
+                _taskLinkServiceMock.Setup(x => x.AddLinksToChildObjects(tasks[index])).Verifiable();
+            }
+
+            _inquiryProcessor.GetTasks(taskEntities);
+
+            _taskLinkServiceMock.VerifyAll();
         }
 
         [Test]
         public void GetTasks_adds_links()
         {
             var requestInfo = new PagedDataRequest(PageNumber, PageSize);
-            var taskEntity = new Data.Entities.Task {TaskId = 300};
+            var taskEntity = new Task {TaskId = 300};
             var queriedItems = new[] {taskEntity};
-            var queryResult = new QueryResult<Data.Entities.Task>(queriedItems, queriedItems.Count(), PageSize);
+            var queryResult = new QueryResult<Task>(queriedItems, queriedItems.Count(), PageSize);
 
-            var task = new Task {TaskId = taskEntity.TaskId};
+            var task = new Models.Task {TaskId = taskEntity.TaskId};
             var tasks = new[] {task};
 
             _allTasksQueryProcessorMock.Setup(x => x.GetTasks(requestInfo)).Returns(queryResult);
@@ -159,14 +213,60 @@ namespace WebApi2Book.Web.Api.Tests.InquiryProcessing
         }
 
         [Test]
+        public void GetTasks_adds_self_link_to_tasks()
+        {
+            var taskEntity1 = new Task {TaskId = 300};
+            var taskEntity2 = new Task {TaskId = 600};
+            var task1 = new Models.Task {TaskId = taskEntity1.TaskId};
+            var task2 = new Models.Task {TaskId = taskEntity2.TaskId};
+
+            var taskEntities = new List<Task> {taskEntity1, taskEntity2};
+            var tasks = new List<Models.Task> {task1, task2};
+
+            for (var i = 0; i < taskEntities.Count; ++i)
+            {
+                var index = i;
+                _autoMapperMock.Setup(x => x.Map<Models.Task>(taskEntities[index])).Returns(tasks[index]);
+
+                _taskLinkServiceMock.Setup(x => x.AddSelfLink(tasks[index])).Verifiable();
+            }
+
+            _inquiryProcessor.GetTasks(taskEntities);
+
+            _taskLinkServiceMock.VerifyAll();
+        }
+
+        [Test]
+        public void GetTasks_maps_entities_to_web_models()
+        {
+            var taskEntity1 = new Task {TaskId = 300};
+            var taskEntity2 = new Task {TaskId = 600};
+            var task1 = new Models.Task {TaskId = taskEntity1.TaskId};
+            var task2 = new Models.Task {TaskId = taskEntity2.TaskId};
+
+            var taskEntities = new List<Task> {taskEntity1, taskEntity2};
+            var tasks = new List<Models.Task> {task1, task2};
+
+            for (var i = 0; i < taskEntities.Count; ++i)
+            {
+                var index = i;
+                _autoMapperMock.Setup(x => x.Map<Models.Task>(taskEntities[index])).Returns(tasks[index]);
+            }
+
+            var actualResult = _inquiryProcessor.GetTasks(taskEntities);
+
+            Assert.IsTrue(tasks.SequenceEqual(actualResult));
+        }
+
+        [Test]
         public void GetTasks_returns_correct_result()
         {
             var requestInfo = new PagedDataRequest(PageNumber, PageSize);
-            var taskEntity = new Data.Entities.Task {TaskId = 300};
+            var taskEntity = new Task {TaskId = 300};
             var queriedItems = new[] {taskEntity};
-            var queryResult = new QueryResult<Data.Entities.Task>(queriedItems, queriedItems.Count(), PageSize);
+            var queryResult = new QueryResult<Task>(queriedItems, queriedItems.Count(), PageSize);
 
-            var task = new Task {TaskId = taskEntity.TaskId};
+            var task = new Models.Task {TaskId = taskEntity.TaskId};
             var tasks = new[] {task};
 
             _allTasksQueryProcessorMock.Setup(x => x.GetTasks(requestInfo)).Returns(queryResult);
@@ -178,52 +278,6 @@ namespace WebApi2Book.Web.Api.Tests.InquiryProcessing
             Assert.AreEqual(queryResult.TotalPageCount, actualResult.PageCount, "Incorrect PageCount in result");
             Assert.AreEqual(PageNumber, actualResult.PageNumber, "Incorrect PageNumber in result");
             Assert.AreEqual(PageSize, actualResult.PageSize, "Incorrect PageSize in result");
-        }
-
-        [Test]
-        public void GetTasks_maps_entities_to_web_models()
-        {
-            var taskEntity1 = new Data.Entities.Task { TaskId = 300 };
-            var taskEntity2 = new Data.Entities.Task { TaskId = 600 };
-            var task1 = new Task {TaskId = taskEntity1.TaskId};
-            var task2 = new Task {TaskId = taskEntity2.TaskId};
-
-            var taskEntities = new List<Data.Entities.Task> {taskEntity1, taskEntity2};
-            var tasks = new List<Task> {task1, task2};
-
-            for (var i = 0; i < taskEntities.Count; ++i)
-            {
-                var index = i;
-                _autoMapperMock.Setup(x => x.Map<Task>(taskEntities[index])).Returns(tasks[index]);
-            }
-
-            var actualResult = _inquiryProcessor.GetTasks(taskEntities);
-
-            Assert.IsTrue(tasks.SequenceEqual(actualResult));
-        }
-
-        [Test]
-        public void GetTasks_adds_self_link_to_tasks()
-        {
-            var taskEntity1 = new Data.Entities.Task { TaskId = 300 };
-            var taskEntity2 = new Data.Entities.Task { TaskId = 600 };
-            var task1 = new Task {TaskId = taskEntity1.TaskId};
-            var task2 = new Task {TaskId = taskEntity2.TaskId};
-
-            var taskEntities = new List<Data.Entities.Task> {taskEntity1, taskEntity2};
-            var tasks = new List<Task> {task1, task2};
-
-            for (var i = 0; i < taskEntities.Count; ++i)
-            {
-                var index = i;
-                _autoMapperMock.Setup(x => x.Map<Task>(taskEntities[index])).Returns(tasks[index]);
-
-                _taskLinkServiceMock.Setup(x => x.AddSelfLink(tasks[index])).Verifiable();
-            }
-
-            _inquiryProcessor.GetTasks(taskEntities);
-
-            _taskLinkServiceMock.VerifyAll();
         }
     }
 }
