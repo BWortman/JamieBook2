@@ -78,6 +78,7 @@
     <Compile Include="Controllers\V1\TasksControllerDependencyBlockMock.cs" />
     <Compile Include="Controllers\V1\TasksControllerTest.cs" />
     <Compile Include="HttpRequestMessageFactory.cs" />
+    <Compile Include="InquiryProcessing\AllTasksInquiryProcessorTest.cs" />
     <Compile Include="InquiryProcessing\PagedDataRequestFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
