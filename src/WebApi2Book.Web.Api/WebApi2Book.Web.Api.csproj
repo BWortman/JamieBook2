@@ -141,6 +141,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutoMapperConfigurator.cs" />
+    <Compile Include="Controllers\V1\ITasksControllerDependencyBlock.cs" />
+    <Compile Include="Controllers\V1\TasksControllerDependencyBlock.cs" />
     <Compile Include="MaintenanceProcessing\LocationLinkCalculator.cs" />
     <Compile Include="MaintenanceProcessing\TaskCreatedActionResult.cs" />
     <Compile Include="Security\BasicAuthenticationMessageHandler.cs" />
