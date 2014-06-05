@@ -179,5 +179,51 @@ namespace WebApi2Book.Web.Api.Tests.InquiryProcessing
             Assert.AreEqual(PageNumber, actualResult.PageNumber, "Incorrect PageNumber in result");
             Assert.AreEqual(PageSize, actualResult.PageSize, "Incorrect PageSize in result");
         }
+
+        [Test]
+        public void GetTasks_maps_entities_to_web_models()
+        {
+            var taskEntity1 = new Data.Entities.Task { TaskId = 300 };
+            var taskEntity2 = new Data.Entities.Task { TaskId = 600 };
+            var task1 = new Task {TaskId = taskEntity1.TaskId};
+            var task2 = new Task {TaskId = taskEntity2.TaskId};
+
+            var taskEntities = new List<Data.Entities.Task> {taskEntity1, taskEntity2};
+            var tasks = new List<Task> {task1, task2};
+
+            for (var i = 0; i < taskEntities.Count; ++i)
+            {
+                var index = i;
+                _autoMapperMock.Setup(x => x.Map<Task>(taskEntities[index])).Returns(tasks[index]);
+            }
+
+            var actualResult = _inquiryProcessor.GetTasks(taskEntities);
+
+            Assert.IsTrue(tasks.SequenceEqual(actualResult));
+        }
+
+        [Test]
+        public void GetTasks_adds_self_link_to_tasks()
+        {
+            var taskEntity1 = new Data.Entities.Task { TaskId = 300 };
+            var taskEntity2 = new Data.Entities.Task { TaskId = 600 };
+            var task1 = new Task {TaskId = taskEntity1.TaskId};
+            var task2 = new Task {TaskId = taskEntity2.TaskId};
+
+            var taskEntities = new List<Data.Entities.Task> {taskEntity1, taskEntity2};
+            var tasks = new List<Task> {task1, task2};
+
+            for (var i = 0; i < taskEntities.Count; ++i)
+            {
+                var index = i;
+                _autoMapperMock.Setup(x => x.Map<Task>(taskEntities[index])).Returns(tasks[index]);
+
+                _taskLinkServiceMock.Setup(x => x.AddSelfLink(tasks[index])).Verifiable();
+            }
+
+            _inquiryProcessor.GetTasks(taskEntities);
+
+            _taskLinkServiceMock.VerifyAll();
+        }
     }
 }
