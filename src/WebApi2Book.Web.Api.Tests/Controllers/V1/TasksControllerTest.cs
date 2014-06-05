@@ -1,9 +1,6 @@
 ﻿// TasksControllerTest.cs
 // Copyright Jamie Kurtz, Brian Wortman 2014.
 
-using System;
-using System.Net.Http;
-using System.Web.Http;
 using Moq;
 using NUnit.Framework;
 using WebApi2Book.Data;
@@ -44,21 +41,10 @@ namespace WebApi2Book.Web.Api.Tests.Controllers.V1
 
         private TasksController _controller;
 
-        public HttpRequestMessage CreateRequestMessage(HttpMethod method = null, string uriString = null)
-        {
-            method = method ?? HttpMethod.Get;
-            var uri = string.IsNullOrWhiteSpace(uriString)
-                ? new Uri("http://localhost:12345/api/whatever")
-                : new Uri(uriString);
-            var requestMessage = new HttpRequestMessage(method, uri);
-            requestMessage.SetConfiguration(new HttpConfiguration());
-            return requestMessage;
-        }
-
         [Test]
         public void GetTasks_returns_correct_response()
         {
-            var requestMessage = CreateRequestMessage();
+            var requestMessage = HttpRequestMessageFactory.CreateRequestMessage();
             var request = new PagedDataRequest(1, 25);
             var response = new PagedDataInquiryResponse<Task>();
 
