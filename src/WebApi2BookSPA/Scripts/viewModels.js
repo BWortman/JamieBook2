@@ -4,7 +4,6 @@ var indexViewModel = function() {
 
     var self = this;
 
-    self.tasks = ko.observableArray([]);
     self.statusMessage = ko.observable("(Click Refresh button to load tasks)");
 
     self.refreshTasks = function() {
@@ -13,9 +12,8 @@ var indexViewModel = function() {
         $.ajax({
             type: 'GET',
             url: taskManagementUrl + '/tasks',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Bearer " + token);
-                xhr.withCredentials = true;
+            headers: {
+                Authorization : "Bearer " + token
             },
             contentType: 'application/json;charset=utf8',
             success: self.onRefreshSuccess,
@@ -30,9 +28,4 @@ var indexViewModel = function() {
     self.onRefreshError = function(error) {
         self.statusMessage(error.responseText);
     };
-};
-
-
-var createIndexViewModel = function() {
-    return new indexViewModel();
 };

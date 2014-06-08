@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApi2BookSPA.Models;
 
-namespace WebApi2BookSPA
+namespace WebApi2BookSPA.Controllers
 {
     public class LoginController : Controller
     {

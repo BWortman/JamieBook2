@@ -16,7 +16,7 @@ namespace WebApi2Book.Web.Api.Controllers.V1
     [ApiVersion1RoutePrefix("tasks")]
     [UnitOfWorkActionFilter]
     [Authorize(Roles = Constants.RoleNames.JuniorWorker)]
-    [EnableCors("http://localhost:52976", "*", "*", SupportsCredentials = true)]
+    [EnableCors("http://localhost:52976", "*", "*")]
     public class TasksController : ApiController
     {
         private readonly ITasksControllerDependencyBlock _tasksControllerDependencyBlock;
@@ -30,6 +30,8 @@ namespace WebApi2Book.Web.Api.Controllers.V1
         public PagedDataInquiryResponse<Task> GetTasks(HttpRequestMessage requestMessage)
         {
             var request = _tasksControllerDependencyBlock.PagedDataRequestFactory.Create(requestMessage.RequestUri);
+
+            var cookies = Request.Headers.GetCookies();
 
             var tasks = _tasksControllerDependencyBlock.AllTasksInquiryProcessor.GetTasks(request);
             return tasks;
