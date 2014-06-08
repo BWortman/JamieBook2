@@ -27,23 +27,30 @@ namespace WebApi2Book.Web.Api.IntegrationTests
         public void AddTask()
         {
             const string data = "{\"Subject\":\"Fix something important\"}";
-
-            var client = _webClientHelper.CreateWebClient();
             const string address = UriRoot + "tasks";
 
-            var responseString = client.UploadString(address, HttpMethod.Post.Method, data);
+            var client = _webClientHelper.CreateWebClient();
 
-            var jsonResponse = JObject.Parse(responseString);
-            Assert.IsNotNull(jsonResponse.ToObject<TaskCreatedActionResult>());
+            try
+            {
+                var responseString = client.UploadString(address, HttpMethod.Post.Method, data);
+
+                var jsonResponse = JObject.Parse(responseString);
+                Assert.IsNotNull(jsonResponse.ToObject<TaskCreatedActionResult>());
+            }
+            finally
+            {
+                client.Dispose();
+            }
         }
 
         [Test]
         public void AddTask_denied()
         {
             const string data = "{\"Subject\":\"Fix something important\"}";
+            const string address = UriRoot + "tasks";
 
             var client = _webClientHelper.CreateWebClient(username: "jdoe");
-            const string address = UriRoot + "tasks";
 
             try
             {
@@ -55,18 +62,30 @@ namespace WebApi2Book.Web.Api.IntegrationTests
                 var statusCode = ((HttpWebResponse) (e.Response)).StatusCode;
                 Assert.AreEqual(HttpStatusCode.Unauthorized, statusCode);
             }
+            finally
+            {
+                client.Dispose();
+            }
         }
 
         [Test]
         public void GetTasks()
         {
             var client = _webClientHelper.CreateWebClient();
-            const string address = UriRoot + "tasks";
 
-            var responseString = client.DownloadString(address);
+            try
+            {
+                const string address = UriRoot + "tasks";
 
-            var jsonResponse = JObject.Parse(responseString);
-            Assert.IsNotNull(jsonResponse.ToObject<PagedDataInquiryResponse<Task>>());
+                var responseString = client.DownloadString(address);
+
+                var jsonResponse = JObject.Parse(responseString);
+                Assert.IsNotNull(jsonResponse.ToObject<PagedDataInquiryResponse<Task>>());
+            }
+            finally
+            {
+                client.Dispose();
+            }
         }
     }
 }
