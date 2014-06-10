@@ -5,7 +5,7 @@ using System;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace WebApi2Book.Web.Api.Tests
+namespace WebApi2Book.Web.Common.Tests
 {
     public static class HttpRequestMessageFactory
     {

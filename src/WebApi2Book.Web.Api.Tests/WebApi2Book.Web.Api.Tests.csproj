@@ -77,7 +77,6 @@
   <ItemGroup>
     <Compile Include="Controllers\V1\TasksControllerDependencyBlockMock.cs" />
     <Compile Include="Controllers\V1\TasksControllerTest.cs" />
-    <Compile Include="HttpRequestMessageFactory.cs" />
     <Compile Include="InquiryProcessing\AllTasksInquiryProcessorTest.cs" />
     <Compile Include="InquiryProcessing\PagedDataRequestFactoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,6 +101,10 @@
     <ProjectReference Include="..\WebApi2Book.Web.Api\WebApi2Book.Web.Api.csproj">
       <Project>{D90661C7-C0E2-40F5-A917-07483FB8C2E8}</Project>
       <Name>WebApi2Book.Web.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApi2Book.Web.Common.Tests\WebApi2Book.Web.Common.Tests.csproj">
+      <Project>{8F8E295A-A3D4-4B03-ACAC-3060109F3F72}</Project>
+      <Name>WebApi2Book.Web.Common.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

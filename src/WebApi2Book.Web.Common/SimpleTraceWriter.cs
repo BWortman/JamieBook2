@@ -25,7 +25,7 @@ namespace WebApi2Book.Web.Common
             WriteTrace(rec);
         }
 
-        public void WriteTrace(TraceRecord rec)
+        public virtual void WriteTrace(TraceRecord rec)
         {
             const string traceFormat =
                 "RequestId={0};{1}Kind={2};{3}Status={4};{5}Operation={6};{7}Operator={8};{9}Category={10}{11}Request={12}{13}Message={14}";

@@ -5,6 +5,7 @@ using NUnit.Framework;
 using WebApi2Book.Data;
 using WebApi2Book.Web.Api.Controllers.V1;
 using WebApi2Book.Web.Api.Models;
+using WebApi2Book.Web.Common.Tests;
 
 namespace WebApi2Book.Web.Api.Tests.Controllers.V1
 {

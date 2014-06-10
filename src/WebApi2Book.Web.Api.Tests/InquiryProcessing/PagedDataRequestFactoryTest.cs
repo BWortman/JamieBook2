@@ -10,6 +10,7 @@ using Moq;
 using NUnit.Framework;
 using WebApi2Book.Common.Logging;
 using WebApi2Book.Web.Api.InquiryProcessing;
+using WebApi2Book.Web.Common.Tests;
 
 namespace WebApi2Book.Web.Api.Tests.InquiryProcessing
 {
