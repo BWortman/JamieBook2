@@ -3,20 +3,14 @@
 
 using System;
 using System.Globalization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace WebApi2Book.Common.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class PrimitiveTypeParserTests
     {
-        [TestMethod]
-        public void Parse_null_DateTime()
-        {
-            Assert.IsNull(PrimitiveTypeParser.Parse<DateTime?>(null));
-        }
-
-        [TestMethod]
+        [Test]
         public void Parse_non_null_DateTime()
         {
             var now = DateTime.Now;
@@ -27,19 +21,25 @@ namespace WebApi2Book.Common.Tests
                 converted.Value.ToString(CultureInfo.InvariantCulture));
         }
 
-        [TestMethod]
-        public void Parse_null_int()
-        {
-            Assert.IsNull(PrimitiveTypeParser.Parse<int?>(null));
-        }
-
-        [TestMethod]
+        [Test]
         public void Parse_non_null_int()
         {
             int? val = 16;
             var converted = PrimitiveTypeParser.Parse<int?>(val.ToString());
 
             Assert.AreEqual(val.Value, converted.Value);
+        }
+
+        [Test]
+        public void Parse_null_DateTime()
+        {
+            Assert.IsNull(PrimitiveTypeParser.Parse<DateTime?>(null));
+        }
+
+        [Test]
+        public void Parse_null_int()
+        {
+            Assert.IsNull(PrimitiveTypeParser.Parse<int?>(null));
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿// HttpRequestMessageFactory.cs
-// Copyright fiserv 2014.
+// Copyright Jamie Kurtz, Brian Wortman 2014.
 
 using System;
 using System.Net.Http;
