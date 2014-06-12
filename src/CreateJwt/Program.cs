@@ -29,6 +29,7 @@ namespace CreateJwt
                     new Claim(ClaimTypes.GivenName, "Boss"),
                     new Claim(ClaimTypes.Surname, "Hogg"),
                     new Claim(ClaimTypes.Role, "Manager"),
+                    new Claim(ClaimTypes.Role, "SeniorWorker"),
                     new Claim(ClaimTypes.Role, "JuniorWorker")
                 }),
                 TokenIssuerName = "corp",

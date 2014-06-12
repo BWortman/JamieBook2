@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using NHibernate;
 using WebApi2Book.Data.Entities;
+using WebApi2Book.Data.QueryProcessors;
 
 namespace WebApi2Book.Data.SqlServer.QueryProcessors
 {
